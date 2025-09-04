@@ -21,22 +21,22 @@
   position: relative;
   display: flex;
   align-items: center;
-  border: 1px solid $border-color;
+  border: 1px solid $border-light;
 
   // Enhanced dark mode support
   [data-theme='dark'] & {
     background-color: rgba(255, 255, 255, 0.1);
-    border-color: $border-color-dark;
+    border-color: $border-dark;
   }
 }
 
 .toggle.on .toggle-track {
-  background-color: $brand-primary;
+  background-color: $primary;
 
   // Enhanced dark mode support
   [data-theme='dark'] & {
-    background-color: $brand-primary;
-    box-shadow: 0 0 0 1px $brand-primary;
+    background-color: $primary;
+    box-shadow: 0 0 0 1px $primary;
   }
 }
 
@@ -73,7 +73,7 @@
 .toggle-icon {
   width: 0.75rem;
   height: 0.75rem;
-  color: $brand-primary;
+  color: $primary;
   flex-shrink: 0;
 }
 

@@ -1,0 +1,53 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/tokens' as *;
+
+// PRO: Dark Theme Tokens
+// ==============================================
+
+// Dark theme color overrides
+[data-theme='dark'] {
+  // Background tokens
+  --surface-base: #{$gray-900};
+  --surface-raised: #{$gray-800};
+  --surface-overlay: rgba(0, 0, 0, 0.9);
+  --surface-sheet: rgba(15, 23, 42, 0.95);
+
+  // Text tokens
+  --text-primary: #{$gray-50};
+  --text-secondary: #{$gray-300};
+  --text-tertiary: #{$gray-400};
+  --text-inverse: #{$gray-900};
+
+  // Border tokens
+  --border-primary: #{rgba(255, 255, 255, 0.1)};
+  --border-secondary: #{rgba(255, 255, 255, 0.05)};
+
+  // Shadow tokens (darker for dark theme)
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  --shadow-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.15);
+  --shadow-dropdown: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+
+  // Focus tokens
+  --focus-ring: #{$focus-ring-dark};
+  --focus-ring-offset: #{$focus-ring-offset};
+
+  // Background and text
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+
+  // Enhanced dark mode backgrounds
+  .app {
+    background-color: var(--surface-base);
+  }
+
+  // Card components get elevated background
+  .card {
+    background-color: var(--surface-raised);
+    border-color: var(--border-primary);
+  }
+
+  // Modal and overlay adjustments
+  .modal-backdrop {
+    background-color: var(--surface-overlay);
+  }
+}

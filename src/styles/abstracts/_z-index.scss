@@ -1,0 +1,36 @@
+// PRO: Z-Index Management System
+// ==============================================
+@use 'sass:map';
+
+// Z-index scale for consistent layering
+$z-index-scale: (
+  'hide': -1,
+  'base': 0,
+  'docked': 10,
+  'dropdown': 1000,
+  'sticky': 1020,
+  'banner': 1030,
+  'overlay': 1040,
+  'modal': 1050,
+  'popover': 1060,
+  'skipLink': 1070,
+  'toast': 1080,
+  'tooltip': 1090,
+);
+
+// Semantic z-index tokens
+$z-dropdown: map.get($z-index-scale, 'dropdown');
+$z-modal: map.get($z-index-scale, 'modal');
+$z-toast: map.get($z-index-scale, 'toast');
+$z-tooltip: map.get($z-index-scale, 'tooltip');
+$z-overlay: map.get($z-index-scale, 'overlay');
+
+// Z-index utility function
+@function z($layer) {
+  @if map.has-key($z-index-scale, $layer) {
+    @return map.get($z-index-scale, $layer);
+  } @else {
+    @warn "Z-index layer '#{$layer}' not found.";
+    @return 0;
+  }
+}

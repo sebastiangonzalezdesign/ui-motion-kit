@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '../abstracts/colors' as *;
+
+// PRO: Color Utility Functions
+// ==============================================
+
+/// Get a color from a color scale
+/// @param {String} $scale - The color scale name (gray, blue, red, etc.)
+/// @param {Number} $shade - The shade number (50, 100, 200, etc.)
+/// @return {Color} The color value
+/// @example scss - Usage
+///   .button {
+///     background: color('blue', 500);
+///     border: 1px solid color('gray', 300);
+///   }
+@function color($scale, $shade) {
+  @if $scale == 'gray' {
+    @return map.get($gray, $shade);
+  } @else if $scale == 'blue' {
+    @return map.get($blue, $shade);
+  } @else if $scale == 'green' {
+    @return map.get($green, $shade);
+  } @else if $scale == 'red' {
+    @return map.get($red, $shade);
+  } @else if $scale == 'yellow' {
+    @return map.get($yellow, $shade);
+  } @else if $scale == 'orange' {
+    @return map.get($orange, $shade);
+  } @else if $scale == 'purple' {
+    @return map.get($purple, $shade);
+  } @else {
+    @error "Unknown color scale: #{$scale}. Available scales: gray, blue, green, red, yellow, orange, purple";
+  }
+}
+
+/// Get a semantic color token (CSS custom property)
+/// @param {String} $token - The semantic token name
+/// @return {String} CSS custom property reference
+/// @example scss - Usage
+///   .card {
+///     background: semantic('background-primary');
+///     color: semantic('text-primary');
+///   }
+@function semantic($token) {
+  @return var(--#{$token});
+}
+
+/// Get a color with alpha transparency
+/// @param {String} $scale - The color scale name
+/// @param {Number} $shade - The shade number
+/// @param {Number} $alpha - Alpha value (0-1)
+/// @return {Color} RGBA color value
+/// @example scss - Usage
+///   .overlay {
+///     background: color-alpha('gray', 900, 0.8);
+///   }
+@function color-alpha($scale, $shade, $alpha) {
+  $base-color: color($scale, $shade);
+  @return rgba($base-color, $alpha);
+}

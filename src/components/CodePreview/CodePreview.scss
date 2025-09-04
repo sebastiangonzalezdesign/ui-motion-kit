@@ -4,7 +4,7 @@
 
 .code-preview {
   margin-bottom: 1.5rem;
-  border: 1px solid $border-color;
+  border: 1px solid $border-light;
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: $background-primary;
@@ -12,7 +12,7 @@
 
   // Enhanced dark mode support
   [data-theme='dark'] & {
-    border-color: $border-color-dark;
+    border-color: $border-dark;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
@@ -28,12 +28,12 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: $text-primary;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $border-light;
 
   // Enhanced dark mode support
   [data-theme='dark'] & {
     background-color: $surface-elevated-dark;
-    border-bottom-color: $border-color-dark;
+    border-bottom-color: $border-dark;
   }
 
   @include respond('sm') {
@@ -45,12 +45,12 @@
 .tabs {
   display: flex;
   background-color: $surface-elevated;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $border-light;
 
   // Enhanced dark mode support
   [data-theme='dark'] & {
     background-color: $surface-elevated-dark;
-    border-bottom-color: $border-color-dark;
+    border-bottom-color: $border-dark;
   }
 }
 
@@ -82,8 +82,8 @@
 
 .tab.active {
   background-color: $background-primary;
-  color: $brand-primary;
-  border-bottom: 2px solid $brand-primary;
+  color: $primary;
+  border-bottom: 2px solid $primary;
 
   // Enhanced dark mode support
   [data-theme='dark'] & {
@@ -119,7 +119,7 @@
   // Enhanced dark mode support
   [data-theme='dark'] & {
     background-color: $surface-elevated-dark;
-    border: 1px solid $border-color-dark;
+    border: 1px solid $border-dark;
   }
 }
 

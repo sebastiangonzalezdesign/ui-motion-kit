@@ -1,3 +1,110 @@
-// Basic motion tokens for free version
+// PRO: Advanced Motion System
+// ==============================================
+@use 'sass:map';
+
+// Base motion tokens (extended from free)
 $motion-fast: 0.15s ease-out;
 $motion-normal: 0.3s ease-out;
+
+// Enhanced duration scale
+$durations: (
+  'instant': 0ms,
+  'fast': 150ms,
+  'normal': 300ms,
+  'slow': 500ms,
+  'slower': 700ms,
+  'slowest': 1000ms,
+);
+
+// Advanced easing curves
+$easings: (
+  'linear': linear,
+  'ease': ease,
+  'ease-in': ease-in,
+  'ease-out': ease-out,
+  'ease-in-out': ease-in-out,
+  'spring': cubic-bezier(0.34, 1.56, 0.64, 1),
+  'bounce': cubic-bezier(0.68, -0.55, 0.265, 1.55),
+  'smooth': cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  'sharp': cubic-bezier(0.4, 0, 0.6, 1),
+  'gentle': cubic-bezier(0.25, 0.1, 0.25, 1),
+);
+
+// Motion presets for common interactions
+$motion-presets: (
+  'fade': (
+    'duration': map.get($durations, 'normal'),
+    'easing': map.get($easings, 'ease-out'),
+  ),
+  'slide': (
+    'duration': map.get($durations, 'normal'),
+    'easing': map.get($easings, 'spring'),
+  ),
+  'scale': (
+    'duration': map.get($durations, 'fast'),
+    'easing': map.get($easings, 'bounce'),
+  ),
+  'rotate': (
+    'duration': map.get($durations, 'normal'),
+    'easing': map.get($easings, 'smooth'),
+  ),
+  'elastic': (
+    'duration': map.get($durations, 'slow'),
+    'easing': map.get($easings, 'spring'),
+  ),
+);
+
+// Responsive motion (respects user preferences)
+$motion-mobile: (
+  'duration': map.get($durations, 'fast'),
+  'easing': map.get($easings, 'ease-out'),
+);
+
+$motion-desktop: (
+  'duration': map.get($durations, 'normal'),
+  'easing': map.get($easings, 'spring'),
+);
+
+// Motion utility functions
+@function duration($key) {
+  @if map.has-key($durations, $key) {
+    @return map.get($durations, $key);
+  } @else {
+    @warn "Duration '#{$key}' not found.";
+    @return map.get($durations, 'normal');
+  }
+}
+
+@function easing($key) {
+  @if map.has-key($easings, $key) {
+    @return map.get($easings, $key);
+  } @else {
+    @warn "Easing '#{$key}' not found.";
+    @return map.get($easings, 'ease-out');
+  }
+}
+
+// Motion preset mixin
+@mixin motion($preset) {
+  @if map.has-key($motion-presets, $preset) {
+    $motion: map.get($motion-presets, $preset);
+    transition-duration: map.get($motion, 'duration');
+    transition-timing-function: map.get($motion, 'easing');
+  } @else {
+    @warn "Motion preset '#{$preset}' not found.";
+  }
+}
+
+// Reduced motion mixin for accessibility
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// Motion-safe mixin (only applies motion if user hasn't requested reduced motion)
+@mixin motion-safe {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}

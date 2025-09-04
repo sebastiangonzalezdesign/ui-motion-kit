@@ -1,0 +1,40 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/tokens' as *;
+@use '../abstracts/shadows' as *;
+
+// PRO: Light Theme Tokens
+// ==============================================
+
+// Light theme color overrides
+:root {
+  // Background tokens
+  --surface-base: #{$gray-50};
+  --surface-raised: #{$white};
+  --surface-overlay: rgba(0, 0, 0, 0.8);
+  --surface-sheet: rgba(255, 255, 255, 0.95);
+
+  // Text tokens
+  --text-primary: #{$gray-900};
+  --text-secondary: #{$gray-600};
+  --text-tertiary: #{$gray-500};
+  --text-inverse: #{$white};
+
+  // Border tokens
+  --border-primary: #{rgba(0, 0, 0, 0.1)};
+  --border-secondary: #{rgba(0, 0, 0, 0.05)};
+
+  // Shadow tokens
+  --shadow-card: #{$shadow-card};
+  --shadow-modal: #{$shadow-modal};
+  --shadow-dropdown: #{$shadow-dropdown};
+
+  // Focus tokens
+  --focus-ring: #{$focus-ring};
+  --focus-ring-offset: #{$focus-ring-offset};
+}
+
+// Light theme specific styles
+[data-theme='light'] {
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+}

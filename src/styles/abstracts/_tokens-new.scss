@@ -1,0 +1,207 @@
+@use 'sass:map';
+@use './colors' as *;
+@use '../functions/colors' as color-fn;
+
+// PRO: Design System Tokens
+// ==============================================
+
+// Semantic Color System CSS Custom Properties
+// These provide runtime theme switching and consistent naming
+:root {
+  // Background Colors
+  --background-primary: #{map.get($gray, 50)};
+  --background-secondary: #{map.get($gray, 100)};
+  --background-tertiary: #{map.get($gray, 200)};
+  --background-inverse: #{map.get($gray, 900)};
+
+  // Text Colors
+  --text-primary: #{map.get($gray, 900)};
+  --text-secondary: #{map.get($gray, 700)};
+  --text-tertiary: #{map.get($gray, 500)};
+  --text-inverse: #{map.get($gray, 50)};
+  --text-disabled: #{map.get($gray, 400)};
+
+  // Border Colors
+  --border-light: #{map.get($gray, 200)};
+  --border-medium: #{map.get($gray, 300)};
+  --border-dark: #{map.get($gray, 400)};
+  --border-focus: #{map.get($blue, 500)};
+
+  // Accent Colors
+  --accent-primary: #{map.get($blue, 600)};
+  --accent-primary-hover: #{map.get($blue, 700)};
+  --accent-primary-light: #{map.get($blue, 50)};
+  --accent-secondary: #{map.get($purple, 600)};
+  --accent-secondary-hover: #{map.get($purple, 700)};
+
+  // Feedback Colors
+  --feedback-success: #{map.get($green, 600)};
+  --feedback-success-light: #{map.get($green, 50)};
+  --feedback-warning: #{map.get($yellow, 600)};
+  --feedback-warning-light: #{map.get($yellow, 50)};
+  --feedback-error: #{map.get($red, 600)};
+  --feedback-error-light: #{map.get($red, 50)};
+  --feedback-info: #{map.get($blue, 600)};
+  --feedback-info-light: #{map.get($blue, 50)};
+}
+
+// Dark theme variant
+[data-theme='dark'] {
+  // Background Colors
+  --background-primary: #{map.get($gray, 900)};
+  --background-secondary: #{map.get($gray, 800)};
+  --background-tertiary: #{map.get($gray, 700)};
+  --background-inverse: #{map.get($gray, 50)};
+
+  // Text Colors
+  --text-primary: #{map.get($gray, 50)};
+  --text-secondary: #{map.get($gray, 300)};
+  --text-tertiary: #{map.get($gray, 400)};
+  --text-inverse: #{map.get($gray, 900)};
+  --text-disabled: #{map.get($gray, 500)};
+
+  // Border Colors
+  --border-light: #{map.get($gray, 700)};
+  --border-medium: #{map.get($gray, 600)};
+  --border-dark: #{map.get($gray, 500)};
+  --border-focus: #{map.get($blue, 400)};
+
+  // Accent Colors (slightly lighter for dark theme)
+  --accent-primary: #{map.get($blue, 500)};
+  --accent-primary-hover: #{map.get($blue, 400)};
+  --accent-primary-light: #{map.get($blue, 900)};
+  --accent-secondary: #{map.get($purple, 500)};
+  --accent-secondary-hover: #{map.get($purple, 400)};
+
+  // Feedback Colors (adjusted for dark theme)
+  --feedback-success: #{map.get($green, 500)};
+  --feedback-success-light: #{map.get($green, 900)};
+  --feedback-warning: #{map.get($yellow, 500)};
+  --feedback-warning-light: #{map.get($yellow, 900)};
+  --feedback-error: #{map.get($red, 500)};
+  --feedback-error-light: #{map.get($red, 900)};
+  --feedback-info: #{map.get($blue, 500)};
+  --feedback-info-light: #{map.get($blue, 900)};
+}
+
+// Export SCSS variable equivalents for all semantic tokens
+$background-primary: var(--background-primary);
+$background-secondary: var(--background-secondary);
+$background-tertiary: var(--background-tertiary);
+$background-inverse: var(--background-inverse);
+
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-tertiary: var(--text-tertiary);
+$text-inverse: var(--text-inverse);
+$text-disabled: var(--text-disabled);
+
+$border-light: var(--border-light);
+$border-medium: var(--border-medium);
+$border-dark: var(--border-dark);
+$border-focus: var(--border-focus);
+
+$accent-primary: var(--accent-primary);
+$accent-primary-hover: var(--accent-primary-hover);
+$accent-primary-light: var(--accent-primary-light);
+$accent-secondary: var(--accent-secondary);
+$accent-secondary-hover: var(--accent-secondary-hover);
+
+$success: var(--feedback-success);
+$success-light: var(--feedback-success-light);
+$warning: var(--feedback-warning);
+$warning-light: var(--feedback-warning-light);
+$error: var(--feedback-error);
+$error-light: var(--feedback-error-light);
+$info: var(--feedback-info);
+$info-light: var(--feedback-info-light);
+
+// Legacy compatibility tokens
+$white: var(--background-primary);
+$black: var(--text-primary);
+$gray-light: var(--border-light);
+$gray-dark: var(--border-dark);
+
+// Brand colors from semantic system
+$primary: var(--accent-primary);
+$secondary: var(--accent-secondary);
+$danger: var(--feedback-error);
+
+// Enhanced surface tokens for complex layering
+$surface-elevated: rgba(0, 0, 0, 0.02); // Subtle surface elevation for light mode
+$surface-elevated-dark: rgba(255, 255, 255, 0.05); // Subtle surface elevation for dark mode
+
+// Brand background tokens with proper opacity
+$brand-bg-soft: rgba(37, 99, 235, 0.08); // Soft blue background using blue-600 base
+$brand-bg-light: rgba(37, 99, 235, 0.12); // Light blue background
+$brand-bg-medium: rgba(37, 99, 235, 0.18); // Medium blue background
+
+// Gradient tokens
+$brand-bg-gradient: linear-gradient(135deg, #{map.get($blue, 50)} 0%, #{map.get($blue, 100)} 100%);
+$brand-bg-gradient-dark: linear-gradient(
+  135deg,
+  #{map.get($gray, 900)} 0%,
+  #{map.get($gray, 800)} 50%,
+  #{map.get($gray, 700)} 100%
+);
+
+// Typography tokens
+$font-family-ui:
+  'Inter',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  sans-serif;
+$font-family-code: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 2rem; // 32px
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing tokens
+$space-xs: 0.25rem; // 4px
+$space-sm: 0.5rem; // 8px
+$space-md: 1rem; // 16px
+$space-lg: 1.5rem; // 24px
+$space-xl: 2rem; // 32px
+$space-2xl: 3rem; // 48px
+
+// Border radius tokens
+$radius-none: 0;
+$radius-sm: 0.25rem; // 4px
+$radius-md: 0.5rem; // 8px
+$radius-lg: 1rem; // 16px
+$radius-xl: 1.5rem; // 24px
+$radius-full: 9999px;
+
+// Surface tokens for complex layering
+$surface-base: $background-primary;
+$surface-raised: $background-secondary;
+$surface-overlay: rgba(0, 0, 0, 0.8); // Modal backdrop
+$surface-sheet: rgba(255, 255, 255, 0.95); // Drawer/sheet background
+
+// State tokens (using new semantic system)
+$state-success: $success;
+$state-warning: $warning;
+$state-error: $error;
+$state-info: $info;
+
+// Interactive tokens
+$interactive-primary: $accent-primary;
+$interactive-secondary: $text-secondary;
+$interactive-accent: map.get($purple, 500); // Purple accent
+$interactive-muted: $text-disabled;
+
+// Focus tokens
+$focus-ring: rgba(37, 99, 235, 0.3); // Blue-600 with opacity
+$focus-ring-dark: rgba(96, 165, 250, 0.4); // Blue-400 with opacity
+$focus-ring-offset: 2px;

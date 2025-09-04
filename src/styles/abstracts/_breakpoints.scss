@@ -1,28 +1,94 @@
-// Breakpoints for free version - updated for better responsive design
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px; // Tablet start
-$breakpoint-lg: 1024px; // Desktop start
+// PRO: Enhanced Responsive System
+// ==============================================
+@use 'sass:map';
 
-// Responsive mixin
+// Granular breakpoint scale
+$breakpoints: (
+  'xs': 375px,
+  // Small phones
+  'sm': 576px,
+  // Large phones
+  'md': 768px,
+  // Tablets
+  'lg': 1024px,
+  // Small desktops
+  'xl': 1280px,
+  // Large desktops
+  '2xl': 1536px, // Extra large screens
+);
+
+// Legacy support (keeping existing variables)
+$breakpoint-sm: map.get($breakpoints, 'sm');
+$breakpoint-md: map.get($breakpoints, 'md');
+$breakpoint-lg: map.get($breakpoints, 'lg');
+
+// Enhanced responsive mixin with all breakpoints
 @mixin respond($breakpoint) {
-  @if $breakpoint == 'sm' {
-    @media (min-width: $breakpoint-sm) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
       @content;
     }
-  } @else if $breakpoint == 'md' {
-    @media (min-width: $breakpoint-md) {
-      @content;
-    }
-  } @else if $breakpoint == 'lg' {
-    @media (min-width: $breakpoint-lg) {
-      @content;
-    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' not found in $breakpoints.";
   }
 }
 
-// Tablet-specific mixin (768px - 1023px)
+// Responsive range mixins
+@mixin respond-between($min, $max) {
+  @if map.has-key($breakpoints, $min) and map.has-key($breakpoints, $max) {
+    @media (min-width: map.get($breakpoints, $min)) and (max-width: #{map.get($breakpoints, $max) - 1px}) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoints '#{$min}' or '#{$max}' not found.";
+  }
+}
+
+@mixin respond-down($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: #{map.get($breakpoints, $breakpoint) - 1px}) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' not found.";
+  }
+}
+
+// Specific device mixins
+@mixin mobile-only {
+  @include respond-down('md');
+}
+
+@mixin tablet-only {
+  @include respond-between('md', 'lg');
+}
+
+@mixin desktop-only {
+  @include respond('lg');
+}
+
+// Legacy tablet mixin (keeping for compatibility)
 @mixin respond-tablet {
-  @media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
+  @include respond-between('md', 'lg');
+}
+
+// Container query support (for modern browsers)
+@mixin container($size) {
+  @container (min-width: #{$size}) {
+    @content;
+  }
+}
+
+// Print media mixin
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+// High-density display mixin
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     @content;
   }
 }

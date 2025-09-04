@@ -1,0 +1,201 @@
+@use '../abstracts/breakpoints' as *;
+@use '../abstracts/spacing' as *;
+
+// PRO: Responsive Utilities
+// ==============================================
+
+// Responsive visibility utilities
+.hidden {
+  display: none !important;
+}
+
+@each $breakpoint, $value in $breakpoints {
+  .hidden-#{$breakpoint} {
+    @include respond($breakpoint) {
+      display: none !important;
+    }
+  }
+
+  .visible-#{$breakpoint} {
+    display: none !important;
+
+    @include respond($breakpoint) {
+      display: block !important;
+    }
+  }
+}
+
+// Responsive spacing utilities
+@each $key, $value in $spacing-scale {
+  // Margin utilities
+  .m-#{$key} {
+    margin: $value !important;
+  }
+  .mt-#{$key} {
+    margin-top: $value !important;
+  }
+  .mr-#{$key} {
+    margin-right: $value !important;
+  }
+  .mb-#{$key} {
+    margin-bottom: $value !important;
+  }
+  .ml-#{$key} {
+    margin-left: $value !important;
+  }
+  .mx-#{$key} {
+    margin-left: $value !important;
+    margin-right: $value !important;
+  }
+  .my-#{$key} {
+    margin-top: $value !important;
+    margin-bottom: $value !important;
+  }
+
+  // Padding utilities
+  .p-#{$key} {
+    padding: $value !important;
+  }
+  .pt-#{$key} {
+    padding-top: $value !important;
+  }
+  .pr-#{$key} {
+    padding-right: $value !important;
+  }
+  .pb-#{$key} {
+    padding-bottom: $value !important;
+  }
+  .pl-#{$key} {
+    padding-left: $value !important;
+  }
+  .px-#{$key} {
+    padding-left: $value !important;
+    padding-right: $value !important;
+  }
+  .py-#{$key} {
+    padding-top: $value !important;
+    padding-bottom: $value !important;
+  }
+}
+
+// Responsive text alignment
+.text-left {
+  text-align: left !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-right {
+  text-align: right !important;
+}
+
+@each $breakpoint, $value in $breakpoints {
+  .text-#{$breakpoint}-left {
+    @include respond($breakpoint) {
+      text-align: left !important;
+    }
+  }
+
+  .text-#{$breakpoint}-center {
+    @include respond($breakpoint) {
+      text-align: center !important;
+    }
+  }
+
+  .text-#{$breakpoint}-right {
+    @include respond($breakpoint) {
+      text-align: right !important;
+    }
+  }
+}
+
+// Responsive flexbox utilities
+.flex {
+  display: flex !important;
+}
+.inline-flex {
+  display: inline-flex !important;
+}
+.flex-col {
+  flex-direction: column !important;
+}
+.flex-row {
+  flex-direction: row !important;
+}
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+.flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+
+.justify-start {
+  justify-content: flex-start !important;
+}
+.justify-center {
+  justify-content: center !important;
+}
+.justify-end {
+  justify-content: flex-end !important;
+}
+.justify-between {
+  justify-content: space-between !important;
+}
+.justify-around {
+  justify-content: space-around !important;
+}
+
+.items-start {
+  align-items: flex-start !important;
+}
+.items-center {
+  align-items: center !important;
+}
+.items-end {
+  align-items: flex-end !important;
+}
+.items-stretch {
+  align-items: stretch !important;
+}
+
+// Responsive grid utilities
+.grid {
+  display: grid !important;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+.grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+}
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+}
+
+.gap-1 {
+  gap: space('1') !important;
+}
+.gap-2 {
+  gap: space('2') !important;
+}
+.gap-3 {
+  gap: space('3') !important;
+}
+.gap-4 {
+  gap: space('4') !important;
+}
+.gap-6 {
+  gap: space('6') !important;
+}
+.gap-8 {
+  gap: space('8') !important;
+}

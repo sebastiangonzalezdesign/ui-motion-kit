@@ -1,15 +1,47 @@
-// Use abstracts
+// PRO: Comprehensive Design System
+// ==============================================
+
+// Vendors (normalize/reset)
+@use 'vendors/normalize' as *;
+
+// Enhanced abstracts (design tokens)
 @use 'abstracts/colors' as *;
 @use 'abstracts/tokens' as *;
+@use 'abstracts/typography' as *;
 @use 'abstracts/motion' as *;
 @use 'abstracts/breakpoints' as *;
+@use 'abstracts/spacing' as *;
+@use 'abstracts/shadows' as *;
+@use 'abstracts/z-index' as *;
 
-// Use base
+// Theme system
+@use 'themes/light' as *;
+@use 'themes/dark' as *;
+
+// Base styles
 @use 'base/reset' as *;
 @use 'base/typography' as *;
 
-// Use layout
+// Layout system
 @use 'layout/grid' as *;
+
+// Utility system
+@use 'utilities/responsive' as *;
+@use 'utilities/animations' as *;
+@use 'utilities/utilities' as *;
+
+// Component styles (existing)
+@use '../components/Button/Button.scss' as *;
+@use '../components/Card/Card.scss' as *;
+@use '../components/Modal/Modal.scss' as *;
+@use '../components/Navbar/Navbar.scss' as *;
+@use '../components/Footer/Footer.scss' as *;
+@use '../components/ThemeToggle/ThemeToggle.scss' as *;
+@use '../components/Toggle/Toggle.scss' as *;
+@use '../components/Hero/Hero.scss' as *;
+@use '../components/Spinner/Spinner.scss' as *;
+@use '../components/IconButton/IconButton.scss' as *;
+@use '../components/CodePreview/CodePreview.scss' as *;
 
 // Use components
 @use '../components/Button/Button.scss' as *;
@@ -95,7 +127,7 @@
   padding: 3rem 2rem;
   background: $brand-bg-gradient;
   border-radius: 1rem;
-  border: 1px solid rgba($brand-primary, 0.1);
+  border: 1px solid rgba($primary, 0.1);
 
   h2 {
     font-size: $font-size-2xl;
@@ -115,7 +147,7 @@
 
   [data-theme='dark'] & {
     background: $brand-bg-gradient-dark;
-    border-color: rgba($brand-primary, 0.2);
+    border-color: rgba($primary, 0.2);
   }
 
   // Ensure button is centered and has proper spacing
@@ -130,7 +162,7 @@
 .cta-button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background-color: $brand-primary;
+  background-color: $primary;
   color: $background-primary;
   text-decoration: none;
   border-radius: 0.5rem;

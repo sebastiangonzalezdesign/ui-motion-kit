@@ -1,0 +1,107 @@
+@use 'tokens' as *;
+
+// PRO: Enhanced Shadow/Elevation System
+// ==============================================
+
+// Elevation tokens (shadows + blur)
+$shadows: (
+  'none': none,
+  'xs': (
+    'light': (
+      0 1px 2px 0 rgba(0, 0, 0, 0.05),
+    ),
+    'dark': (
+      0 1px 2px 0 rgba(0, 0, 0, 0.3),
+    ),
+  ),
+  'sm': (
+    'light': (
+      0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px 0 rgba(0, 0, 0, 0.06),
+    ),
+    'dark': (
+      0 1px 3px 0 rgba(0, 0, 0, 0.4),
+      0 1px 2px 0 rgba(0, 0, 0, 0.2),
+    ),
+  ),
+  'md': (
+    'light': (
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    ),
+    'dark': (
+      0 4px 6px -1px rgba(0, 0, 0, 0.4),
+      0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    ),
+  ),
+  'lg': (
+    'light': (
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    ),
+    'dark': (
+      0 10px 15px -3px rgba(0, 0, 0, 0.4),
+      0 4px 6px -2px rgba(0, 0, 0, 0.2),
+    ),
+  ),
+  'xl': (
+    'light': (
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    ),
+    'dark': (
+      0 20px 25px -5px rgba(0, 0, 0, 0.4),
+      0 10px 10px -5px rgba(0, 0, 0, 0.15),
+    ),
+  ),
+  '2xl': (
+    'light': (
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    ),
+    'dark': (
+      0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    ),
+  ),
+);
+
+// Simplified shadow tokens for easy use
+$shadow-card:
+  0 1px 3px 0 rgba(0, 0, 0, 0.1),
+  0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-modal:
+  0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-dropdown:
+  0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-tooltip:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+// Shadow utility function (simplified)
+@function shadow($size) {
+  @if $size == 'xs' {
+    @return 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  } @else if $size == 'sm' {
+    @return 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  } @else if $size == 'md' {
+    @return 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  } @else if $size == 'lg' {
+    @return 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  } @else if $size == 'xl' {
+    @return 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  } @else if $size == '2xl' {
+    @return 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  } @else if $size == 'none' {
+    @return none;
+  } @else {
+    @warn "Shadow size '#{$size}' not found.";
+    @return none;
+  }
+}
+
+// Focus ring tokens
+$focus-ring-width: 2px;
+$focus-ring-offset: 2px;
+$focus-ring-color: $focus-ring;
+$focus-ring-style: solid;

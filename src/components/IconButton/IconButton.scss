@@ -13,7 +13,7 @@
   color: $text-primary;
 
   &:focus {
-    outline: 2px solid $brand-primary;
+    outline: 2px solid $primary;
     outline-offset: 2px;
   }
 
@@ -33,23 +33,23 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
 
     &:hover:not(:disabled) {
-      background: rgba($brand-primary, 0.08);
-      border-color: $brand-primary;
-      color: $brand-primary;
+      background: rgba($primary, 0.08);
+      border-color: $primary;
+      color: $primary;
 
       .icon-button__icon {
-        color: $brand-primary;
+        color: $primary;
       }
     }
   }
 
   &--ghost {
     &:hover:not(:disabled) {
-      background: rgba($brand-primary, 0.08);
-      color: $brand-primary;
+      background: rgba($primary, 0.08);
+      color: $primary;
 
       .icon-button__icon {
-        color: $brand-primary;
+        color: $primary;
       }
     }
   }
@@ -58,12 +58,12 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
 
     &:hover:not(:disabled) {
-      background: rgba($brand-primary, 0.08);
-      border-color: $brand-primary;
-      color: $brand-primary;
+      background: rgba($primary, 0.08);
+      border-color: $primary;
+      color: $primary;
 
       .icon-button__icon {
-        color: $brand-primary;
+        color: $primary;
       }
     }
   }

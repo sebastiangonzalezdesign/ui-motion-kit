@@ -5,7 +5,7 @@
 
 .card {
   background-color: $background-primary;
-  border: 1px solid $border-color;
+  border: 1px solid $border-light;
   border-radius: $space-md;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -22,7 +22,7 @@
 
   // Dark mode styles
   [data-theme='dark'] & {
-    border-color: $border-color-dark;
+    border-color: $border-dark;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
     &:hover {
@@ -39,13 +39,13 @@
 
   // Highlight variant
   &--highlight {
-    border: 2px solid $brand-primary;
+    border: 2px solid $primary;
     background: $brand-bg-medium;
     max-width: 100% !important; // Override max-width for full width
     width: 100%;
 
     [data-theme='dark'] & {
-      border-color: $brand-primary;
+      border-color: $primary;
       background: $brand-bg-medium;
     }
   }
@@ -61,7 +61,7 @@
       height: 4rem;
       border-radius: 50%;
       background: $brand-bg-gradient;
-      border: 2px solid rgba($brand-primary, 0.2);
+      border: 2px solid rgba($primary, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -73,14 +73,14 @@
         position: absolute;
         inset: -2px;
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba($brand-primary, 0.3), rgba($brand-primary, 0.1));
+        background: linear-gradient(135deg, rgba($primary, 0.3), rgba($primary, 0.1));
         z-index: -1;
       }
 
       .card__icon-svg {
         width: 2rem;
         height: 2rem;
-        color: $brand-primary;
+        color: $primary;
         position: relative;
         z-index: 1;
       }
@@ -98,14 +98,14 @@
     [data-theme='dark'] & {
       .card__icon {
         background: $brand-bg-gradient-dark;
-        border-color: rgba($brand-primary, 0.3);
+        border-color: rgba($primary, 0.3);
 
         &::before {
-          background: linear-gradient(135deg, rgba($brand-primary, 0.4), rgba($brand-primary, 0.2));
+          background: linear-gradient(135deg, rgba($primary, 0.4), rgba($primary, 0.2));
         }
 
         .card__icon-svg {
-          color: $brand-primary;
+          color: $primary;
         }
       }
     }

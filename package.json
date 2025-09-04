@@ -1,8 +1,19 @@
 {
-  "name": "motion-ui-kit",
+  "name": "motion-ui-kit-pro",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Premium UI component library with sophisticated animations and comprehensive design system",
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "animations",
+    "design-system",
+    "typescript",
+    "scss",
+    "framer-motion"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
