@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useState } from 'react';
-import Modal from '../components/Modal/Modal';
-import Button from '../components/Button/Button';
+import { Modal } from '../components/feedback';
+import { Button } from '../components/primitives';
 
 function ModalWrapper() {
   const [open, setOpen] = useState(false);

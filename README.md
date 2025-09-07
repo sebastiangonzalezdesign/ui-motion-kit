@@ -50,16 +50,33 @@ Experience the full range of premium components, advanced animations, and compre
 
 ### ✅ Phase 1 Complete - Foundation Components
 
+#### 🧩 **Primitives** (`src/components/primitives/`)
+
 - **Button** — Multiple variants (primary, secondary, ghost) with hover & press states, full accessibility
 - **Card** — Flexible content layout with hover effects and interactive states
-- **Modal** — Fully accessible modal with backdrop, ESC/backdrop close, focus trap, and portal mounting
 - **Toggle** — Smooth animated switch with labels and accessibility support
-- **ThemeToggle** — Persistent light/dark mode toggle (☀️/🌙) with system preference detection
-- **Spinner** — Multiple sizes and variants for loading states
-- **CodePreview** — Interactive code snippets with syntax highlighting and copy functionality
 - **IconButton** — Compact button variant with icon support and multiple states
+- **Spinner** — Multiple sizes and variants for loading states
+
+#### 💬 **Feedback** (`src/components/feedback/`)
+
+- **Modal** — Fully accessible modal with backdrop, ESC/backdrop close, focus trap, and portal mounting
+
+#### 🧭 **Navigation** (`src/components/navigation/`)
+
+- _Phase 2 components ready for implementation_
+
+#### 📐 **Layout** (`src/components/layout/`)
+
+- **ScrollToTop** — Smooth scroll-to-top functionality with animated button
+
+#### 🚀 **Demo Site Components** (`src/app/components/`)
+
+- **ThemeToggle** — Persistent light/dark mode toggle (☀️/🌙) with system preference detection
+- **CodePreview** — Interactive code snippets with syntax highlighting and copy functionality
 - **Hero Section** — Landing page hero with advanced typography and call-to-action components
 - **Navbar** — Responsive navigation with theme toggle integration
+- **Footer** — Site footer with links and branding
 
 ### 🎨 Enhanced Design System (Phase 1)
 
@@ -140,32 +157,60 @@ styles/
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── Button/          # Primary, secondary, ghost variants
-│   ├── Card/            # Flexible content containers
-│   ├── Modal/           # Accessible modal dialogs
-│   ├── Toggle/          # Animated switch controls
-│   ├── ThemeToggle/     # Light/dark mode switcher
-│   ├── Spinner/         # Loading state indicators
-│   ├── IconButton/      # Compact icon-based buttons
-│   ├── Hero/            # Landing page hero sections
-│   ├── Navbar/          # Navigation components
-│   └── CodePreview/     # Interactive code examples
-├── pages/               # Route components
-│   ├── Home.tsx         # Landing page
-│   ├── Buttons.tsx      # Button showcase
-│   ├── Cards.tsx        # Card examples
-│   └── Modals.tsx       # Modal demonstrations
-├── styles/              # SCSS design system
+├── components/          # 🎨 Design System Components (Customer-Facing)
+│   ├── primitives/      # Core UI building blocks
+│   │   ├── Button/      # Primary, secondary, ghost variants
+│   │   ├── Card/        # Flexible content containers
+│   │   ├── Toggle/      # Animated switch controls
+│   │   ├── IconButton/  # Compact icon-based buttons
+│   │   └── Spinner/     # Loading state indicators
+│   ├── feedback/        # User feedback components
+│   │   ├── Modal/       # Accessible modal dialogs
+│   │   └── Toast/       # Notification toasts (Phase 2)
+│   ├── navigation/      # Navigation components
+│   │   ├── Tabs/        # Tab interface (Phase 2)
+│   │   ├── CommandPalette/ # Command search (Phase 2)
+│   │   └── Drawer/      # Side drawer (Phase 2)
+│   ├── layout/          # Layout utilities
+│   │   └── ScrollToTop/ # Scroll-to-top functionality
+│   └── index.ts         # Main component exports
+├── app/                 # 🚀 Demo Site (Internal Use)
+│   ├── components/      # Demo site specific components
+│   │   ├── Navbar/      # Site navigation
+│   │   ├── Hero/        # Landing page hero sections
+│   │   ├── Footer/      # Site footer
+│   │   ├── ThemeToggle/ # Light/dark mode switcher
+│   │   └── CodePreview/ # Interactive code examples
+│   └── pages/           # Demo site pages
+│       ├── Home.tsx     # Landing page
+│       ├── DesignTokens.tsx # Design system showcase
+│       ├── Components.tsx   # Component library
+│       ├── Documentation.tsx # Docs and guides
+│       ├── Changelog.tsx    # Version history
+│       ├── Buttons.tsx  # Button showcase
+│       ├── Cards.tsx    # Card examples
+│       ├── Modals.tsx   # Modal demonstrations
+│       ├── TabsPage.tsx # Tabs showcase (Phase 2)
+│       └── ToastPage.tsx # Toast examples (Phase 2)
+├── styles/              # 🎨 SCSS Design System
 │   ├── abstracts/       # Design tokens, colors, typography
-│   ├── functions/       # Utility functions
 │   ├── base/            # Reset, typography base styles
-│   ├── vendors/         # Third-party CSS (normalize)
+│   ├── layout/          # Grid and layout utilities
 │   └── main.scss        # Main stylesheet entry
 ├── utils/               # JavaScript utilities
 │   └── motion.ts        # Motion configuration and helpers
 └── types/               # TypeScript type definitions
 ```
+
+### 🏗️ Architecture Benefits
+
+- **🔄 Scalable Structure**: Clean separation between design system and demo site
+- **👥 Customer Clarity**: Clear distinction between shipped components and demo-only features
+- **📦 Easy Distribution**: Design system components can be easily extracted and packaged
+- **🧩 Modular Design**: Components organized by functionality for better maintainability
+- **🎯 Professional**: Industry-standard structure that scales with team growth
+
+> 📖 **Detailed Architecture Guide**: See [ARCHITECTURE.md](./ARCHITECTURE.md) for comprehensive documentation on project structure, patterns, and development workflow.
 
 ---
 

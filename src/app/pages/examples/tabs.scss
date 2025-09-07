@@ -1,0 +1,260 @@
+// Tabs Page Styles
+.tabs-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .page-description {
+    margin-bottom: 3rem;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  // Interactive Demo Section
+  .interactive-demo {
+    margin-bottom: 4rem;
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+    }
+
+    .demo-controls {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--surface-primary);
+      border: 1px solid var(--border-primary);
+      border-radius: 12px;
+
+      h3 {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+
+      .control-group {
+        margin-bottom: 1.5rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: var(--text-secondary);
+          font-weight: 500;
+        }
+
+        .button-group {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+
+          button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            background: var(--surface-secondary);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background: var(--surface-tertiary);
+              color: var(--text-primary);
+            }
+
+            &.active {
+              background: var(--accent-primary);
+              color: var(--accent-contrast);
+              border-color: var(--accent-primary);
+            }
+          }
+        }
+      }
+    }
+
+    .demo-showcase {
+      padding: 2rem;
+      background: var(--surface-primary);
+      border: 1px solid var(--border-primary);
+      border-radius: 12px;
+      min-height: 300px;
+    }
+  }
+
+  // Code Examples Section
+  .code-examples {
+    h2 {
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+    }
+
+    .code-preview {
+      margin-bottom: 3rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Tab Example Content
+  .tab-example-content {
+    padding: 1.5rem;
+
+    h4 {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    h5 {
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.5rem;
+      color: var(--text-secondary);
+
+      li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // Variants Showcase
+  .variants-showcase {
+    .variant-section {
+      margin-bottom: 2rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      h5 {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        font-size: 1.125rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  // Card Grid for Features
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  // Responsive Design
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .interactive-demo .demo-controls {
+      padding: 1rem;
+
+      .control-group .button-group {
+        gap: 0.25rem;
+
+        button {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.8125rem;
+        }
+      }
+    }
+
+    .interactive-demo .demo-showcase {
+      padding: 1rem;
+      min-height: 250px;
+    }
+
+    .tab-example-content {
+      padding: 1rem;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    .page-description {
+      font-size: 1rem;
+    }
+
+    .interactive-demo h2,
+    .code-examples h2 {
+      font-size: 1.5rem;
+    }
+
+    .interactive-demo .demo-controls .control-group .button-group {
+      button {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+// Dark mode considerations
+[data-theme='dark'] {
+  .tabs-page {
+    .interactive-demo .demo-controls,
+    .interactive-demo .demo-showcase {
+      background: var(--surface-secondary);
+    }
+
+    .interactive-demo .demo-controls .control-group .button-group button {
+      &:hover {
+        background: var(--surface-tertiary);
+      }
+    }
+  }
+}

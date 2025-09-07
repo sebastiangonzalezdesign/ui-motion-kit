@@ -1,13 +1,20 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { pageVariants, pageTransition } from './utils/motion';
-import Navbar from './components/Navbar/Navbar';
-import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import Footer from './components/Footer/Footer';
-import Home from './pages/Home';
-import Buttons from './pages/Buttons';
-import Cards from './pages/Cards';
-import Modals from './pages/Modals';
+import { Navbar, Footer } from './app/components';
+import { ScrollToTop } from './components/layout';
+import {
+  Home,
+  DesignTokens,
+  Components,
+  Documentation,
+  Changelog,
+  Buttons,
+  Cards,
+  Modals,
+  TabsPage,
+  ToastPage,
+} from './app/pages';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -29,6 +36,134 @@ function AnimatedRoutes() {
             </motion.div>
           }
         />
+        <Route
+          path="/docs/design-tokens"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <DesignTokens />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/docs/components"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <Components />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/docs"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <Documentation />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/docs/changelog"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <Changelog />
+            </motion.div>
+          }
+        />
+        {/* Component example routes */}
+        <Route
+          path="/examples/buttons"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <Buttons />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/cards"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <Cards />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/modals"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <Modals />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/tabs"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <TabsPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/toasts"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <ToastPage />
+            </motion.div>
+          }
+        />
+        {/* Legacy routes for backward compatibility */}
         <Route
           path="/buttons"
           element={

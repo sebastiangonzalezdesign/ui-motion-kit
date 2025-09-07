@@ -30,28 +30,22 @@
 @use 'utilities/animations' as *;
 @use 'utilities/utilities' as *;
 
-// Component styles (existing)
-@use '../components/Button/Button.scss' as *;
-@use '../components/Card/Card.scss' as *;
-@use '../components/Modal/Modal.scss' as *;
-@use '../components/Navbar/Navbar.scss' as *;
-@use '../components/Footer/Footer.scss' as *;
-@use '../components/ThemeToggle/ThemeToggle.scss' as *;
-@use '../components/Toggle/Toggle.scss' as *;
-@use '../components/Hero/Hero.scss' as *;
-@use '../components/Spinner/Spinner.scss' as *;
-@use '../components/IconButton/IconButton.scss' as *;
-@use '../components/CodePreview/CodePreview.scss' as *;
+// Design System Component styles (categorized)
+@use '../components/primitives/Button/Button.scss' as *;
+@use '../components/primitives/Card/Card.scss' as *;
+@use '../components/primitives/Toggle/Toggle.scss' as *;
+@use '../components/primitives/IconButton/IconButton.scss' as *;
+@use '../components/primitives/Spinner/Spinner.scss' as *;
+@use '../components/feedback/Modal/Modal.scss' as *;
+@use '../components/feedback/Toast/Toast.scss' as *;
+@use '../components/navigation/Tabs/Tabs.scss' as *;
 
-// Use components
-@use '../components/Button/Button.scss' as *;
-@use '../components/Card/Card.scss' as *;
-@use '../components/Modal/Modal.scss' as *;
-@use '../components/Navbar/Navbar.scss' as *;
-@use '../components/Footer/Footer.scss' as *;
-@use '../components/ThemeToggle/ThemeToggle.scss' as *;
-@use '../components/Toggle/Toggle.scss' as *;
-@use '../components/Hero/Hero.scss' as *;
+// Demo Site Component styles
+@use '../app/components/Navbar/Navbar.scss' as *;
+@use '../app/components/Footer/Footer.scss' as *;
+@use '../app/components/ThemeToggle/ThemeToggle.scss' as *;
+@use '../app/components/Hero/Hero.scss' as *;
+@use '../app/components/CodePreview/CodePreview.scss' as *;
 
 // App styles
 .app {
