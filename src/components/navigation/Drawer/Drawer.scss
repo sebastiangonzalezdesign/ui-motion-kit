@@ -1,0 +1,333 @@
+@use '../../../styles/abstracts' as *;
+
+.drawer {
+  position: fixed;
+  z-index: $z-drawer;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  box-shadow: $shadow-xl;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+
+  // Backdrop
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $color-backdrop;
+    z-index: $z-backdrop;
+  }
+
+  // Direction-specific positioning
+  &--left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-right: 1px solid $color-border;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  &--right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-left: 1px solid $color-border;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  &--top {
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid $color-border;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  &--bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid $color-border;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  // Sizes for left/right drawers
+  &--left,
+  &--right {
+    &.drawer--sm {
+      width: 20rem; // 320px
+    }
+
+    &.drawer--md {
+      width: 28rem; // 448px
+    }
+
+    &.drawer--lg {
+      width: 36rem; // 576px
+    }
+
+    &.drawer--xl {
+      width: 48rem; // 768px
+    }
+
+    &.drawer--full {
+      width: 100vw;
+    }
+  }
+
+  // Sizes for top/bottom drawers
+  &--top,
+  &--bottom {
+    &.drawer--sm {
+      height: 20rem; // 320px
+    }
+
+    &.drawer--md {
+      height: 28rem; // 448px
+    }
+
+    &.drawer--lg {
+      height: 36rem; // 576px
+    }
+
+    &.drawer--xl {
+      height: 48rem; // 768px
+    }
+
+    &.drawer--full {
+      height: 100vh;
+    }
+  }
+
+  // Header
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-md;
+    border-bottom: 1px solid $color-border;
+    background: $color-surface;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $color-surface-hover;
+      color: $color-text-primary;
+      border-color: $color-border-hover;
+    }
+
+    &:focus {
+      outline: 2px solid $color-focus;
+      outline-offset: 2px;
+    }
+
+    &:active {
+      background: $color-surface-active;
+      transform: scale(0.95);
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  // Content
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+    padding: $space-md;
+  }
+
+  // Footer
+  &__footer {
+    padding: $space-md;
+    border-top: 1px solid $color-border;
+    background: $color-surface;
+    flex-shrink: 0;
+  }
+
+  // Drag handle for gesture support
+  &__drag-handle {
+    position: absolute;
+    z-index: 1;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &--left &__drag-handle {
+    top: 0;
+    right: -4px;
+    bottom: 0;
+    width: 8px;
+  }
+
+  &--right &__drag-handle {
+    top: 0;
+    left: -4px;
+    bottom: 0;
+    width: 8px;
+  }
+
+  &--top &__drag-handle {
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 8px;
+  }
+
+  &--bottom &__drag-handle {
+    left: 0;
+    right: 0;
+    top: -4px;
+    height: 8px;
+  }
+
+  // Responsive adjustments
+  @include breakpoint-down(md) {
+    &--left,
+    &--right {
+      &.drawer--sm,
+      &.drawer--md {
+        width: 90vw;
+      }
+
+      &.drawer--lg,
+      &.drawer--xl {
+        width: 95vw;
+      }
+    }
+
+    &--top,
+    &--bottom {
+      &.drawer--sm,
+      &.drawer--md {
+        height: 60vh;
+      }
+
+      &.drawer--lg,
+      &.drawer--xl {
+        height: 80vh;
+      }
+    }
+  }
+
+  @include breakpoint-down(sm) {
+    &--left,
+    &--right {
+      &:not(.drawer--full) {
+        width: 100vw;
+      }
+    }
+
+    &--top,
+    &--bottom {
+      &:not(.drawer--full) {
+        height: 100vh;
+      }
+    }
+
+    &__header {
+      padding: $space-sm;
+    }
+
+    &__content {
+      padding: $space-sm;
+    }
+
+    &__footer {
+      padding: $space-sm;
+    }
+  }
+
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    background: $color-surface-dark;
+    border-color: $color-border-dark;
+    box-shadow: $shadow-xl-dark;
+
+    &__backdrop {
+      background: $color-backdrop-dark;
+    }
+
+    &__header {
+      background: $color-surface-dark;
+      border-color: $color-border-dark;
+    }
+
+    &__title {
+      color: $color-text-primary-dark;
+    }
+
+    &__close-button {
+      border-color: $color-border-dark;
+      color: $color-text-secondary-dark;
+
+      &:hover {
+        background: $color-surface-hover-dark;
+        color: $color-text-primary-dark;
+        border-color: $color-border-hover-dark;
+      }
+
+      &:active {
+        background: $color-surface-active-dark;
+      }
+    }
+
+    &__content {
+      background: $color-surface-dark;
+    }
+
+    &__footer {
+      background: $color-surface-dark;
+      border-color: $color-border-dark;
+    }
+  }
+
+  // Accessibility - reduced motion
+  @media (prefers-reduced-motion: reduce) {
+    &__close-button {
+      transition: none;
+
+      &:active {
+        transform: none;
+      }
+    }
+  }
+}

@@ -1,7 +1,17 @@
 // Navigation Components Exports
+
+// Tabs Component
 export { Tabs, TabList, TabTrigger, TabContent } from './Tabs';
 export type { TabsProps, TabListProps, TabTriggerProps, TabContentProps } from './Tabs';
 
-// Future navigation components (Phase 2)
-// export { default as Drawer } from './Drawer/Drawer';
-// export { default as CommandPalette } from './CommandPalette/CommandPalette';
+// CommandPalette Component
+export { CommandPalette, useCommandPalette } from './CommandPalette';
+export type { CommandPaletteProps } from './CommandPalette';
+
+// Drawer Component
+export { Drawer, useDrawer } from './Drawer';
+export type { DrawerProps } from './Drawer';
+
+// Breadcrumb Component
+export { Breadcrumb } from './Breadcrumb';
+export type { BreadcrumbProps } from './Breadcrumb';

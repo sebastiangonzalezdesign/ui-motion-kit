@@ -6,6 +6,7 @@ import { Card } from '../../../components/primitives';
 import { Modal } from '../../../components/feedback';
 import { Hero } from '../../components';
 import { IconButton } from '../../../components/primitives';
+import { Breadcrumb } from '../../../components/navigation';
 import {
   CheckCircleIcon,
   LightBulbIcon,
@@ -23,6 +24,7 @@ const Buttons = () => {
 
   return (
     <div className="page">
+      <Breadcrumb />
       <Hero
         headline="Button Components"
         description="Interactive buttons with smooth hover animations and click feedback."

@@ -14,6 +14,15 @@ import {
   Modals,
   TabsPage,
   ToastPage,
+  CommandPalettePage,
+  DrawerPage,
+  InputsPage,
+  TogglesPage,
+  NavbarPage,
+  SidebarPage,
+  LoadersPage,
+  MicroInteractionsPage,
+  PageTransitionsPage,
 } from './app/pages';
 
 function AnimatedRoutes() {
@@ -150,7 +159,7 @@ function AnimatedRoutes() {
           }
         />
         <Route
-          path="/examples/toasts"
+          path="/examples/toast"
           element={
             <motion.div
               initial="initial"
@@ -160,6 +169,132 @@ function AnimatedRoutes() {
               transition={pageTransition}
             >
               <ToastPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/command-palette"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <CommandPalettePage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/drawer"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <DrawerPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/inputs"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <InputsPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/toggles"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <TogglesPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/navbar"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <NavbarPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/sidebar"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <SidebarPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/loaders"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <LoadersPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/micro-interactions"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <MicroInteractionsPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/page-transitions"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <PageTransitionsPage />
             </motion.div>
           }
         />

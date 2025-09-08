@@ -1,0 +1,193 @@
+@use '../../../styles/abstracts' as *;
+
+.command-palette-page {
+  padding: $space-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .page-header {
+    margin-bottom: $space-2xl;
+    text-align: center;
+
+    h1 {
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-bold;
+      color: $text-primary;
+      margin-bottom: $space-md;
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: $text-secondary;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  .demo-section {
+    margin-bottom: $space-xl;
+
+    .demo-controls {
+      display: flex;
+      flex-direction: column;
+      gap: $space-lg;
+      align-items: flex-start;
+
+      .keyboard-shortcuts {
+        p {
+          font-weight: $font-weight-medium;
+          margin-bottom: $space-sm;
+          color: $text-primary;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            display: flex;
+            align-items: center;
+            gap: $space-sm;
+            margin-bottom: $space-xs;
+            color: $text-secondary;
+
+            kbd {
+              display: inline-block;
+              padding: 2px 6px;
+              background: $background-tertiary;
+              border: 1px solid $border-light;
+              border-radius: $radius-sm;
+              font-family: $font-family-mono;
+              font-size: $font-size-sm;
+              font-weight: $font-weight-medium;
+              color: $text-primary;
+              min-width: 24px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: $space-lg;
+
+      .feature {
+        h3 {
+          font-size: $font-size-lg;
+          font-weight: $font-weight-semibold;
+          color: $text-primary;
+          margin-bottom: $space-sm;
+        }
+
+        p {
+          color: $text-secondary;
+          line-height: 1.5;
+        }
+      }
+    }
+
+    .commands-preview {
+      display: flex;
+      flex-direction: column;
+      gap: $space-sm;
+
+      .command-item {
+        display: flex;
+        align-items: center;
+        gap: $space-md;
+        padding: $space-md;
+        background: $background-secondary;
+        border: 1px solid $border-light;
+        border-radius: $radius-md;
+        transition: $transition-fast;
+
+        &:hover {
+          background: $background-tertiary;
+          border-color: $border-medium;
+        }
+
+        .command-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 2rem;
+          height: 2rem;
+          color: $text-secondary;
+
+          .placeholder-icon {
+            width: 1rem;
+            height: 1rem;
+            background: $background-tertiary;
+            border-radius: $radius-sm;
+          }
+        }
+
+        .command-content {
+          flex: 1;
+
+          .command-label {
+            font-size: $font-size-base;
+            font-weight: $font-weight-medium;
+            color: $text-primary;
+            margin-bottom: 2px;
+          }
+
+          .command-description {
+            font-size: $font-size-sm;
+            color: $text-secondary;
+            margin-bottom: 4px;
+          }
+
+          .command-category {
+            font-size: $font-size-xs;
+            color: $text-tertiary;
+            text-transform: uppercase;
+            font-weight: $font-weight-medium;
+            letter-spacing: 0.5px;
+          }
+        }
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @include respond('md') {
+    .demo-controls {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  @include respond-below('sm') {
+    padding: $space-lg;
+
+    .page-header {
+      h1 {
+        font-size: $font-size-2xl;
+      }
+
+      p {
+        font-size: $font-size-base;
+      }
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .command-item {
+      padding: $space-sm;
+      gap: $space-sm;
+
+      .command-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 @use '../../../styles/abstracts/tokens' as *;
 @use '../../../styles/abstracts/motion' as *;
 @use '../../../styles/abstracts/breakpoints' as *;
+@use '../../../styles/abstracts/spacing' as *;
 
 .card {
   background-color: $background-primary;
@@ -35,6 +36,11 @@
     pointer-events: none;
     max-width: 600px !important; // Ensure loading state also has max-width
     width: 100%; // Allow it to be responsive up to max-width
+  }
+
+  // Default variant
+  &--default {
+    height: fit-content;
   }
 
   // Highlight variant

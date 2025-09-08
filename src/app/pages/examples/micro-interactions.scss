@@ -1,0 +1,23 @@
+@use '../../../styles/abstracts' as *;
+
+.micro-interactions-page {
+  padding: $space-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .demo-section {
+    margin-bottom: $space-xl;
+
+    .micro-examples {
+      ul {
+        list-style: disc;
+        padding-left: $space-lg;
+
+        li {
+          margin-bottom: $space-sm;
+          color: $text-secondary;
+        }
+      }
+    }
+  }
+}

@@ -5,116 +5,214 @@
 // PRO: Design System Tokens
 // ==============================================
 
-// Semantic Color System CSS Custom Properties
-// These provide runtime theme switching and consistent naming
+// 🎨 THEME CONFIGURATION MAP
+// This centralizes all theme variations and makes adding new themes simple
+$themes: (
+  light: (
+    // Background tokens
+    background-primary: map.get(colors.$gray, 50),
+    background-secondary: map.get(colors.$gray, 100),
+    background-tertiary: map.get(colors.$gray, 200),
+    background-inverse: map.get(colors.$gray, 900),
+    // Text tokens
+    text-primary: map.get(colors.$gray, 900),
+    text-secondary: map.get(colors.$gray, 700),
+    text-tertiary: map.get(colors.$gray, 500),
+    text-inverse: map.get(colors.$gray, 50),
+    text-disabled: map.get(colors.$gray, 400),
+    // Border tokens
+    border-light: map.get(colors.$gray, 200),
+    border-medium: map.get(colors.$gray, 300),
+    border-dark: map.get(colors.$gray, 400),
+    border-focus: map.get(colors.$blue, 500),
+    // Accent tokens (contextual - adjust for readability)
+    accent-primary: map.get(colors.$blue, 600),
+    accent-primary-hover: map.get(colors.$blue, 700),
+    accent-primary-light: map.get(colors.$blue, 50),
+    accent-secondary: map.get(colors.$purple, 600),
+    accent-secondary-hover: map.get(colors.$purple, 700),
+    // Feedback contextual tokens
+    feedback-success-light: map.get(colors.$green, 50),
+    feedback-warning-light: map.get(colors.$yellow, 50),
+    feedback-error-light: map.get(colors.$red, 50),
+    feedback-info-light: map.get(colors.$blue, 50),
+  ),
+
+  dark: (
+    // Background tokens
+    background-primary: map.get(colors.$gray, 900),
+    background-secondary: map.get(colors.$gray, 800),
+    background-tertiary: map.get(colors.$gray, 700),
+    background-inverse: map.get(colors.$gray, 50),
+    // Text tokens
+    text-primary: map.get(colors.$gray, 50),
+    text-secondary: map.get(colors.$gray, 300),
+    text-tertiary: map.get(colors.$gray, 400),
+    text-inverse: map.get(colors.$gray, 900),
+    text-disabled: map.get(colors.$gray, 500),
+    // Border tokens
+    border-light: map.get(colors.$gray, 700),
+    border-medium: map.get(colors.$gray, 600),
+    border-dark: map.get(colors.$gray, 500),
+    border-focus: map.get(colors.$blue, 400),
+    // Accent tokens (lighter for dark theme readability)
+    accent-primary: map.get(colors.$blue, 500),
+    accent-primary-hover: map.get(colors.$blue, 400),
+    accent-primary-light: map.get(colors.$blue, 900),
+    accent-secondary: map.get(colors.$purple, 500),
+    accent-secondary-hover: map.get(colors.$purple, 400),
+    // Feedback contextual tokens (dark backgrounds)
+    feedback-success-light: map.get(colors.$green, 900),
+    feedback-warning-light: map.get(colors.$yellow, 900),
+    feedback-error-light: map.get(colors.$red, 900),
+    feedback-info-light: map.get(colors.$blue, 900),
+  ),
+);
+
+// 🔒 FIXED TOKENS (Theme-Independent)
+// These tokens remain consistent across all themes for brand consistency
 :root {
-  // Background Colors
-  --background-primary: #{map.get(colors.$gray, 50)};
-  --background-secondary: #{map.get(colors.$gray, 100)};
-  --background-tertiary: #{map.get(colors.$gray, 200)};
-  --background-inverse: #{map.get(colors.$gray, 900)};
+  // Brand colors (fixed across themes)
+  --brand-primary: #{map.get(colors.$blue, 600)};
+  --brand-secondary: #{map.get(colors.$purple, 600)};
 
-  // Text Colors
-  --text-primary: #{map.get(colors.$gray, 900)};
-  --text-secondary: #{map.get(colors.$gray, 700)};
-  --text-tertiary: #{map.get(colors.$gray, 500)};
-  --text-inverse: #{map.get(colors.$gray, 50)};
-  --text-disabled: #{map.get(colors.$gray, 400)};
-
-  // Border Colors
-  --border-light: #{map.get(colors.$gray, 200)};
-  --border-medium: #{map.get(colors.$gray, 300)};
-  --border-dark: #{map.get(colors.$gray, 400)};
-  --border-focus: #{map.get(colors.$blue, 500)};
-
-  // Accent Colors
-  --accent-primary: #{map.get(colors.$blue, 600)};
-  --accent-primary-hover: #{map.get(colors.$blue, 700)};
-  --accent-primary-light: #{map.get(colors.$blue, 50)};
-  --accent-secondary: #{map.get(colors.$purple, 600)};
-  --accent-secondary-hover: #{map.get(colors.$purple, 700)};
-
-  // Feedback Colors
+  // Feedback colors (semantic meaning should be consistent)
   --feedback-success: #{map.get(colors.$green, 600)};
-  --feedback-success-light: #{map.get(colors.$green, 50)};
   --feedback-warning: #{map.get(colors.$yellow, 600)};
-  --feedback-warning-light: #{map.get(colors.$yellow, 50)};
   --feedback-error: #{map.get(colors.$red, 600)};
-  --feedback-error-light: #{map.get(colors.$red, 50)};
   --feedback-info: #{map.get(colors.$blue, 600)};
-  --feedback-info-light: #{map.get(colors.$blue, 50)};
 }
 
-// Dark theme variant
-[data-theme='dark'] {
-  // Background Colors
-  --background-primary: #{map.get(colors.$gray, 900)};
-  --background-secondary: #{map.get(colors.$gray, 800)};
-  --background-tertiary: #{map.get(colors.$gray, 700)};
-  --background-inverse: #{map.get(colors.$gray, 50)};
-
-  // Text Colors
-  --text-primary: #{map.get(colors.$gray, 50)};
-  --text-secondary: #{map.get(colors.$gray, 300)};
-  --text-tertiary: #{map.get(colors.$gray, 400)};
-  --text-inverse: #{map.get(colors.$gray, 900)};
-  --text-disabled: #{map.get(colors.$gray, 500)};
-
-  // Border Colors
-  --border-light: #{map.get(colors.$gray, 700)};
-  --border-medium: #{map.get(colors.$gray, 600)};
-  --border-dark: #{map.get(colors.$gray, 500)};
-  --border-focus: #{map.get(colors.$blue, 400)};
-
-  // Accent Colors (slightly lighter for dark theme)
-  --accent-primary: #{map.get(colors.$blue, 500)};
-  --accent-primary-hover: #{map.get(colors.$blue, 400)};
-  --accent-primary-light: #{map.get(colors.$blue, 900)};
-  --accent-secondary: #{map.get(colors.$purple, 500)};
-  --accent-secondary-hover: #{map.get(colors.$purple, 400)};
-
-  // Feedback Colors (adjusted for dark theme)
-  --feedback-success: #{map.get(colors.$green, 500)};
-  --feedback-success-light: #{map.get(colors.$green, 900)};
-  --feedback-warning: #{map.get(colors.$yellow, 500)};
-  --feedback-warning-light: #{map.get(colors.$yellow, 900)};
-  --feedback-error: #{map.get(colors.$red, 500)};
-  --feedback-error-light: #{map.get(colors.$red, 900)};
-  --feedback-info: #{map.get(colors.$blue, 500)};
-  --feedback-info-light: #{map.get(colors.$blue, 900)};
+// 🎭 AUTOMATIC THEME GENERATION
+// Generate theme-specific tokens from the $themes map
+// This approach scales to any number of themes without duplication
+:root {
+  // Default theme (light)
+  @each $token, $value in map.get($themes, light) {
+    --#{$token}: #{$value};
+  }
 }
 
-// Export SCSS variable equivalents for all semantic tokens
+@each $theme-name, $tokens in $themes {
+  @if $theme-name != light {
+    [data-theme='#{$theme-name}'] {
+      @each $token, $value in $tokens {
+        --#{$token}: #{$value};
+      }
+    }
+  }
+}
+
+// 📤 SCSS VARIABLE EXPORTS
+// Export CSS custom properties as SCSS variables for component use
+// These automatically inherit theme values from CSS custom properties
+
+// Background tokens
 $background-primary: var(--background-primary);
 $background-secondary: var(--background-secondary);
 $background-tertiary: var(--background-tertiary);
 $background-inverse: var(--background-inverse);
 
+// Text tokens
 $text-primary: var(--text-primary);
 $text-secondary: var(--text-secondary);
 $text-tertiary: var(--text-tertiary);
 $text-inverse: var(--text-inverse);
 $text-disabled: var(--text-disabled);
 
+// Border tokens
 $border-light: var(--border-light);
 $border-medium: var(--border-medium);
 $border-dark: var(--border-dark);
 $border-focus: var(--border-focus);
 
+// Accent tokens
 $accent-primary: var(--accent-primary);
 $accent-primary-hover: var(--accent-primary-hover);
 $accent-primary-light: var(--accent-primary-light);
 $accent-secondary: var(--accent-secondary);
 $accent-secondary-hover: var(--accent-secondary-hover);
 
-$success: var(--feedback-success);
-$success-light: var(--feedback-success-light);
-$warning: var(--feedback-warning);
-$warning-light: var(--feedback-warning-light);
-$error: var(--feedback-error);
-$error-light: var(--feedback-error-light);
-$info: var(--feedback-info);
-$info-light: var(--feedback-info-light);
+// Fixed tokens (brand consistency)
+$brand-primary: var(--brand-primary);
+$brand-secondary: var(--brand-secondary);
+
+// Feedback tokens
+$feedback-success: var(--feedback-success);
+$feedback-success-light: var(--feedback-success-light);
+$feedback-warning: var(--feedback-warning);
+$feedback-warning-light: var(--feedback-warning-light);
+$feedback-error: var(--feedback-error);
+$feedback-error-light: var(--feedback-error-light);
+$feedback-info: var(--feedback-info);
+$feedback-info-light: var(--feedback-info-light);
+
+// Legacy aliases for backward compatibility
+$success: $feedback-success;
+$success-light: $feedback-success-light;
+$warning: $feedback-warning;
+$warning-light: $feedback-warning-light;
+$error: $feedback-error;
+$error-light: $feedback-error-light;
+$info: $feedback-info;
+$info-light: $feedback-info-light;
+$primary: $accent-primary;
+$secondary: $accent-secondary;
+$danger: $feedback-error;
+
+// Component-specific color tokens
+$color-surface: $background-primary;
+$color-surface-dark: #{map.get(colors.$gray, 800)};
+$color-surface-hover: $background-secondary;
+$color-surface-hover-dark: #{map.get(colors.$gray, 700)};
+$color-surface-active: $background-tertiary;
+$color-surface-active-dark: #{map.get(colors.$gray, 600)};
+
+$color-border: $border-light;
+$color-border-dark: #{map.get(colors.$gray, 600)};
+$color-border-hover: $border-medium;
+$color-border-hover-dark: #{map.get(colors.$gray, 500)};
+
+$color-text-primary: $text-primary;
+$color-text-primary-dark: #{map.get(colors.$gray, 100)};
+$color-text-secondary: $text-secondary;
+$color-text-secondary-dark: #{map.get(colors.$gray, 300)};
+
+$color-backdrop: rgba(0, 0, 0, 0.5);
+$color-backdrop-dark: rgba(0, 0, 0, 0.7);
+
+$color-focus: $border-focus;
+
+// Shadow tokens
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg:
+  0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl:
+  0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+// Dark mode shadows
+$shadow-sm-dark: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+$shadow-md-dark:
+  0 4px 6px -1px rgba(0, 0, 0, 0.4),
+  0 2px 4px -1px rgba(0, 0, 0, 0.3);
+$shadow-lg-dark:
+  0 10px 15px -3px rgba(0, 0, 0, 0.4),
+  0 4px 6px -2px rgba(0, 0, 0, 0.3);
+$shadow-xl-dark:
+  0 20px 25px -5px rgba(0, 0, 0, 0.4),
+  0 10px 10px -5px rgba(0, 0, 0, 0.2);
+$shadow-2xl-dark: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+// Transition tokens
+$transition-fast: all 0.15s ease-in-out;
+$transition-normal: all 0.2s ease-in-out;
+$transition-slow: all 0.3s ease-in-out;
 
 // Legacy compatibility tokens
 $white: var(--background-primary);
@@ -124,11 +222,6 @@ $gray-dark: var(--border-dark);
 
 // Logo color token (automatically switches with theme)
 $logo-color: var(--text-primary);
-
-// Brand colors from semantic system
-$primary: var(--accent-primary);
-$secondary: var(--accent-secondary);
-$danger: var(--feedback-error);
 
 // Brand hover state
 $brand-hover: var(--accent-primary-hover);
@@ -241,6 +334,7 @@ $font-family-ui:
   'Segoe UI',
   sans-serif;
 $font-family-code: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+$font-family-mono: $font-family-code; // Alias for consistency
 
 $font-size-xs: 0.75rem; // 12px
 $font-size-sm: 0.875rem; // 14px
@@ -255,13 +349,67 @@ $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-// Spacing tokens
-$space-xs: 0.25rem; // 4px
-$space-sm: 0.5rem; // 8px
-$space-md: 1rem; // 16px
-$space-lg: 1.5rem; // 24px
-$space-xl: 2rem; // 32px
-$space-2xl: 3rem; // 48px
+// Spacing tokens (consistent 8px grid)
+$space-0: 0;
+$space-px: 1px;
+$space-0-5: 0.125rem; // 2px
+$space-1: 0.25rem; // 4px
+$space-1-5: 0.375rem; // 6px
+$space-2: 0.5rem; // 8px
+$space-2-5: 0.625rem; // 10px
+$space-3: 0.75rem; // 12px
+$space-3-5: 0.875rem; // 14px
+$space-4: 1rem; // 16px
+$space-5: 1.25rem; // 20px
+$space-6: 1.5rem; // 24px
+$space-7: 1.75rem; // 28px
+$space-8: 2rem; // 32px
+$space-9: 2.25rem; // 36px
+$space-10: 2.5rem; // 40px
+$space-11: 2.75rem; // 44px
+$space-12: 3rem; // 48px
+$space-14: 3.5rem; // 56px
+$space-16: 4rem; // 64px
+$space-20: 5rem; // 80px
+$space-24: 6rem; // 96px
+$space-28: 7rem; // 112px
+$space-32: 8rem; // 128px
+$space-36: 9rem; // 144px
+$space-40: 10rem; // 160px
+$space-44: 11rem; // 176px
+$space-48: 12rem; // 192px
+$space-52: 13rem; // 208px
+$space-56: 14rem; // 224px
+$space-60: 15rem; // 240px
+$space-64: 16rem; // 256px
+$space-72: 18rem; // 288px
+$space-80: 20rem; // 320px
+$space-96: 24rem; // 384px
+
+// Motion tokens (durations and easings)
+$motion-duration-instant: 0ms;
+$motion-duration-fast: 150ms;
+$motion-duration-normal: 300ms;
+$motion-duration-slow: 500ms;
+$motion-duration-slower: 700ms;
+$motion-duration-slowest: 1000ms;
+
+// UX-focused semantic easings
+$motion-easing-linear: linear;
+$motion-easing-ease: ease;
+$motion-easing-ease-in: ease-in;
+$motion-easing-ease-out: ease-out;
+$motion-easing-ease-in-out: ease-in-out;
+$motion-easing-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94); // General UI transitions
+$motion-easing-decelerate: cubic-bezier(0, 0, 0.2, 1); // Entrances, reveals
+$motion-easing-accelerate: cubic-bezier(0.4, 0, 1, 1); // Exits, dismissals
+$motion-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1); // Playful, bouncy
+$motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1); // Strong emphasis
+// Legacy aliases
+$motion-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$motion-easing-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$motion-easing-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+$motion-easing-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
 
 // Border radius tokens
 $radius-none: 0;
@@ -293,3 +441,18 @@ $interactive-muted: $text-disabled;
 $focus-ring: rgba(37, 99, 235, 0.3); // Blue-600 with opacity
 $focus-ring-dark: rgba(96, 165, 250, 0.4); // Blue-400 with opacity
 $focus-ring-offset: 2px;
+
+// Z-index tokens
+$z-base: 1;
+$z-dropdown: 10;
+$z-sticky: 20;
+$z-fixed: 30;
+$z-modal-backdrop: 40;
+$z-modal: 50;
+$z-popover: 60;
+$z-tooltip: 70;
+$z-toast: 80;
+
+$z-drawer: 90;
+$z-backdrop: 100;
+$z-command-palette: 110;

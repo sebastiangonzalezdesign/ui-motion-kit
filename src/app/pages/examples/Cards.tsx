@@ -3,6 +3,7 @@ import { Card } from '../../../components/primitives';
 import { Button } from '../../../components/primitives';
 import { CodePreview } from '../../components';
 import { Hero } from '../../components';
+import { Breadcrumb } from '../../../components/navigation';
 import { HeartIcon, ShareIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 const Cards = () => {
@@ -16,6 +17,7 @@ const Cards = () => {
 
   return (
     <div className="page">
+      <Breadcrumb />
       <Hero
         headline="Card Components"
         description="Versatile cards with images, ratings, badges, and smooth animations."

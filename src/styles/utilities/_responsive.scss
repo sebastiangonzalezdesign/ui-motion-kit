@@ -1,8 +1,21 @@
 @use '../abstracts/breakpoints' as *;
 @use '../abstracts/spacing' as *;
+@use 'sass:string';
 
 // PRO: Responsive Utilities
 // ==============================================
+
+// String replacement function for class names
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace +
+      str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
 
 // Responsive visibility utilities
 .hidden {
@@ -27,52 +40,58 @@
 
 // Responsive spacing utilities
 @each $key, $value in $spacing-scale {
+  // Convert decimal keys to valid CSS class names
+  $class-key: $key;
+  @if string.index($key, '.') {
+    $class-key: str-replace($key, '.', '_');
+  }
+
   // Margin utilities
-  .m-#{$key} {
+  .m-#{$class-key} {
     margin: $value !important;
   }
-  .mt-#{$key} {
+  .mt-#{$class-key} {
     margin-top: $value !important;
   }
-  .mr-#{$key} {
+  .mr-#{$class-key} {
     margin-right: $value !important;
   }
-  .mb-#{$key} {
+  .mb-#{$class-key} {
     margin-bottom: $value !important;
   }
-  .ml-#{$key} {
+  .ml-#{$class-key} {
     margin-left: $value !important;
   }
-  .mx-#{$key} {
+  .mx-#{$class-key} {
     margin-left: $value !important;
     margin-right: $value !important;
   }
-  .my-#{$key} {
+  .my-#{$class-key} {
     margin-top: $value !important;
     margin-bottom: $value !important;
   }
 
   // Padding utilities
-  .p-#{$key} {
+  .p-#{$class-key} {
     padding: $value !important;
   }
-  .pt-#{$key} {
+  .pt-#{$class-key} {
     padding-top: $value !important;
   }
-  .pr-#{$key} {
+  .pr-#{$class-key} {
     padding-right: $value !important;
   }
-  .pb-#{$key} {
+  .pb-#{$class-key} {
     padding-bottom: $value !important;
   }
-  .pl-#{$key} {
+  .pl-#{$class-key} {
     padding-left: $value !important;
   }
-  .px-#{$key} {
+  .px-#{$class-key} {
     padding-left: $value !important;
     padding-right: $value !important;
   }
-  .py-#{$key} {
+  .py-#{$class-key} {
     padding-top: $value !important;
     padding-bottom: $value !important;
   }

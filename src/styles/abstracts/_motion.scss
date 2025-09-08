@@ -2,12 +2,8 @@
 // ==============================================
 @use 'sass:map';
 
-// Base motion tokens (extended from free)
-$motion-fast: 0.15s ease-out;
-$motion-normal: 0.3s ease-out;
-
-// Enhanced duration scale
-$durations: (
+// Base motion tokens (enhanced and standardized)
+$motion-durations: (
   'instant': 0ms,
   'fast': 150ms,
   'normal': 300ms,
@@ -16,13 +12,25 @@ $durations: (
   'slowest': 1000ms,
 );
 
-// Advanced easing curves
-$easings: (
+// Professional easing curves (semantic naming for UX intent)
+$motion-easings: (
   'linear': linear,
   'ease': ease,
   'ease-in': ease-in,
   'ease-out': ease-out,
   'ease-in-out': ease-in-out,
+  // UX-focused semantic easings
+  'ease-standard': cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  // General UI transitions
+  'ease-decelerate': cubic-bezier(0, 0, 0.2, 1),
+  // Entrances, reveals
+  'ease-accelerate': cubic-bezier(0.4, 0, 1, 1),
+  // Exits, dismissals
+  'ease-spring': cubic-bezier(0.34, 1.56, 0.64, 1),
+  // Playful, bouncy
+  'ease-emphasized': cubic-bezier(0.2, 0, 0, 1),
+  // Strong emphasis
+  // Legacy aliases (keep for compatibility)
   'spring': cubic-bezier(0.34, 1.56, 0.64, 1),
   'bounce': cubic-bezier(0.68, -0.55, 0.265, 1.55),
   'smooth': cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -30,64 +38,108 @@ $easings: (
   'gentle': cubic-bezier(0.25, 0.1, 0.25, 1),
 );
 
-// Motion presets for common interactions
+// Enhanced motion presets for UX patterns
 $motion-presets: (
   'fade': (
-    'duration': map.get($durations, 'normal'),
-    'easing': map.get($easings, 'ease-out'),
+    'duration': map.get($motion-durations, 'normal'),
+    'easing': map.get($motion-easings, 'ease-standard'),
   ),
   'slide': (
-    'duration': map.get($durations, 'normal'),
-    'easing': map.get($easings, 'spring'),
+    'duration': map.get($motion-durations, 'normal'),
+    'easing': map.get($motion-easings, 'ease-decelerate'),
   ),
   'scale': (
-    'duration': map.get($durations, 'fast'),
-    'easing': map.get($easings, 'bounce'),
+    'duration': map.get($motion-durations, 'fast'),
+    'easing': map.get($motion-easings, 'ease-spring'),
   ),
   'rotate': (
-    'duration': map.get($durations, 'normal'),
-    'easing': map.get($easings, 'smooth'),
+    'duration': map.get($motion-durations, 'normal'),
+    'easing': map.get($motion-easings, 'ease-standard'),
   ),
   'elastic': (
-    'duration': map.get($durations, 'slow'),
-    'easing': map.get($easings, 'spring'),
+    'duration': map.get($motion-durations, 'slow'),
+    'easing': map.get($motion-easings, 'ease-spring'),
+  ),
+  'entrance': (
+    'duration': map.get($motion-durations, 'normal'),
+    'easing': map.get($motion-easings, 'ease-decelerate'),
+  ),
+  'exit': (
+    'duration': map.get($motion-durations, 'fast'),
+    'easing': map.get($motion-easings, 'ease-accelerate'),
+  ),
+  'emphasis': (
+    'duration': map.get($motion-durations, 'fast'),
+    'easing': map.get($motion-easings, 'ease-emphasized'),
   ),
 );
 
-// Responsive motion (respects user preferences)
+// UX-focused semantic motion roles (maps to presets with clear intent)
+$motion-semantic: (
+  // Micro-interactions (hover, active, focus states)
+  'micro-interaction': map.get($motion-presets, 'scale'),
+  // Page/modal entrances
+  'entrance': map.get($motion-presets, 'entrance'),
+  // Leave animations, dismissals
+  'exit': map.get($motion-presets, 'exit'),
+  // Draw attention (toasts, highlights, badges)
+  'emphasis': map.get($motion-presets, 'emphasis'),
+  // Context changes (navigation, drawers, tabs)
+  'continuity': map.get($motion-presets, 'slide'),
+  // Action confirmation (button press, form submit)
+  'feedback': map.get($motion-presets, 'fade'),
+  // Legacy aliases (maintain backward compatibility)
+  'interaction': map.get($motion-presets, 'scale'),
+  'navigation': map.get($motion-presets, 'slide')
+);
+
+// Responsive motion (device-aware)
 $motion-mobile: (
-  'duration': map.get($durations, 'fast'),
-  'easing': map.get($easings, 'ease-out'),
+  'duration': map.get($motion-durations, 'fast'),
+  'easing': map.get($motion-easings, 'ease-out'),
 );
 
 $motion-desktop: (
-  'duration': map.get($durations, 'normal'),
-  'easing': map.get($easings, 'spring'),
+  'duration': map.get($motion-durations, 'normal'),
+  'easing': map.get($motion-easings, 'spring'),
 );
 
-// Motion utility functions
-@function duration($key) {
-  @if map.has-key($durations, $key) {
-    @return map.get($durations, $key);
+// Motion utility functions (following established pattern)
+@function motion-duration($key) {
+  @if map.has-key($motion-durations, $key) {
+    @return map.get($motion-durations, $key);
   } @else {
     @warn "Duration '#{$key}' not found.";
-    @return map.get($durations, 'normal');
+    @return map.get($motion-durations, 'normal');
   }
 }
 
-@function easing($key) {
-  @if map.has-key($easings, $key) {
-    @return map.get($easings, $key);
+@function motion-easing($key) {
+  @if map.has-key($motion-easings, $key) {
+    @return map.get($motion-easings, $key);
   } @else {
     @warn "Easing '#{$key}' not found.";
-    @return map.get($easings, 'ease-out');
+    @return map.get($motion-easings, 'ease-out');
   }
 }
 
-// Motion preset mixin
+@function motion-semantic($key) {
+  @if map.has-key($motion-semantic, $key) {
+    @return map.get($motion-semantic, $key);
+  } @else {
+    @warn "Semantic motion key '#{$key}' not found.";
+    @return map.get($motion-semantic, 'interaction');
+  }
+}
+
+// Motion preset mixin (enhanced)
 @mixin motion($preset) {
   @if map.has-key($motion-presets, $preset) {
     $motion: map.get($motion-presets, $preset);
+    transition-duration: map.get($motion, 'duration');
+    transition-timing-function: map.get($motion, 'easing');
+  } @else if map.has-key($motion-semantic, $preset) {
+    $motion: map.get($motion-semantic, $preset);
     transition-duration: map.get($motion, 'duration');
     transition-timing-function: map.get($motion, 'easing');
   } @else {
@@ -95,16 +147,19 @@ $motion-desktop: (
   }
 }
 
-// Reduced motion mixin for accessibility
+// Accessibility mixins
 @mixin reduced-motion {
   @media (prefers-reduced-motion: reduce) {
     @content;
   }
 }
 
-// Motion-safe mixin (only applies motion if user hasn't requested reduced motion)
 @mixin motion-safe {
   @media (prefers-reduced-motion: no-preference) {
     @content;
   }
 }
+
+// Legacy compatibility (for smooth migration)
+$motion-fast: motion-duration('fast') motion-easing('ease-out');
+$motion-normal: motion-duration('normal') motion-easing('ease-out');

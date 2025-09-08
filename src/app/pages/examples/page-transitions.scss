@@ -1,0 +1,23 @@
+@use '../../../styles/abstracts' as *;
+
+.page-transitions-page {
+  padding: $space-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .demo-section {
+    margin-bottom: $space-xl;
+
+    .transition-examples {
+      ul {
+        list-style: disc;
+        padding-left: $space-lg;
+
+        li {
+          margin-bottom: $space-sm;
+          color: $text-secondary;
+        }
+      }
+    }
+  }
+}

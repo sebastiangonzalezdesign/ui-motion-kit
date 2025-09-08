@@ -1,5 +1,6 @@
 @use '../../../styles/abstracts/tokens' as *;
 @use '../../../styles/abstracts/colors' as *;
+@use '../../../styles/abstracts/spacing' as *;
 
 .footer {
   background-color: var(--background-primary);

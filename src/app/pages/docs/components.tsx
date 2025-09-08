@@ -1,9 +1,18 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Card } from '../../../components/primitives';
 import { Hero } from '../../components';
-import { Button } from '../../../components/primitives';
-import './Components.scss';
+import { Button, SearchInput } from '../../../components/primitives';
+import { Breadcrumb } from '../../../components/navigation';
+import type { SearchableItem } from '../../../components/primitives';
+import {
+  // Category icons
+  CubeIcon,
+  MapIcon,
+  ChatBubbleBottomCenterTextIcon,
+  PlayIcon,
+} from '@heroicons/react/24/outline';
+import './design-tokens.scss';
 
 interface ComponentItem {
   id: string;
@@ -22,152 +31,246 @@ interface ComponentCategory {
 
 const Components = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<string>('ui-basics');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  const categories: ComponentCategory[] = [
-    {
-      id: 'ui-basics',
-      name: 'UI Basics',
-      description: 'Essential interactive elements',
-      components: [
-        {
-          id: 'buttons',
-          name: 'Buttons',
-          description: 'Interactive buttons with hover animations and click feedback',
-          status: 'available',
-          path: '/components/buttons',
-        },
-        {
-          id: 'inputs',
-          name: 'Inputs',
-          description: 'Form inputs with validation states and animations',
-          status: 'pro',
-          path: '/components/inputs',
-        },
-        {
-          id: 'toggles',
-          name: 'Toggles',
-          description: 'Switch toggles with smooth state transitions',
-          status: 'available',
-          path: '/components/toggles',
-        },
-        {
-          id: 'cards',
-          name: 'Cards',
-          description: 'Versatile cards with images, ratings, and badges',
-          status: 'available',
-          path: '/components/cards',
-        },
-      ],
-    },
-    {
-      id: 'navigation',
-      name: 'Navigation',
-      description: 'Components for user navigation',
-      components: [
-        {
-          id: 'tabs',
-          name: 'Tabs',
-          description: 'Advanced tabbed interfaces with animations and lazy loading',
-          status: 'pro',
-          path: '/components/tabs',
-        },
-        {
-          id: 'navbar',
-          name: 'Navbar',
-          description: 'Responsive navigation with mobile menu',
-          status: 'available',
-          path: '/components/navbar',
-        },
-        {
-          id: 'sidebar',
-          name: 'Sidebar',
-          description: 'Collapsible sidebar navigation',
-          status: 'pro',
-          path: '/components/sidebar',
-        },
-        {
-          id: 'breadcrumbs',
-          name: 'Breadcrumbs',
-          description: 'Hierarchical navigation breadcrumbs',
-          status: 'coming-soon',
-          path: '/components/breadcrumbs',
-        },
-      ],
-    },
-    {
-      id: 'feedback',
-      name: 'Feedback',
-      description: 'User feedback and status components',
-      components: [
-        {
-          id: 'modals',
-          name: 'Modals',
-          description: 'Slide-in modals with backdrop and animations',
-          status: 'available',
-          path: '/components/modals',
-        },
-        {
-          id: 'toasts',
-          name: 'Toast Notifications',
-          description: 'Stackable toast notifications with auto-dismiss',
-          status: 'pro',
-          path: '/components/toasts',
-        },
-        {
-          id: 'alerts',
-          name: 'Alerts',
-          description: 'Contextual alerts and banners',
-          status: 'coming-soon',
-          path: '/components/alerts',
-        },
-        {
-          id: 'loaders',
-          name: 'Loading States',
-          description: 'Spinners, skeleton screens, and progress indicators',
-          status: 'pro',
-          path: '/components/loaders',
-        },
-      ],
-    },
-    {
-      id: 'motion',
-      name: 'Motion Components',
-      description: 'Advanced animation and interaction components',
-      components: [
-        {
-          id: 'drawer',
-          name: 'Drawer',
-          description: 'Multi-directional sliding drawers with gestures',
-          status: 'pro',
-          path: '/components/drawer',
-        },
-        {
-          id: 'command-palette',
-          name: 'Command Palette',
-          description: 'Advanced search interface with keyboard shortcuts',
-          status: 'pro',
-          path: '/components/command-palette',
-        },
-        {
-          id: 'micro-interactions',
-          name: 'Micro-interactions',
-          description: 'Delightful micro-animations and hover effects',
-          status: 'pro',
-          path: '/components/micro-interactions',
-        },
-        {
-          id: 'page-transitions',
-          name: 'Page Transitions',
-          description: 'Smooth page and route transition animations',
-          status: 'pro',
-          path: '/components/page-transitions',
-        },
-      ],
-    },
-  ];
+  // Initialize category from URL params on mount
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [searchParams]);
+
+  // Update URL when category changes
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    setSearchParams({ category: categoryId });
+  };
+
+  const categories: ComponentCategory[] = useMemo(
+    () => [
+      {
+        id: 'ui-basics',
+        name: 'UI Basics',
+        description: 'Essential interactive elements',
+        components: [
+          {
+            id: 'buttons',
+            name: 'Buttons',
+            description: 'Interactive buttons with hover animations and click feedback',
+            status: 'available',
+            path: '/examples/buttons',
+          },
+          {
+            id: 'inputs',
+            name: 'Inputs',
+            description: 'Form inputs with validation states and animations',
+            status: 'pro',
+            path: '/examples/inputs',
+          },
+          {
+            id: 'toggles',
+            name: 'Toggles',
+            description: 'Switch toggles with smooth state transitions',
+            status: 'available',
+            path: '/examples/toggles',
+          },
+          {
+            id: 'cards',
+            name: 'Cards',
+            description: 'Versatile cards with images, ratings, and badges',
+            status: 'available',
+            path: '/examples/cards',
+          },
+        ],
+      },
+      {
+        id: 'navigation',
+        name: 'Navigation',
+        description: 'Components for user navigation',
+        components: [
+          {
+            id: 'tabs',
+            name: 'Tabs',
+            description: 'Advanced tabbed interfaces with animations and lazy loading',
+            status: 'available',
+            path: '/examples/tabs',
+          },
+          {
+            id: 'navbar',
+            name: 'Navbar',
+            description: 'Responsive navigation with mobile menu',
+            status: 'available',
+            path: '/examples/navbar',
+          },
+          {
+            id: 'sidebar',
+            name: 'Sidebar',
+            description: 'Collapsible sidebar navigation',
+            status: 'pro',
+            path: '/examples/sidebar',
+          },
+          {
+            id: 'breadcrumbs',
+            name: 'Breadcrumbs',
+            description: 'Hierarchical navigation breadcrumbs',
+            status: 'coming-soon',
+            path: '/examples/breadcrumbs',
+          },
+        ],
+      },
+      {
+        id: 'feedback',
+        name: 'Feedback',
+        description: 'User feedback and status components',
+        components: [
+          {
+            id: 'modals',
+            name: 'Modals',
+            description: 'Slide-in modals with backdrop and animations',
+            status: 'available',
+            path: '/examples/modals',
+          },
+          {
+            id: 'toasts',
+            name: 'Toast Notifications',
+            description: 'Stackable toast notifications with auto-dismiss',
+            status: 'available',
+            path: '/examples/toast',
+          },
+          {
+            id: 'alerts',
+            name: 'Alerts',
+            description: 'Contextual alerts and banners',
+            status: 'coming-soon',
+            path: '/examples/alerts',
+          },
+          {
+            id: 'loaders',
+            name: 'Loading States',
+            description: 'Spinners, skeleton screens, and progress indicators',
+            status: 'pro',
+            path: '/examples/loaders',
+          },
+        ],
+      },
+      {
+        id: 'motion',
+        name: 'Motion Components',
+        description: 'Advanced animation and interaction components',
+        components: [
+          {
+            id: 'drawer',
+            name: 'Drawer',
+            description: 'Multi-directional sliding drawers with gestures',
+            status: 'available',
+            path: '/examples/drawer',
+          },
+          {
+            id: 'command-palette',
+            name: 'Command Palette',
+            description: 'Advanced search interface with keyboard shortcuts',
+            status: 'available',
+            path: '/examples/command-palette',
+          },
+          {
+            id: 'micro-interactions',
+            name: 'Micro-interactions',
+            description: 'Delightful micro-animations and hover effects',
+            status: 'pro',
+            path: '/examples/micro-interactions',
+          },
+          {
+            id: 'page-transitions',
+            name: 'Page Transitions',
+            description: 'Smooth page and route transition animations',
+            status: 'pro',
+            path: '/examples/page-transitions',
+          },
+        ],
+      },
+    ],
+    []
+  );
 
   const selectedCategoryData = categories.find((cat) => cat.id === selectedCategory);
+
+  // Sidebar items with icons
+  const sidebarItems = useMemo(
+    () => [
+      {
+        id: 'ui-basics',
+        label: 'UI Basics',
+        description: 'Essential interactive elements',
+        icon: <CubeIcon width="16" height="16" />,
+        count: categories.find((cat) => cat.id === 'ui-basics')?.components.length,
+      },
+      {
+        id: 'navigation',
+        label: 'Navigation',
+        description: 'Components for user navigation',
+        icon: <MapIcon width="16" height="16" />,
+        count: categories.find((cat) => cat.id === 'navigation')?.components.length,
+      },
+      {
+        id: 'feedback',
+        label: 'Feedback',
+        description: 'User feedback and status components',
+        icon: <ChatBubbleBottomCenterTextIcon width="16" height="16" />,
+        count: categories.find((cat) => cat.id === 'feedback')?.components.length,
+      },
+      {
+        id: 'motion',
+        label: 'Motion Components',
+        description: 'Advanced animation and interaction components',
+        icon: <PlayIcon width="16" height="16" />,
+        isPro: true,
+        count: categories.find((cat) => cat.id === 'motion')?.components.length,
+      },
+    ],
+    [categories]
+  );
+
+  // Searchable data for the search component
+  const searchableData = useMemo(() => {
+    const allData: SearchableItem[] = [];
+
+    // Add categories
+    categories.forEach((cat) => {
+      allData.push({
+        label: cat.name,
+        description: cat.description,
+        type: 'category',
+        category: cat.id,
+      });
+    });
+
+    // Add components
+    categories.forEach((cat) => {
+      cat.components.forEach((component) => {
+        allData.push({
+          label: component.name,
+          name: component.name,
+          description: component.description,
+          type: 'component',
+          category: cat.id,
+          status: component.status,
+        });
+      });
+    });
+
+    return allData;
+  }, [categories]);
+
+  const handleSearchResultClick = (item: SearchableItem) => {
+    if (item.type === 'category') {
+      handleCategoryChange(item.category as string);
+    } else if (item.type === 'component') {
+      handleCategoryChange(item.category as string);
+    }
+  };
 
   const getStatusBadge = (status: ComponentItem['status']) => {
     switch (status) {
@@ -189,48 +292,92 @@ const Components = () => {
   };
 
   return (
-    <div className="components-page">
+    <div className="design-tokens-page">
+      {/* Changed from components-page to design-tokens-page */}
+      {/* Breadcrumb Navigation */}
+      <Breadcrumb
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Components', path: '/docs/components' },
+        ]}
+        className="components-breadcrumb"
+      />
+
       <Hero
         headline="Component Library"
         description="Explore our comprehensive collection of UI components, organized by category and use case."
         backgroundColor="brand-light"
         borderRadius="lg"
-        size="lg"
+        size="md"
         showIllustrations={false}
       />
 
-      <div className="components-layout">
-        {/* Sidebar Navigation */}
-        <aside className="components-sidebar">
+      <div className="design-tokens-layout">
+        {/* Enhanced Sidebar with Search */}
+        <aside className={`design-tokens-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
           <div className="sidebar-header">
             <h3>Categories</h3>
-          </div>
-          <nav className="sidebar-nav">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                className={`sidebar-item ${selectedCategory === category.id ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(category.id)}
+            <button
+              className="sidebar-toggle"
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
               >
-                <div className="sidebar-item-content">
-                  <span className="sidebar-item-name">{category.name}</span>
-                  <span className="sidebar-item-description">{category.description}</span>
-                  <span className="sidebar-item-count">
-                    {category.components.length} components
-                  </span>
-                </div>
-              </button>
-            ))}
-          </nav>
+                <path d="M3 12h18M3 6h18M3 18h18" />
+              </svg>
+            </button>
+          </div>
+
+          {!sidebarCollapsed && (
+            <>
+              <div className="sidebar-search">
+                <SearchInput
+                  placeholder="Search components..."
+                  data={searchableData}
+                  searchKeys={['label', 'description', 'name']}
+                  onResultClick={handleSearchResultClick}
+                  renderResult={(item: SearchableItem) => (
+                    <div className="search-result-custom">
+                      <span className="result-name">{item.label}</span>
+                      <span className="result-type">{String(item.type)}</span>
+                      {item.description && <span className="result-desc">{item.description}</span>}
+                    </div>
+                  )}
+                />
+              </div>
+
+              <nav className="sidebar-nav" role="navigation">
+                {sidebarItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => handleCategoryChange(item.id)}
+                    className={`sidebar-nav-item ${selectedCategory === item.id ? 'active' : ''}`}
+                    aria-current={selectedCategory === item.id ? 'page' : undefined}
+                  >
+                    <span className="nav-icon">{item.icon}</span>
+                    <span className="nav-label">{item.label}</span>
+                    {item.isPro && <span className="pro-badge">Pro</span>}
+                  </button>
+                ))}
+              </nav>
+            </>
+          )}
         </aside>
 
         {/* Main Content */}
-        <main className="components-main">
+        <main className="design-tokens-content">
           {selectedCategoryData && (
-            <>
-              <div className="category-header">
+            <section className="token-section">
+              <div className="section-header">
                 <h2>{selectedCategoryData.name}</h2>
-                <p className="category-description">{selectedCategoryData.description}</p>
+                <p>{selectedCategoryData.description}</p>
               </div>
 
               <div className="components-grid">
@@ -313,14 +460,17 @@ const Components = () => {
                   </Card>
                 </div>
               )}
-            </>
+            </section>
           )}
         </main>
       </div>
 
       {/* Component Overview */}
-      <section className="component-overview">
-        <h2>Component Philosophy</h2>
+      <section className="component-overview token-section">
+        <div className="section-header">
+          <h2>Component Philosophy</h2>
+          <p>Our design system principles and component approach</p>
+        </div>
         <div className="philosophy-grid">
           <Card>
             <h3>🎯 Token-Based</h3>

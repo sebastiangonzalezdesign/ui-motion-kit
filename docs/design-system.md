@@ -23,7 +23,7 @@ styles/
 │   ├── _colors.scss     # Raw color palettes (7 complete scales)
 │   ├── _tokens.scss     # Semantic design tokens + CSS custom properties
 │   ├── _typography.scss # Font scales and text styles
-│   ├── _motion.scss     # Animation tokens and easing
+│   ├── _motion.scss     # UX-focused motion system with semantic roles and easing curves
 │   └── _breakpoints.scss# Responsive breakpoints
 ├── functions/           # Utility functions
 │   └── _colors.scss     # Color access helpers (color(), semantic())
@@ -39,65 +39,82 @@ styles/
 
 ## 🎯 **Enhanced Design Tokens**
 
-### **Color System Architecture**
+### **Centralized Token System Architecture**
 
-Our enhanced color system follows a **three-layer architecture**:
+Our revolutionary design token system uses a **centralized theme configuration** approach that eliminates duplication and provides enterprise-grade scalability:
 
 #### **1. Raw Color Palettes** (`_colors.scss`)
 
 ```scss
-// 7 complete color scales with 50-900 shades
+// Complete color scales with 50-900 shades
 $gray: (
   50: #f9fafb,
   100: #f3f4f6,
-  // ... through 900
+  500: #6b7280,
   900: #111827,
 );
 
-$blue: (
-  50: #eff6ff,
-  500: #3b82f6,
-  // Primary brand
-  600: #2563eb,
-  // Primary brand hover
-  900: #1e3a8a,
+// Fixed brand colors (consistent across all themes)
+$primary-colors: (
+  primary: rgb(99, 102, 241),
+  secondary: rgb(244, 63, 94),
 );
-// + Green, Red, Yellow, Orange, Purple scales
 ```
 
-#### **2. Semantic Tokens** (`_tokens.scss`)
+#### **2. Centralized Theme Configuration** (`_tokens.scss`)
 
 ```scss
-// CSS Custom Properties for runtime theming
-:root {
-  --background-primary: #{map.get($gray, 50)};
-  --text-primary: #{map.get($gray, 900)};
-  --accent-primary: #{map.get($blue, 600)};
-  --feedback-success: #{map.get($green, 600)};
-}
+// Single source of truth for all theme variants
+$themes: (
+  light: (
+    background-primary: map.get($gray, 50),
+    background-secondary: map.get($gray, 100),
+    text-primary: map.get($gray, 900),
+    text-secondary: map.get($gray, 600),
+    border-primary: map.get($gray, 200),
+  ),
+  dark: (
+    background-primary: map.get($gray, 900),
+    background-secondary: map.get($gray, 800),
+    text-primary: map.get($gray, 50),
+    text-secondary: map.get($gray, 300),
+    border-primary: map.get($gray, 700),
+  ),
+);
 
-[data-theme='dark'] {
-  --background-primary: #{map.get($gray, 900)};
-  --text-primary: #{map.get($gray, 50)};
-  // Automatic dark mode variants
+// Automatic theme generation - no manual duplication!
+@each $theme-name, $theme-config in $themes {
+  [data-theme='#{$theme-name}'] {
+    @each $token-name, $token-value in $theme-config {
+      --#{$token-name}: #{$token-value};
+    }
+  }
 }
-
-// SCSS Variables for development
-$background-primary: var(--background-primary);
-$text-primary: var(--text-primary);
 ```
 
-#### **3. Utility Functions** (`functions/_colors.scss`)
+#### **3. Architectural Benefits**
+
+- **🎯 Single Source of Truth**: All theme variants in one centralized `$themes` map
+- **🔄 DRY Principle**: Eliminates 80+ lines of manual dark mode overrides
+- **📈 Infinite Scalability**: Adding new themes (high-contrast, sepia) requires only map entries
+- **🎨 Fixed vs. Contextual**: Brand colors stay consistent while UI tokens adapt
+- **⚡ Automatic Generation**: SCSS loops create all theme variants programmatically
+- **🛠️ Zero Maintenance**: Token structure changes propagate automatically
+
+#### **4. Usage in Components**
 
 ```scss
-// Access raw colors
-@function color($scale, $shade) {
-  @return map.get($#{$scale}, $shade);
-}
+.button {
+  background: var(--background-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
 
-// Access semantic tokens
-@function semantic($token) {
-  @return var(--#{$token});
+  // Brand colors remain fixed across themes
+  &.primary {
+    background: map.get($primary-colors, primary);
+    color: white;
+  }
+}
 }
 
 // Usage examples:
@@ -184,78 +201,155 @@ $spacing-responsive: (
 
 ---
 
-## 🎭 **Motion System**
+## 🎭 **Enhanced Motion System**
 
-### **Motion Philosophy**
+### **UX-Focused Motion Philosophy**
 
-Our motion system follows these principles:
+Our motion system follows enterprise design system principles with semantic roles:
 
-1. **Purposeful** - Every animation serves a functional purpose
+1. **Purposeful** - Every animation serves a functional UX purpose
 2. **Performant** - GPU-accelerated transforms and opacity changes
 3. **Accessible** - Respects `prefers-reduced-motion`
-4. **Contextual** - Adapts to device capabilities and user preferences
+4. **Semantic** - Clear mapping between motion intent and implementation
+5. **Contextual** - Adapts to device capabilities and user preferences
 
 ### **Duration Scale**
 
 ```scss
-$durations: (
+$motion-durations: (
   'instant': 0ms,
+  // Immediate feedback
   'fast': 150ms,
-  // Quick interactions
+  // Quick interactions (hover, active)
   'normal': 300ms,
   // Standard transitions
   'slow': 500ms,
   // Complex animations
-  'slower': 700ms, // Page transitions
+  'slower': 700ms,
+  // Dramatic effects
+  'slowest': 1000ms, // Page transitions
 );
 ```
 
-### **Easing Curves**
+### **UX-Focused Easing Curves**
+
+Professional easing curves mapped to specific UI intents:
 
 ```scss
-$easings: (
-  'linear': linear,
+$motion-easings: (
+  'ease-standard': cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  // General UI transitions
+  'ease-decelerate': cubic-bezier(0, 0, 0.2, 1),
+  // Entrances, reveals
+  'ease-accelerate': cubic-bezier(0.4, 0, 1, 1),
+  // Exits, dismissals
+  'ease-spring': cubic-bezier(0.34, 1.56, 0.64, 1),
+  // Playful, bouncy
+  'ease-emphasized': cubic-bezier(0.2, 0, 0, 1),
+  // Strong emphasis
+  // Legacy aliases maintained for compatibility
   'ease-out': ease-out,
   // Natural deceleration
   'spring': cubic-bezier(0.34, 1.56, 0.64, 1),
-  // Bouncy, playful
   'smooth': cubic-bezier(0.25, 0.46, 0.45, 0.94),
-  // Smooth, elegant
-  'sharp': cubic-bezier(0.4, 0, 0.6, 1), // Quick, snappy
 );
 ```
 
-### **Motion Presets**
+### **Semantic Motion Roles**
 
-Pre-configured animation combinations:
+Motion patterns mapped to specific UX goals:
+
+```scss
+$motion-semantic: (
+  // Micro-interactions (hover, active, focus states)
+  'micro-interaction': (
+      duration: 150ms,
+      easing: ease-spring,
+    ),
+  // Page/modal entrances
+  'entrance': (
+      duration: 300ms,
+      easing: ease-decelerate,
+    ),
+  // Leave animations, dismissals
+  'exit': (
+      duration: 150ms,
+      easing: ease-accelerate,
+    ),
+  // Draw attention (toasts, highlights, badges)
+  'emphasis': (
+      duration: 150ms,
+      easing: ease-emphasized,
+    ),
+  // Context changes (navigation, drawers, tabs)
+  'continuity': (
+      duration: 300ms,
+      easing: ease-decelerate,
+    ),
+  // Action confirmation (button press, form submit)
+  'feedback': (
+      duration: 300ms,
+      easing: ease-standard,
+    )
+);
+```
+
+### **Enhanced Motion Presets**
+
+Pre-configured animation combinations with semantic naming:
 
 ```scss
 $motion-presets: (
   'fade': (
     duration: 300ms,
-    easing: ease-out,
+    easing: ease-standard,
   ),
   'slide': (
     duration: 300ms,
-    easing: spring,
+    easing: ease-decelerate,
   ),
   'scale': (
     duration: 150ms,
-    easing: bounce,
+    easing: ease-spring,
   ),
-  'elastic': (
-    duration: 500ms,
-    easing: spring,
+  'entrance': (
+    duration: 300ms,
+    easing: ease-decelerate,
+  ),
+  'exit': (
+    duration: 150ms,
+    easing: ease-accelerate,
+  ),
+  'emphasis': (
+    duration: 150ms,
+    easing: ease-emphasized,
   ),
 );
 ```
 
-**Usage:**
+**Usage Examples:**
 
 ```scss
+// Semantic approach (recommended)
+.button {
+  @include motion('micro-interaction');
+  // Perfect for hover states
+}
+
 .modal {
+  @include motion('entrance');
+  // Optimized for modal appearances
+}
+
+.toast {
+  @include motion('emphasis');
+  // Draws attention effectively
+}
+
+// Preset approach (also supported)
+.card {
   @include motion('fade');
-  // Compiles to: transition: 300ms ease-out;
+  // Traditional approach still works
 }
 ```
 
@@ -539,4 +633,74 @@ Existing components gain new features without breaking changes:
 
 ---
 
-_This design system documentation is living and evolving. Last updated: September 3, 2025_
+## 🚀 **Token Evolution Roadmap**
+
+### **Current State: Enterprise-Grade SCSS Foundation**
+
+Motion UI Kit Pro's current token system is already sophisticated and production-ready:
+
+- **✅ Three-Layer Architecture**: Raw colors → Semantic tokens → CSS custom properties
+- **✅ Runtime Theming**: Automatic light/dark mode switching
+- **✅ Professional Organization**: Proper SCSS modules with separation of concerns
+- **✅ Type Safety**: Full TypeScript integration
+- **✅ Performance**: Optimized compilation and minimal runtime overhead
+
+### **Future Vision: Cross-Platform Token Pipeline**
+
+**Phase 2: Enhanced SCSS System**
+
+```scss
+// Enhanced semantic categories
+:root {
+  // Interactive states
+  --interactive-primary: #{map.get($blue, 600)};
+  --interactive-hover: #{map.get($blue, 700)};
+  --interactive-active: #{map.get($blue, 800)};
+
+  // Component-specific tokens
+  --button-primary-bg: var(--interactive-primary);
+  --card-surface: var(--background-raised);
+}
+```
+
+**Phase 3: JSON Source of Truth + Style Dictionary**
+
+```json
+{
+  "color": {
+    "semantic": {
+      "background": {
+        "primary": {
+          "value": "{color.gray.50}",
+          "darkValue": "{color.gray.900}",
+          "description": "Primary background for main content areas"
+        }
+      }
+    }
+  }
+}
+```
+
+**Multi-Platform Output:**
+
+- **Web**: CSS custom properties + SCSS variables (current)
+- **React Native**: JavaScript style objects
+- **iOS**: Swift color definitions
+- **Android**: XML color resources
+- **Tailwind**: Configuration file
+- **Figma**: Token Studio sync
+
+### **Strategic Benefits**
+
+1. **🔄 Seamless Migration**: Current SCSS remains the foundation
+2. **📱 Platform Expansion**: Same tokens across web, mobile, native
+3. **🎨 Design Integration**: Bidirectional Figma synchronization
+4. **🏢 Enterprise Scale**: Multi-brand token management
+5. **⚡ Performance**: Platform-optimized token delivery
+6. **🔧 Developer Experience**: Enhanced tooling and type safety
+
+This evolution transforms Motion UI Kit Pro from a React component library into a comprehensive cross-platform design system toolkit, positioning it as an enterprise-ready solution for modern product development.
+
+---
+
+_This design system documentation is living and evolving. Last updated: September 7, 2025_

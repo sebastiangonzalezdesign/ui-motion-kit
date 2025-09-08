@@ -4,6 +4,7 @@ import { Modal } from '../../../components/feedback';
 import { Card } from '../../../components/primitives';
 import { CodePreview } from '../../components';
 import { Hero } from '../../components';
+import { Breadcrumb } from '../../../components/navigation';
 import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
@@ -17,6 +18,7 @@ const Modals = () => {
 
   return (
     <div className="page">
+      <Breadcrumb />
       <Hero
         headline="Modal Components"
         description="Slide-in modals for user interactions with smooth animations."

@@ -3,6 +3,7 @@ import { useToast } from '../../../components/feedback';
 import { Button } from '../../../components/primitives';
 import { Card } from '../../../components/primitives';
 import { CodePreview } from '../../components';
+import { Breadcrumb } from '../../../components/navigation';
 import './toast.scss';
 
 const ToastPage: React.FC = () => {
@@ -117,6 +118,7 @@ function App() {
 
   return (
     <div className="toast-page">
+      <Breadcrumb />
       <h1>Toast Notifications</h1>
       <p className="page-description">
         A flexible toast notification system with multiple types, positions, auto-dismiss, custom

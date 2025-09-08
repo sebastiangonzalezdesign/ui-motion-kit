@@ -2,23 +2,23 @@
 // ==============================================
 @use 'sass:map';
 
-// Fluid spacing scale with responsive values
+// Clean 8px grid-based spacing scale (simplified from current complex scale)
 $spacing-scale: (
   '0': 0,
   'px': 1px,
-  'half': 0.125rem,
-  // 2px (was 0.5)
+  '0.5': 0.125rem,
+  // 2px
   '1': 0.25rem,
   // 4px
-  '1-half': 0.375rem,
-  // 6px (was 1.5)
+  '1.5': 0.375rem,
+  // 6px
   '2': 0.5rem,
   // 8px
-  '2-half': 0.625rem,
-  // 10px (was 2.5)
+  '2.5': 0.625rem,
+  // 10px
   '3': 0.75rem,
   // 12px
-  '3-half': 0.875rem,
+  '3.5': 0.875rem,
   // 14px
   '4': 1rem,
   // 16px
@@ -73,7 +73,7 @@ $spacing-scale: (
   '96': 24rem, // 384px
 );
 
-// Responsive spacing tokens (fluid)
+// Responsive spacing tokens (fluid scaling)
 $spacing-responsive: (
   'xs': clamp(0.5rem, 2vw, 1rem),
   // 8px - 16px
@@ -90,13 +90,31 @@ $spacing-responsive: (
   '3xl': clamp(8rem, 12vw, 12rem), // 128px - 192px
 );
 
-// Semantic spacing tokens
-$space-section: map.get($spacing-responsive, 'lg'); // Section spacing
-$space-component: map.get($spacing-responsive, 'md'); // Component spacing
-$space-element: map.get($spacing-responsive, 'sm'); // Element spacing
-$space-inline: map.get($spacing-responsive, 'xs'); // Inline spacing
+// Semantic spacing tokens (following typography pattern)
+$spacing-semantic: (
+  'section': map.get($spacing-responsive, 'lg'),
+  // Large section spacing
+  'component': map.get($spacing-scale, '8'),
+  // Component internal spacing
+  'element': map.get($spacing-scale, '4'),
+  // Element spacing
+  'inline': map.get($spacing-scale, '2'),
+  // Inline spacing
+  'tight': map.get($spacing-scale, '1'), // Tight spacing
+);
 
-// Spacing utility function
+// Backward Compatibility Variables
+// Legacy naming system for existing components
+$space-xs: map.get($spacing-scale, '1'); // 4px
+$space-sm: map.get($spacing-scale, '2'); // 8px
+$space-md: map.get($spacing-scale, '4'); // 16px
+$space-lg: map.get($spacing-scale, '6'); // 24px
+$space-xl: map.get($spacing-scale, '8'); // 32px
+$space-2xl: map.get($spacing-scale, '12'); // 48px
+$space-3xl: map.get($spacing-scale, '16'); // 64px
+$space-4xl: map.get($spacing-scale, '24'); // 96px
+
+// Spacing utility functions (following the established pattern)
 @function space($key) {
   @if map.has-key($spacing-scale, $key) {
     @return map.get($spacing-scale, $key);
@@ -105,5 +123,14 @@ $space-inline: map.get($spacing-responsive, 'xs'); // Inline spacing
   } @else {
     @warn "Spacing key '#{$key}' not found.";
     @return 0;
+  }
+}
+
+@function space-semantic($key) {
+  @if map.has-key($spacing-semantic, $key) {
+    @return map.get($spacing-semantic, $key);
+  } @else {
+    @warn "Semantic spacing key '#{$key}' not found.";
+    @return map.get($spacing-semantic, 'element');
   }
 }

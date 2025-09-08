@@ -1,0 +1,107 @@
+@use '../../../styles/abstracts/tokens' as *;
+
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  background: var(--background-primary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    background: var(--background-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-secondary);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  // Size variants
+  &--sm {
+    padding: 4px 8px;
+    font-size: 11px;
+    gap: 4px;
+
+    .copy-icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &--md {
+    padding: 6px 10px;
+    font-size: 12px;
+    gap: 6px;
+
+    .copy-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // Style variants
+  &--minimal {
+    border: none;
+    background: transparent;
+    padding: 4px;
+
+    &:hover {
+      background: var(--background-secondary);
+    }
+
+    .copy-text {
+      display: none;
+    }
+  }
+
+  .copy-icon {
+    transition: all 0.2s ease;
+
+    &--success {
+      color: var(--success-primary, #10b981);
+    }
+  }
+
+  .copy-text {
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  // States
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: var(--background-primary);
+      color: var(--text-secondary);
+      border-color: var(--border-primary);
+    }
+  }
+}
+
+// Animation for success state
+@keyframes copySuccess {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.copy-button .copy-icon--success {
+  animation: copySuccess 0.3s ease;
+}

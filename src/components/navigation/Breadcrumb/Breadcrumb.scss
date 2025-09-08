@@ -1,0 +1,99 @@
+@use '../../../styles/abstracts' as *;
+
+.breadcrumb {
+  margin-bottom: $space-lg;
+
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $space-xs;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    padding: $space-xs $space-sm;
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    border-radius: $radius-sm;
+    transition: $transition-fast;
+
+    &:hover {
+      color: $text-primary;
+      background: $color-surface-hover;
+    }
+
+    &:focus {
+      outline: 2px solid $color-focus;
+      outline-offset: 2px;
+    }
+  }
+
+  &__current {
+    padding: $space-xs $space-sm;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__home-icon {
+    width: 1rem;
+    height: 1rem;
+    color: $text-secondary;
+  }
+
+  &__separator {
+    width: 1rem;
+    height: 1rem;
+    color: $text-tertiary;
+    margin: 0 $space-xs;
+  }
+
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    &__link {
+      color: $text-secondary;
+
+      &:hover {
+        color: $text-primary;
+        background: $color-surface-hover;
+      }
+    }
+
+    &__current {
+      color: $text-primary;
+    }
+
+    &__home-icon {
+      color: $text-secondary;
+    }
+  }
+
+  // Responsive
+  @include respond-below('sm') {
+    &__link,
+    &__current {
+      font-size: $font-size-xs;
+      padding: $space-xs;
+    }
+
+    &__home-icon,
+    &__separator {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+}

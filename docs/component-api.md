@@ -8,11 +8,77 @@ All Motion UI Kit Pro components follow consistent API patterns:
 - **Composition-friendly** with flexible children patterns
 - **Accessibility-built-in** with ARIA attributes and keyboard support
 - **Theme-aware** with automatic dark/light mode support
-- **Motion-configurable** with animation customization options
+- **UX-focused motion system** with semantic animation roles and professional easing curves
 
 ---
 
 ## 🧩 **Enhanced Core Components**
+
+### **Button Component**
+
+Enhanced from the free version with additional props and states.
+
+### **Breadcrumb Component** _(NEW)_
+
+Intelligent breadcrumb navigation with category-aware routing and state persistence.
+
+#### **Props Interface**
+
+```typescript
+interface BreadcrumbProps {
+  // Optional customization
+  className?: string;
+
+  // Navigation context (automatically detected)
+  separator?: React.ReactNode; // Default: "/"
+  maxItems?: number; // Maximum breadcrumb items to display
+  showHome?: boolean; // Show home icon (default: true)
+}
+```
+
+#### **Features**
+
+- **🗺️ Automatic Path Detection**: Generates breadcrumbs based on current route
+- **🎯 Category-Aware**: Maps component pages to their respective categories (UI Basics, Navigation, Feedback, Motion)
+- **🔄 State Persistence**: Maintains category context using URL search parameters
+- **♿ Accessibility**: Full keyboard navigation and screen reader support
+- **🎨 Themeable**: Adapts to light/dark modes automatically
+
+#### **Usage Examples**
+
+```tsx
+// Basic usage (auto-detects current route)
+<Breadcrumb />
+
+// Custom separator
+<Breadcrumb separator=">" />
+
+// Hide home icon
+<Breadcrumb showHome={false} />
+
+// Limit breadcrumb items
+<Breadcrumb maxItems={3} />
+```
+
+#### **Automatic Category Mapping**
+
+The breadcrumb component automatically maps component routes to categories:
+
+```tsx
+// Component to category mapping
+const componentCategoryMap = {
+  buttons: 'ui-basics',
+  cards: 'ui-basics',
+  toggles: 'ui-basics',
+  navbar: 'navigation',
+  sidebar: 'navigation',
+  modals: 'feedback',
+  toast: 'feedback',
+  loaders: 'motion',
+  'micro-interactions': 'motion',
+  'page-transitions': 'motion',
+};
+```
 
 ### **Button Component**
 
@@ -33,7 +99,7 @@ interface ButtonProps {
   loadingText?: string;
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
-  motion?: 'subtle' | 'smooth' | 'spring' | 'bounce' | 'none';
+  motion?: 'micro-interaction' | 'entrance' | 'exit' | 'emphasis' | 'feedback' | 'none';
   fullWidth?: boolean;
 
   // Standard HTML props
@@ -70,10 +136,10 @@ interface ButtonProps {
   Complete Task
 </Button>
 
-// PRO: Custom motion
+// PRO: UX-focused motion
 <Button
   variant="primary"
-  motion="spring"
+  motion="micro-interaction"
   size="lg"
 >
   Get Started

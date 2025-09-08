@@ -72,6 +72,24 @@ $breakpoint-lg: map.get($breakpoints, 'lg');
   @include respond-between('md', 'lg');
 }
 
+// Breakpoint-down mixin for max-width queries
+@mixin breakpoint-down($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: #{map.get($breakpoints, $breakpoint) - 1px}) {
+      @content;
+    }
+  } @else {
+    @warn 'Unknown breakpoint: #{$breakpoint}';
+  }
+}
+
+// Alias for breakpoint-down
+@mixin respond-below($breakpoint) {
+  @include breakpoint-down($breakpoint) {
+    @content;
+  }
+}
+
 // Container query support (for modern browsers)
 @mixin container($size) {
   @container (min-width: #{$size}) {

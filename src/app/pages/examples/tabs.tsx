@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Tabs, TabList, TabTrigger, TabContent } from '../../../components/navigation';
 import { Button, Card } from '../../../components/primitives';
 import { CodePreview } from '../../components';
+import { Breadcrumb } from '../../../components/navigation';
 import './tabs.scss';
 
 const TabsPage: React.FC = () => {
@@ -80,6 +81,7 @@ const TabsPage: React.FC = () => {
 
   return (
     <div className="tabs-demo-page">
+      <Breadcrumb />
       <div className="container">
         <header className="page-header">
           <h1>Tabs Component</h1>
