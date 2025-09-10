@@ -2,67 +2,140 @@
 @use '../../../styles/abstracts/tokens' as *;
 @use '../../../styles/abstracts/motion' as *;
 
-.toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.25rem;
-  border-radius: 1rem;
-  transition: background-color $motion-normal;
-}
+@use '../../../styles/abstracts/colors' as *;
+@use '../../../styles/abstracts/tokens' as *;
+@use '../../../styles/abstracts/motion' as *;
 
-.toggle-track {
-  width: 3rem;
-  height: 1.5rem;
-  background-color: $background-secondary;
-  border-radius: 0.75rem;
-  position: relative;
+.toggle-group {
   display: flex;
   align-items: center;
-  border: 1px solid $border-light;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
 
-  // Enhanced dark mode support
-  [data-theme='dark'] & {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: $border-dark;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__label {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+  }
+
+  &__description {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
   }
 }
 
-.toggle.on .toggle-track {
-  background-color: $primary;
+.toggle {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  background: transparent;
+  border-radius: 50px;
 
-  // Enhanced dark mode support
-  [data-theme='dark'] & {
-    background-color: $primary;
-    box-shadow: 0 0 0 1px $primary;
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  // Size variants
+  &--sm {
+    --track-width: 36px;
+    --track-height: 20px;
+    --thumb-size: 16px;
+    --thumb-translate: 14px;
+    --icon-size: 10px;
+  }
+
+  &--md {
+    --track-width: 44px;
+    --track-height: 24px;
+    --thumb-size: 20px;
+    --thumb-translate: 18px;
+    --icon-size: 12px;
+  }
+
+  &--lg {
+    --track-width: 52px;
+    --track-height: 28px;
+    --thumb-size: 24px;
+    --thumb-translate: 22px;
+    --icon-size: 14px;
+  }
+
+  // Style variants
+  &--pill {
+    .toggle__track {
+      border-radius: 50px;
+    }
+  }
+
+  &--square {
+    .toggle__track {
+      border-radius: 6px;
+    }
+
+    .toggle__thumb {
+      border-radius: 4px;
+    }
+  }
+
+  // States
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--loading {
+    cursor: wait;
+  }
+
+  &:hover:not(&--disabled):not(&--loading) {
+    transform: scale(1.05);
   }
 }
 
-.toggle-thumb {
-  width: 1.25rem;
-  height: 1.25rem;
-  background-color: white;
-  border-radius: 50%;
+.toggle__track {
+  width: var(--track-width);
+  height: var(--track-height);
+  border-radius: 50px;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-primary);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  background: var(--background-white);
+}
+
+.toggle__thumb {
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  background: var(--background-white);
+  border-radius: 50px;
+  position: relative;
+  left: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  left: 0.125rem;
+  flex-shrink: 0;
 
-  // Enhanced dark mode support
   [data-theme='dark'] & {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    background: var(--background-white);
   }
 }
 
-.toggle.on .toggle-thumb {
-  left: calc(100% - 1.375rem);
-}
-
-.toggle-icon-container {
+.toggle__icon-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,36 +144,66 @@
 }
 
 .toggle-icon {
-  width: 0.75rem;
-  height: 0.75rem;
-  color: $primary;
-  flex-shrink: 0;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  stroke-width: 2.5;
 }
 
-.toggle.on .toggle-icon {
-  color: white;
-}
+.toggle--on {
+  .toggle-icon {
+    color: var(--text-inverse);
+  }
 
-.toggle:hover .toggle-track {
-  // Enhanced dark mode support
-  [data-theme='dark'] & {
-    background-color: rgba(255, 255, 255, 0.15);
+  .toggle__track {
+    background: var(--background-accent);
+  }
+
+  .toggle__thumb {
+    background: var(--background-accent);
   }
 }
 
-.toggle.on:hover .toggle-track {
-  // Enhanced dark mode support
-  [data-theme='dark'] & {
-    background-color: $brand-hover;
+.toggle--off {
+  .toggle-icon {
+    color: var(--text-tertiary);
+  }
+
+  .toggle__track {
+    background: var(--background-white);
+  }
+
+  .toggle__thumb {
+    background: var(--background-white);
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .toggle {
-    transition: none;
-  }
+.toggle__spinner {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border: 2px solid transparent;
+  border-top: 2px solid var(--text-secondary);
+  border-radius: 50%;
+}
 
-  .toggle-icon-container {
-    animation: none;
+// Dark mode adjustments
+[data-theme='dark'] {
+  .toggle__track {
+    border-color: var(--border-primary);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  .toggle-group {
+    gap: 0.75rem;
+
+    &__label {
+      font-size: 0.875rem;
+    }
+
+    &__description {
+      font-size: 0.75rem;
+    }
   }
 }

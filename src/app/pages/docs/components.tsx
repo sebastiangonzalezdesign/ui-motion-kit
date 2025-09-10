@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card } from '../../../components/primitives';
 import { Hero } from '../../components';
 import { Button, SearchInput } from '../../../components/primitives';
@@ -11,6 +11,13 @@ import {
   MapIcon,
   ChatBubbleBottomCenterTextIcon,
   PlayIcon,
+  // Philosophy icons
+  SwatchIcon,
+  UserGroupIcon,
+  DevicePhoneMobileIcon,
+  PaintBrushIcon,
+  // Toggle icon
+  Bars3Icon,
 } from '@heroicons/react/24/outline';
 import './design-tokens.scss';
 
@@ -312,7 +319,7 @@ const Components = () => {
         showIllustrations={false}
       />
 
-      <div className="design-tokens-layout">
+      <div className={`design-tokens-layout ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         {/* Enhanced Sidebar with Search */}
         <aside className={`design-tokens-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
           <div className="sidebar-header">
@@ -322,16 +329,7 @@ const Components = () => {
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M3 12h18M3 6h18M3 18h18" />
-              </svg>
+              <Bars3Icon width="16" height="16" />
             </button>
           </div>
 
@@ -396,26 +394,27 @@ const Components = () => {
 
                       <div className="component-actions">
                         {component.status === 'available' && (
-                          <Button size="sm" variant="outline">
-                            View Component
-                          </Button>
+                          <>
+                            <Button size="sm" variant="primary">
+                              View Component
+                            </Button>
+                            <Button size="sm" variant="outline">
+                              View Code
+                            </Button>
+                          </>
                         )}
                         {component.status === 'pro' && (
                           <div className="pro-actions">
                             <Button size="sm" variant="primary">
                               View in Pro
                             </Button>
-                            <Link
-                              to="https://sebastiangonzalez.design/motion-ui-kit"
-                              target="_blank"
-                              className="upgrade-link"
-                            >
-                              Upgrade to unlock
-                            </Link>
+                            <Button size="sm" variant="outline">
+                              Preview
+                            </Button>
                           </div>
                         )}
                         {component.status === 'coming-soon' && (
-                          <Button size="sm" variant="outline">
+                          <Button size="sm" variant="ghost">
                             Coming Soon
                           </Button>
                         )}
@@ -450,13 +449,6 @@ const Components = () => {
                         <strong>Performance:</strong> Optimized animations that run at 60fps
                       </div>
                     </div>
-                    <Button
-                      onClick={() =>
-                        window.open('https://sebastiangonzalez.design/motion-ui-kit', '_blank')
-                      }
-                    >
-                      Upgrade to Pro
-                    </Button>
                   </Card>
                 </div>
               )}
@@ -473,21 +465,33 @@ const Components = () => {
         </div>
         <div className="philosophy-grid">
           <Card>
-            <h3>🎯 Token-Based</h3>
+            <h3>
+              <SwatchIcon width="20" height="20" />
+              Token-Based
+            </h3>
             <p>Every component uses design tokens for consistent styling and easy customization.</p>
           </Card>
           <Card>
-            <h3>♿ Accessible</h3>
+            <h3>
+              <UserGroupIcon width="20" height="20" />
+              Accessible
+            </h3>
             <p>
               Built with accessibility in mind, including ARIA attributes and keyboard navigation.
             </p>
           </Card>
           <Card>
-            <h3>📱 Responsive</h3>
+            <h3>
+              <DevicePhoneMobileIcon width="20" height="20" />
+              Responsive
+            </h3>
             <p>Mobile-first design ensures components work beautifully on all screen sizes.</p>
           </Card>
           <Card>
-            <h3>🎨 Customizable</h3>
+            <h3>
+              <PaintBrushIcon width="20" height="20" />
+              Customizable
+            </h3>
             <p>Easy to theme and customize using CSS custom properties and SCSS variables.</p>
           </Card>
         </div>

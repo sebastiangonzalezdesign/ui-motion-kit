@@ -12,6 +12,13 @@ import {
   WrenchScrewdriverIcon,
   PlayIcon,
   PaintBrushIcon,
+  // Quick links icons
+  SwatchIcon,
+  CubeIcon,
+  DocumentTextIcon,
+  SparklesIcon,
+  // Toggle icon
+  Bars3Icon,
 } from '@heroicons/react/24/outline';
 import './design-tokens.scss';
 
@@ -302,13 +309,12 @@ const customTheme = {
       <Hero
         headline="Documentation"
         description="Your complete developer handbook for building with Motion UI Kit. Learn setup, customization, and best practices."
-        backgroundColor="brand-medium"
-        borderRadius="lg"
+        backgroundColor="brand-light"
         size="md"
         showIllustrations={false}
       />
 
-      <div className="design-tokens-layout">
+      <div className={`design-tokens-layout ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         {/* Enhanced Sidebar with Search */}
         <aside className={`design-tokens-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
           <div className="sidebar-header">
@@ -318,16 +324,7 @@ const customTheme = {
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M3 12h18M3 6h18M3 18h18" />
-              </svg>
+              <Bars3Icon width="16" height="16" />
             </button>
           </div>
 
@@ -622,7 +619,10 @@ function MyComponent() {
         <h2>Quick Links</h2>
         <div className="links-grid">
           <Card>
-            <h3>🎨 Design Tokens</h3>
+            <h3>
+              <SwatchIcon width="20" height="20" />
+              Design Tokens
+            </h3>
             <p>Explore the complete token system</p>
             <Link to="/design-tokens">
               <Button size="sm" variant="outline">
@@ -631,7 +631,10 @@ function MyComponent() {
             </Link>
           </Card>
           <Card>
-            <h3>🧩 Components</h3>
+            <h3>
+              <CubeIcon width="20" height="20" />
+              Components
+            </h3>
             <p>Browse all available components</p>
             <Link to="/components">
               <Button size="sm" variant="outline">
@@ -640,7 +643,10 @@ function MyComponent() {
             </Link>
           </Card>
           <Card>
-            <h3>📋 Changelog</h3>
+            <h3>
+              <DocumentTextIcon width="20" height="20" />
+              Changelog
+            </h3>
             <p>See what's new and improved</p>
             <Link to="/changelog">
               <Button size="sm" variant="outline">
@@ -648,20 +654,33 @@ function MyComponent() {
               </Button>
             </Link>
           </Card>
-          <Card>
-            <h3>🚀 Upgrade to Pro</h3>
-            <p>Unlock advanced features</p>
+        </div>
+      </section>
+
+      {/* Pro Feature CTA */}
+      <div className="pro-feature-cta">
+        <Card className="cta-card">
+          <h3>
+            <SparklesIcon width="24" height="24" />
+            Upgrade to Pro
+          </h3>
+          <p>
+            Unlock advanced motion components, semantic motion tokens, and enterprise-ready design
+            patterns. Take your projects to the next level with professional-grade animations.
+          </p>
+          <div className="cta-actions">
             <Button
-              size="sm"
+              variant="primary"
+              size="md"
               onClick={() =>
                 window.open('https://sebastiangonzalez.design/motion-ui-kit', '_blank')
               }
             >
-              Get Pro
+              Get Pro →
             </Button>
-          </Card>
-        </div>
-      </section>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 };

@@ -28,6 +28,8 @@ import {
   UserIcon,
   // Spacing benefits icons
   CalculatorIcon,
+  // Toggle icon
+  Bars3Icon,
 } from '@heroicons/react/24/outline';
 import './design-tokens.scss';
 
@@ -594,7 +596,7 @@ import { Button } from '@motion-ui-kit/primitives';
         showIllustrations={false}
       />
 
-      <div className="design-tokens-layout">
+      <div className={`design-tokens-layout ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         {/* Enhanced Sidebar with Search */}
         <aside className={`design-tokens-sidebar ${sidebarCollapsed ? 'collapsed' : ''}`}>
           <div className="sidebar-header">
@@ -604,29 +606,7 @@ import { Button } from '@motion-ui-kit/primitives';
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                {sidebarCollapsed ? (
-                  // Menu icon when collapsed
-                  <>
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <line x1="3" y1="18" x2="21" y2="18" />
-                  </>
-                ) : (
-                  // X icon when expanded
-                  <>
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </>
-                )}
-              </svg>
+              <Bars3Icon width="16" height="16" />
             </button>
           </div>
 

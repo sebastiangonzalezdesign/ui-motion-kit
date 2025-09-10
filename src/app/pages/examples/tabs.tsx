@@ -6,7 +6,6 @@ import { Breadcrumb } from '../../../components/navigation';
 import './tabs.scss';
 
 const TabsPage: React.FC = () => {
-  const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal');
   const [variant, setVariant] = useState<'default' | 'pills' | 'underline' | 'bordered'>('default');
 
   const basicTabsCode = `<Tabs defaultValue="overview">
@@ -95,26 +94,6 @@ const TabsPage: React.FC = () => {
           <h2>Interactive Demo</h2>
           <div className="demo-controls">
             <div className="control-group">
-              <label>Orientation:</label>
-              <div className="button-group">
-                <Button
-                  variant={orientation === 'horizontal' ? 'primary' : 'outline'}
-                  size="sm"
-                  onClick={() => setOrientation('horizontal')}
-                >
-                  Horizontal
-                </Button>
-                <Button
-                  variant={orientation === 'vertical' ? 'primary' : 'outline'}
-                  size="sm"
-                  onClick={() => setOrientation('vertical')}
-                >
-                  Vertical
-                </Button>
-              </div>
-            </div>
-
-            <div className="control-group">
               <label>Variant:</label>
               <div className="button-group">
                 <Button
@@ -150,7 +129,7 @@ const TabsPage: React.FC = () => {
           </div>
 
           <Card className="demo-card">
-            <Tabs defaultValue="overview" orientation={orientation} variant={variant}>
+            <Tabs defaultValue="overview" variant={variant}>
               <TabList aria-label="Product Information">
                 <TabTrigger value="overview">Overview</TabTrigger>
                 <TabTrigger value="features">Features</TabTrigger>

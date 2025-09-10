@@ -1,5 +1,5 @@
 // Tabs Page Styles
-.tabs-page {
+.tabs-demo-page {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -58,11 +58,14 @@
         }
 
         .button-group {
-          display: flex;
-          gap: 0.5rem;
+          display: flex !important;
+          gap: 0.5rem !important;
           flex-wrap: wrap;
+          align-items: center;
 
-          button {
+          .button {
+            width: auto !important;
+            flex: 0 0 auto;
             padding: 0.5rem 1rem;
             border: 1px solid var(--border-primary);
             border-radius: 6px;
@@ -192,7 +195,7 @@
       font-size: 2rem;
     }
 
-    .interactive-demo .demo-controls {
+    .demo-section .demo-controls {
       padding: 1rem;
 
       .control-group .button-group {
@@ -205,7 +208,7 @@
       }
     }
 
-    .interactive-demo .demo-showcase {
+    .demo-section .demo-showcase {
       padding: 1rem;
       min-height: 250px;
     }
@@ -229,12 +232,12 @@
       font-size: 1rem;
     }
 
-    .interactive-demo h2,
-    .code-examples h2 {
+    .demo-section h2,
+    .examples-section h2 {
       font-size: 1.5rem;
     }
 
-    .interactive-demo .demo-controls .control-group .button-group {
+    .demo-section .demo-controls .control-group .button-group {
       button {
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
@@ -243,9 +246,39 @@
   }
 }
 
+// Extra specific targeting for button groups
+.tabs-demo-page .demo-section .demo-controls .control-group .button-group {
+  display: flex !important;
+  gap: 0.5rem !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  width: auto !important;
+
+  .button {
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+  }
+}
+
+// Demo card spacing
+.demo-card {
+  padding: 2rem !important;
+  margin-top: 1.5rem;
+
+  .tabs {
+    width: 100%;
+  }
+
+  .tab-content {
+    margin-top: 1.5rem;
+  }
+}
+
 // Dark mode considerations
 [data-theme='dark'] {
-  .tabs-page {
+  .tabs-demo-page {
     .interactive-demo .demo-controls,
     .interactive-demo .demo-showcase {
       background: var(--surface-secondary);

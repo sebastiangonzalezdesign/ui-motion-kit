@@ -1,0 +1,425 @@
+@use '../../../styles/abstracts/colors' as *;
+@use '../../../styles/abstracts/tokens' as *;
+@use '../../../styles/abstracts/motion' as *;
+@use '../../../styles/abstracts/breakpoints' as *;
+
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  // Size variants
+  &--sm {
+    .input {
+      height: 36px;
+      padding: 0 12px;
+      font-size: 0.875rem;
+
+      &--with-icon {
+        padding-left: 36px;
+      }
+
+      &--with-password,
+      &--with-clear {
+        padding-right: 36px;
+      }
+    }
+
+    .input__icon-wrapper {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &--md {
+    .input {
+      height: 44px;
+      padding: 0 16px;
+      font-size: 1rem;
+
+      &--with-icon {
+        padding-left: 44px;
+      }
+
+      &--with-password,
+      &--with-clear {
+        padding-right: 44px;
+      }
+    }
+
+    .input__icon-wrapper {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  &--lg {
+    .input {
+      height: 52px;
+      padding: 0 20px;
+      font-size: 1.125rem;
+
+      &--with-icon {
+        padding-left: 52px;
+      }
+
+      &--with-password,
+      &--with-clear {
+        padding-right: 52px;
+      }
+    }
+
+    .input__icon-wrapper {
+      width: 52px;
+      height: 52px;
+    }
+  }
+
+  // Style variants
+  &--default .input {
+    border: 2px solid var(--border-medium);
+    background: var(--background-primary);
+  }
+
+  &--outlined .input {
+    border: 2px solid var(--border-medium);
+    background: transparent;
+  }
+
+  &--filled .input {
+    border: 2px solid transparent;
+    background: var(--background-secondary);
+  }
+
+  // Label variants
+  &--floating {
+    margin-top: 0;
+  }
+
+  &--fixed {
+    margin-top: 1.5rem;
+  }
+}
+
+.input__label {
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform-origin: left center;
+  z-index: 1;
+
+  // Fixed label variant
+  &--fixed {
+    position: static;
+    display: block;
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  // Floating label variant
+  &--floating {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform-origin: left top;
+    color: var(--text-tertiary);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: color 0.2s ease;
+
+    &--focused {
+      color: var(--text-accent);
+      font-weight: 500;
+    }
+
+    &--error {
+      color: var(--feedback-error);
+    }
+  }
+}
+
+// Adjust floating label position when input has an icon
+.input--with-icon + .input__label--floating,
+.input__wrapper:has(.input--with-icon) .input__label--floating {
+  left: 44px; // Default medium size
+}
+
+// Size-specific icon adjustments for floating labels
+.input-group--sm {
+  .input--with-icon + .input__label--floating,
+  .input__wrapper:has(.input--with-icon) .input__label--floating {
+    left: 36px;
+  }
+}
+
+.input-group--lg {
+  .input--with-icon + .input__label--floating,
+  .input__wrapper:has(.input--with-icon) .input__label--floating {
+    left: 52px;
+  }
+}
+
+.input__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &--error .input {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(var(--error-rgb), 0.1);
+  }
+
+  &--success .input {
+    border-color: var(--success);
+    box-shadow: 0 0 0 3px rgba(var(--success-rgb), 0.1);
+  }
+}
+
+.input {
+  width: 100%;
+  border-radius: 8px;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  outline: none;
+  position: relative;
+
+  &:focus {
+    border-color: var(--text-accent);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
+  }
+
+  // Error state overrides focus colors
+  .input__wrapper--error &:focus {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(var(--error-rgb), 0.1);
+  }
+
+  // Success state overrides focus colors
+  .input__wrapper--success &:focus {
+    border-color: var(--success);
+    box-shadow: 0 0 0 3px rgba(var(--success-rgb), 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--background-tertiary);
+  }
+
+  &::placeholder {
+    color: var(--text-tertiary);
+    opacity: 1;
+  }
+
+  // Hide default search input cancel button (webkit browsers)
+  &[type='search']::-webkit-search-cancel-button,
+  &[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+.input__icon-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+    z-index: 1; // Lower than password toggle
+
+    // When there's a password toggle, position to the left of it
+    .input__wrapper--password & {
+      right: 36px;
+    }
+  }
+}
+
+.input__icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+
+  &--error {
+    color: var(--error);
+  }
+
+  &--success {
+    color: var(--success);
+  }
+}
+
+.input__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--primary);
+  border-radius: 50%;
+}
+
+.input__clear,
+.input__password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+
+  &:hover {
+    color: var(--text-primary);
+    background: var(--background-secondary);
+  }
+}
+
+.input__clear {
+  font-size: 20px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.input__message {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.input__error {
+  color: var(--error);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.input__success {
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.input__hint {
+  color: var(--text-secondary);
+}
+
+// Dark mode adjustments
+[data-theme='dark'] {
+  .input {
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(var(--text-accent), 0.2);
+    }
+
+    // Error state overrides focus colors in dark mode
+    .input__wrapper--error &:focus {
+      box-shadow: 0 0 0 3px rgba(var(--error-rgb), 0.2);
+    }
+
+    // Success state overrides focus colors in dark mode
+    .input__wrapper--success &:focus {
+      box-shadow: 0 0 0 3px rgba(var(--success-rgb), 0.2);
+    }
+  }
+
+  .input__wrapper {
+    &--error .input {
+      box-shadow: 0 0 0 3px rgba(var(--error-rgb), 0.2);
+    }
+
+    &--success .input {
+      box-shadow: 0 0 0 3px rgba(var(--success-rgb), 0.2);
+    }
+  }
+}
+
+// Animation for floating label in outlined variant (MUI-style)
+.input-group--outlined.input-group--floating {
+  .input__label--floating {
+    &.input__label--focused {
+      background: var(--background-primary);
+      padding: 0 4px;
+      border-radius: 4px;
+
+      // Error state takes precedence over focused color
+      &.input__label--error {
+        color: var(--feedback-error);
+      }
+    }
+  }
+
+  .input:focus + .input__label--floating,
+  .input__label--floating.input__label--focused {
+    background: var(--background-primary);
+    padding: 0 4px;
+  }
+}
+
+// Animation for floating label in filled variant
+.input-group--filled.input-group--floating {
+  .input__label--floating {
+    &.input__label--focused {
+      background: var(--background-secondary);
+      padding: 0 4px;
+      border-radius: 4px;
+
+      // Error state takes precedence over focused color
+      &.input__label--error {
+        color: var(--feedback-error);
+      }
+    }
+  }
+
+  .input:focus + .input__label--floating,
+  .input__label--floating.input__label--focused {
+    background: var(--background-secondary);
+    padding: 0 4px;
+  }
+}
+
+// Animation for floating label in default variant
+.input-group--default.input-group--floating {
+  .input__label--floating {
+    &.input__label--focused {
+      background: var(--background-primary);
+      color: var(--text-accent);
+      padding: 0 4px;
+      border-radius: 4px;
+
+      // Error state takes precedence over focused color
+      &.input__label--error {
+        color: var(--feedback-error);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  .input-group {
+    &--lg {
+      .input {
+        height: 48px;
+        font-size: 1rem;
+      }
+    }
+  }
+}

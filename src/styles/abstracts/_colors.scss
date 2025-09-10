@@ -6,6 +6,12 @@
 // Raw Color Scales - Pure color definitions only
 // These contain the raw color values that power the entire design system
 
+// Base
+$base: (
+  white: #ffffff,
+  black: #222222,
+);
+
 // Gray Scale - Complete 50-900 range
 $gray: (
   50: #f9fafb,

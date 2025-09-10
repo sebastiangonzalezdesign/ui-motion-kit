@@ -83,6 +83,14 @@
   transition: all 0.2s ease;
   white-space: nowrap;
   user-select: none;
+  z-index: 1;
+
+  // Ensure text stays visible during transitions
+  span,
+  & {
+    opacity: 1;
+    transition: opacity 0.1s ease;
+  }
 
   // Focus styles
   &:focus-visible {
@@ -144,6 +152,8 @@
 .tab-trigger--pills {
   border-radius: 0.5rem;
   margin: 0.125rem;
+  position: relative;
+  z-index: 2;
 
   &:hover:not(.tab-trigger--disabled) {
     background-color: rgba(colors.color('gray', 100), 0.5);
@@ -156,6 +166,7 @@
   &.tab-trigger--active {
     background-color: $accent-primary;
     color: white;
+    z-index: 3;
 
     &:hover {
       background-color: $accent-primary-hover;
@@ -182,11 +193,13 @@
     border-color: $border-light;
     border-bottom-color: $background-primary;
     background-color: $background-primary;
+    color: $primary; // Primary blue color for active text
 
     [data-theme='dark'] & {
       border-color: $border-dark;
       border-bottom-color: $background-primary;
       background-color: $background-primary;
+      color: $primary; // Primary blue color for active text in dark mode
     }
   }
 }
@@ -204,10 +217,9 @@
     height: 2px;
   }
 
+  // Pills variant doesn't need indicator since it has its own background
   .tab-trigger--pills & {
-    inset: 0;
-    border-radius: 0.5rem;
-    background-color: $accent-primary;
+    display: none;
   }
 }
 
