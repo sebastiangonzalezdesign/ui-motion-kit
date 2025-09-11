@@ -53,7 +53,7 @@ const Footer = () => {
         <div className="footer-links">
           <nav className="footer-nav">
             <a
-              href="https://github.com/sebastiangonzalezdesign/motion-ui-kit"
+              href="https://github.com/sebastiangonzalezdesign/ui-motion-kit-pro"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -65,7 +65,7 @@ const Footer = () => {
           </nav>
         </div>
 
-        {/* Right Section - Upgrade CTA */}
+        {/* Right Section - Pro Waitlist CTA */}
         <div className="footer-cta">
           <a
             href="https://sebastiangonzalez.design/motion-ui-kit"
@@ -80,10 +80,10 @@ const Footer = () => {
             }}
           >
             <Button size="sm" icon={<SparklesIcon />}>
-              Upgrade to Pro
+              Join Pro Waitlist
             </Button>
           </a>
-          <p className="cta-subtitle">8+ advanced components & motion tokens</p>
+          <p className="cta-subtitle">Premium templates & priority support</p>
         </div>
       </div>
 
