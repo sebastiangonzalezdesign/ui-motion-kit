@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Card } from '../../../components/primitives';
 import { Hero } from '../../components';
 import { Button } from '../../../components/primitives';
-import './Changelog.scss';
+import './changelog.scss';
 
 interface ChangelogEntry {
   version: string;
