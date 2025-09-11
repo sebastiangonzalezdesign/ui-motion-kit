@@ -1,45 +1,79 @@
 # Motion UI Kit Pro
 
-A **premium, comprehensive library** of **UI micro-interactions** built with **React 19, Vit### **Color System\*\*
+A **premium, comprehensive library** of **UI micro-interactions** built with **React 19, Vite, TypeScript, SCSS, and Framer Motion**.  
+Motion UI Kit Pro delivers advanced components, sophisticated animations, **revolutionary Experience System**, and a complete design system for professional applications.
 
-- **Cen### **Enhanced Motion System\*\*
-
-- **UX-Focused Semantic Roles**: Motion tokens mapped to specific interaction patterns (micro-interaction, entrance, exit, emphasis, continuity, feedback)
-- **Professional Easing Curves**: Semantic easing functions with clear intent (ease-standard, ease-decelerate, ease-accelerate, ease-spring, ease-emphasized)
-- **Accessibility-First**: Built-in `prefers-reduced-motion` support and performance optimization
-- **Centralized Architecture**: All motion tokens in `_motion.scss` and `_tokens.scss` following established patterns
-- **Duration Scale**: Six-level timing system from instant (0ms) to slowest (1000ms) for different interaction types
-- **Backward Compatibility**: Legacy aliases maintained while introducing semantic improvementszed Theme Configuration\*\*: Single `$themes` map eliminates duplication and scales to any number of themes
-- **Automatic Generation**: No manual dark mode overrides — themes generated programmatically from centralized configuration
-- **Fixed vs. Contextual**: Brand colors stay consistent while contextual tokens (backgrounds, text) adapt to themes
-- **Seven Complete Scales**: Gray, Blue, Green, Red, Yellow, Orange, Purple with 50-900 shades each
-- **Enterprise-Ready**: DRY principle applied with professional separation of concerns
-
-### **Theme System**
-
-- **Runtime Switching**: CSS custom properties enable instant theme changes without page reload
-- **Scalable Architecture**: Adding new themes (high-contrast, sepia, etc.) requires only map updates
-- **Brand Consistency**: Fixed tokens ensure brand elements remain consistent across all themes
-- **Performance**: Optimized compilation with minimal runtime overheadCSS, and Framer Motion\*\*.  
-  Motion UI Kit Pro delivers advanced components, sophisticated animations, and a complete design system for professional applications.
+> **🌟 NEW: Experience System** - Revolutionary context-aware components that understand user intent and adapt automatically to provide intelligent, personalized interfaces.
 
 ---
 
-## ## � Support
+## 🧠 **Experience System** - Revolutionary Context-Aware UI
 
-This free release is just the beginning. If you like it, **star the repo ⭐** and let us know which components you'd like to see next.
+### **What is the Experience System?**
 
-> Motion UI Kit — bring polish, accessibility, and motion to your interfaces.
+The Experience System is a groundbreaking approach to UI development that creates **context-aware, adaptive components** that understand user intent and automatically adjust their behavior, appearance, and guidance level based on user expertise, device context, and interaction patterns.
+
+### **Key Capabilities:**
+
+- **🎯 Intent-Driven Design**: Components understand what users are trying to accomplish
+- **🧠 User Context Awareness**: Adapts to user expertise level, device type, and accessibility needs
+- **📊 Learning System**: Components learn from user patterns and optimize over time
+- **⚡ Real-Time Adaptation**: Interface adjusts instantly based on user behavior and context
+- **♿ Accessibility Intelligence**: Automatically adapts for reduced motion, screen readers, and accessibility needs
+
+### **Available Experience Components:**
+
+#### **Smart Button** 🎯
+
+Intent-driven buttons that adapt to user context:
+
+- **Context-aware styling** based on action criticality (low/medium/high/critical)
+- **User journey adaptation** (discovery/evaluation/purchase/usage/advocacy)
+- **Flow position awareness** (entry/middle/exit/confirmation)
+- **Automatic accessibility** enhancements based on user needs
+
+#### **Confirmation Flow** 🧠
+
+Intelligent confirmation dialogs that adapt to user expertise:
+
+- **Adaptive complexity** - More guidance for new users, streamlined for experts
+- **Context-aware confirmations** based on action criticality and user history
+- **Smart safeguards** with automatic checklists for critical actions
+- **Learning behavior** that reduces friction for experienced users
+
+### **Developer Experience:**
+
+```jsx
+// Traditional approach
+<Button variant="primary" size="lg">Delete Account</Button>
+
+// Experience System approach - understands intent and adapts
+<SmartButton
+  intent="destructive"
+  criticality="critical"
+  userJourneyStage="usage"
+  flowPosition="confirmation"
+>
+  Delete Account
+</SmartButton>
+```
+
+The Experience System automatically:
+
+- Adapts button styling based on action criticality
+- Provides appropriate confirmation flows for destructive actions
+- Adjusts guidance level based on user expertise
+- Learns from user patterns to optimize future interactions
 
 ---
 
-**Last Updated**: September 2025 — Enhanced motion system with UX-focused semantic roles and professional easing curves.
+## 🎮 **Live Demo**
 
 👉 [View Live Demo](https://motion-pro.sebastiangonzalez.design/)
 
-Experience the full range of premium components, advanced animations, and comprehensive design system in action.
+Experience the full range of premium components, advanced animations, and the revolutionary Experience System in action.
 
-> **Status:** Phase 1 Complete ✅ — Enhanced foundation with comprehensive design system, UX-focused motion architecture, and intelligent navigation
+> **Status:** Phase 2 Complete ✅ — Experience System implemented with Smart Button and Confirmation Flow components, comprehensive design system, and intelligent navigation
 
 ---
 
@@ -61,13 +95,28 @@ Experience the full range of premium components, advanced animations, and compre
 
 ## 📦 Components
 
-### ✅ Phase 1 Complete - Foundation Components
+### 🌟 **Experience System** - Revolutionary Context-Aware Components
+
+#### 🧠 **Smart Components** (`src/components/primitives/`)
+
+- **SmartButton** — Intent-driven buttons that adapt to user context, criticality, and journey stage with automatic accessibility enhancements
+- **Confirmation Flow** — Intelligent confirmation dialogs that adapt complexity based on user expertise and action criticality
+- **Adaptive Forms** — _(Coming Soon)_ Forms that adapt validation and guidance based on user behavior patterns
+
+#### ⚡ **Experience Context** (`src/utils/`)
+
+- **ExperienceProvider** — Global context provider for user behavior tracking and adaptive component behavior
+- **useSmartComponent** — React hook for accessing user context and tracking component interactions
+- **Adaptation Rules** — Configurable rules engine for defining how components adapt to different user contexts
+
+### ✅ **Foundation Components** - Phase 1 Complete
 
 #### 🧩 **Primitives** (`src/components/primitives/`)
 
-- **Button** — Multiple variants (primary, secondary, ghost) with hover & press states, full accessibility
+- **Button** — Multiple variants (primary, outline, ghost) with hover & press states, full accessibility
 - **Card** — Flexible content layout with hover effects and interactive states
-- **Toggle** — Smooth animated switch with labels and accessibility support
+- **Toggle** — Enhanced animated switch with morphing Hero Icons, state-based colors (off: white, on: accent), smooth spring physics
+- **Input** — Complete form input system with floating/fixed labels, validation states, password toggle, search optimization, icon support, error styling with proper focus colors, accessibility compliance
 - **IconButton** — Compact button variant with icon support and multiple states
 - **Spinner** — Multiple sizes and variants for loading states
 
@@ -78,6 +127,7 @@ Experience the full range of premium components, advanced animations, and compre
 #### 🧭 **Navigation** (`src/components/navigation/`)
 
 - **Breadcrumb** — Intelligent breadcrumb navigation with category-aware routing and state persistence
+- **Tabs** — Advanced tabbed interface with three variants (default, pills, underline, bordered), animated indicators, smooth transitions, accessibility compliance
 - **Sidebar** — Collapsible sidebar navigation (coming soon with advanced features)
 - _Additional Phase 2 components ready for implementation_
 
@@ -102,18 +152,28 @@ Experience the full range of premium components, advanced animations, and compre
 - **Motion Tokens**: Accessibility-first animation system with `prefers-reduced-motion` support
 - **SCSS Architecture**: Modern module system with proper separation of concerns
 
-### 🚀 Phase 2 - Premium Components (In Development)
+### 🚀 Phase 2 - Premium Components (Major Progress)
 
-| Component Category  | Phase 1 Foundation ✅                     | Phase 2 Premium 🚀                                                               |
-| ------------------- | ----------------------------------------- | -------------------------------------------------------------------------------- |
-| **Core Components** | Buttons, Cards, Modals, Toggles, Spinners | + Tabs, Drawers, Toasts, Counters, Advanced Forms                                |
-| **Navigation**      | Breadcrumb, Sidebar (preview)             | + Command Palette, Pagination, Advanced Sidebar                                  |
-| **Data Display**    | Basic Cards                               | + Tables, Lists, Statistics Cards, Progress Indicators                           |
-| **Motion System**   | Basic transitions                         | + Advanced spring physics, scroll-triggered animations, stagger effects          |
-| **Documentation**   | README + demo site                        | + Full Storybook with interactive controls and design tokens                     |
-| **Theming**         | Light + Dark modes                        | + Multiple theme presets + custom token system                                   |
-| **Templates**       | Component demos                           | + Dashboard layouts + Landing page templates                                     |
-| **Developer Tools** | SCSS tokens                               | + Figma design system + Tailwind CSS integration + Cross-platform token pipeline |
+| Component Category  | Phase 1 Foundation ✅                             | Phase 2 Premium 🚀                                                                               |
+| ------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Core Components** | Buttons, Cards, Modals, Toggles, Spinners         | ✅ **Tabs** (3 variants), **Advanced Input** (floating/fixed labels) + Drawers, Toasts, Counters |
+| **Navigation**      | Breadcrumb, ✅ **Tabs**, Sidebar (preview)        | + Command Palette, Pagination, Advanced Sidebar                                                  |
+| **Forms**           | ✅ **Input** (complete with validation)           | + Advanced form components, validation, file uploads                                             |
+| **Data Display**    | Basic Cards                                       | + Tables, Lists, Statistics Cards, Progress Indicators                                           |
+| **Motion System**   | ✅ **Enhanced spring physics**, basic transitions | + Advanced scroll-triggered animations, stagger effects                                          |
+| **Documentation**   | README + demo site                                | ✅ **Storybook** (interactive component playground) + design tokens visualization                |
+| **Theming**         | Light + Dark modes                                | + Multiple theme presets + custom token system                                                   |
+| **Templates**       | Component demos                                   | + Dashboard layouts + Landing page templates                                                     |
+| **Developer Tools** | SCSS tokens                                       | + Figma design system + Tailwind CSS integration + Cross-platform token pipeline                 |
+
+#### 🎯 **Recent Achievements (Phase 2 & 3)**
+
+- ✅ **Advanced Input Component**: Complete implementation with floating/fixed labels, validation, password toggle, icon support
+- ✅ **Enhanced Toggle Component**: Morphing animations with Hero Icons, state-based colors, smooth spring physics
+- ✅ **Advanced Tabs Component**: Four variants (default, pills, underline, bordered) with animated indicators and accessibility
+- ✅ **Security Hardening**: Protected against npm supply chain attacks with exact dependency versioning
+- ✅ **Animation Enhancement**: Advanced spring physics and context-aware transitions
+- ✅ **Storybook Documentation**: Complete interactive component playground with live props, controls, and comprehensive examples
 
 ---
 
@@ -180,15 +240,17 @@ src/
 ├── components/          # 🎨 Design System Components (Customer-Facing)
 │   ├── primitives/      # Core UI building blocks
 │   │   ├── Button/      # Primary, secondary, ghost variants
+│   │   ├── SmartButton/ # 🌟 Experience System - Context-aware buttons ✨
 │   │   ├── Card/        # Flexible content containers
-│   │   ├── Toggle/      # Animated switch controls
+│   │   ├── Toggle/      # Enhanced animated switch with Hero Icons ✅
+│   │   ├── Input/       # Advanced input with floating/fixed labels ✅
 │   │   ├── IconButton/  # Compact icon-based buttons
 │   │   └── Spinner/     # Loading state indicators
 │   ├── feedback/        # User feedback components
 │   │   ├── Modal/       # Accessible modal dialogs
 │   │   └── Toast/       # Notification toasts (Phase 2)
 │   ├── navigation/      # Navigation components
-│   │   ├── Tabs/        # Tab interface (Phase 2)
+│   │   ├── Tabs/        # Advanced tab interface with 4 variants ✅
 │   │   ├── CommandPalette/ # Command search (Phase 2)
 │   │   ├── Drawer/      # Side drawer (Phase 2)
 │   │   ├── Breadcrumb/  # Intelligent breadcrumb navigation ✅
@@ -210,16 +272,18 @@ src/
 │       │   ├── documentation.tsx # Main documentation (/docs)
 │       │   └── changelog.tsx     # Version history (/docs/changelog)
 │       ├── examples/    # Component examples
-│       │   ├── buttons.tsx       # Button showcase (/examples/buttons)
-│       │   ├── cards.tsx         # Card examples (/examples/cards)
-│       │   ├── modals.tsx        # Modal demonstrations (/examples/modals)
-│       │   ├── sidebar.tsx       # Sidebar preview (/examples/sidebar) ✅
-│       │   ├── tabs.tsx          # Tabs showcase (/examples/tabs)
-│       │   ├── toast.tsx         # Toast examples (/examples/toast)
-│       │   ├── navbar.tsx        # Navigation examples (/examples/navbar)
-│       │   ├── toggles.tsx       # Toggle examples (/examples/toggles)
-│       │   ├── inputs.tsx        # Input examples (/examples/inputs)
-│       │   ├── loaders.tsx       # Loading examples (/examples/loaders)
+│       │   ├── buttons.tsx           # Button showcase with SmartButton integration (/examples/buttons)
+│       │   ├── experience-demo.tsx   # 🌟 Experience System interactive demo (/examples/experience-demo) ✨
+│       │   ├── confirmation-flow.tsx # 🧠 Intelligent confirmation examples (/examples/confirmation-flow) ✨
+│       │   ├── cards.tsx             # Card examples (/examples/cards)
+│       │   ├── modals.tsx            # Modal demonstrations (/examples/modals)
+│       │   ├── sidebar.tsx           # Sidebar preview (/examples/sidebar) ✅
+│       │   ├── tabs.tsx              # Tabs showcase (/examples/tabs)
+│       │   ├── toast.tsx             # Toast examples (/examples/toast)
+│       │   ├── navbar.tsx            # Navigation examples (/examples/navbar)
+│       │   ├── toggles.tsx           # Toggle examples (/examples/toggles)
+│       │   ├── inputs.tsx            # Input examples (/examples/inputs)
+│       │   ├── loaders.tsx           # Loading examples (/examples/loaders)
 │       │   ├── micro-interactions.tsx # Micro-interaction examples
 │       │   └── page-transitions.tsx   # Page transition examples
 │       └── Home.tsx     # Landing page (/)
@@ -229,7 +293,8 @@ src/
 │   ├── layout/          # Grid and layout utilities
 │   └── main.scss        # Main stylesheet entry
 ├── utils/               # JavaScript utilities
-│   └── motion.ts        # Motion configuration and helpers
+│   ├── motion.ts        # Motion configuration and helpers
+│   └── experience-context.ts # 🌟 Experience System - Context provider and hooks ✨
 └── types/               # TypeScript type definitions
 ```
 
@@ -270,6 +335,8 @@ npm run preview
 npm run dev          # Start dev server with hot reload
 npm run build        # Build for production
 npm run preview      # Preview production build locally
+npm run storybook    # Start Storybook component playground
+npm run build-storybook # Build Storybook for production
 npm run lint         # Run ESLint
 npm run type-check   # Run TypeScript check
 ```
@@ -296,25 +363,34 @@ npm run type-check   # Run TypeScript check
 - [x] TypeScript integration with proper type definitions
 - [x] Responsive design with mobile-first approach
 
-### Phase 2 - Premium Components 🚧 **NEXT**
+### Phase 2 - Experience System & Premium Components ✅ **COMPLETE**
 
-- [ ] Advanced component library (Tabs, Drawers, Toasts)
-- [ ] Command palette with search and keyboard navigation
-- [ ] Data display components (Tables, Progress, Statistics)
-- [ ] Advanced motion system with scroll-triggered animations
-- [ ] Storybook documentation with interactive controls
-- [ ] Multiple theme presets and custom theming system
-- [ ] Dashboard and landing page templates
-- [ ] Figma design system integration
+**Experience System - Revolutionary Achievement ✅**
 
-### Phase 3 - Cross-Platform Token System 🎯 **FUTURE**
+- [x] **Context-Aware Architecture** - Global ExperienceProvider with user behavior tracking
+- [x] **SmartButton Component** - Intent-driven buttons that adapt to user context, criticality, and journey stage
+- [x] **Confirmation Flow System** - Intelligent confirmation dialogs that adapt complexity based on user expertise
+- [x] **Learning System** - Components learn from user patterns and optimize over time
+- [x] **Accessibility Intelligence** - Automatic adaptation for reduced motion, screen readers, and accessibility needs
+- [x] **Experience Demo Page** - Interactive demonstrations of context-aware component behavior
+- [x] **Site Integration** - Experience System featured across Home, Components, and Examples pages
 
-- [ ] JSON-based token source of truth with Style Dictionary integration
-- [ ] Multi-platform token generation (React Native, iOS, Android, Tailwind)
-- [ ] Figma bidirectional sync and Token Studio integration
-- [ ] Enterprise multi-brand token management
-- [ ] Automated token validation and documentation generation
-- [ ] Cross-platform design system toolkit
+**Premium Components - Major Progress ✅**
+
+- [x] **Advanced Input Component** - Complete with floating/fixed labels, validation states, password toggle, icon support
+- [x] **Enhanced Toggle Component** - Morphing animations with Hero Icons, state-based colors, smooth spring physics
+- [x] **Advanced Tabs Component** - Four variants (default, pills, underline, bordered) with animated indicators and accessibility
+- [x] **Security Hardening** - Protected against npm supply chain attacks with exact dependency versioning
+- [x] **Animation Enhancement** - Advanced spring physics and context-aware transitions
+
+### Phase 3 - Advanced Components & Tools 🔄 **IN PROGRESS**
+
+**Next Priority Components**
+
+- [ ] **Adaptive Forms** - Forms that adapt validation and guidance based on user behavior patterns
+- [ ] **Smart Navigation** - Context-aware navigation components that adapt to user flow
+- [ ] **Intelligent Data Display** - Tables and lists that adapt complexity based on user expertise
+- [ ] **Advanced Experience Rules** - More sophisticated adaptation rules and learning algorithms
 
 ---
 

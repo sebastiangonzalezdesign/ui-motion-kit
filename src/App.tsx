@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { pageVariants, pageTransition } from './utils/motion';
+import { ExperienceProvider, type ExperienceSystemConfig } from './utils/experience-context';
 import { Navbar, Footer } from './app/components';
 import { ScrollToTop } from './components/layout';
 import {
@@ -12,6 +13,8 @@ import {
   Buttons,
   Cards,
   Modals,
+  ExperienceDemo,
+  ConfirmationFlow,
   TabsPage,
   ToastPage,
   CommandPalettePage,
@@ -113,6 +116,34 @@ function AnimatedRoutes() {
               transition={pageTransition}
             >
               <Buttons />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/experience-demo"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <ExperienceDemo />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/confirmation-flow"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <ConfirmationFlow />
             </motion.div>
           }
         />
@@ -346,18 +377,42 @@ function AnimatedRoutes() {
   );
 }
 
+// Basic Experience System configuration
+const experienceConfig: ExperienceSystemConfig = {
+  adaptationRules: [
+    {
+      condition: (context) => context.device === 'mobile',
+      adaptations: [
+        {
+          componentType: 'button',
+          adaptations: {
+            layout: 'spacious',
+            motion: 'standard',
+          },
+        },
+      ],
+    },
+  ],
+  enableUsageTracking: true,
+  enableAutomaticAdaptation: true,
+  enablePredictiveLoading: false,
+  enableSmartBatching: false,
+};
+
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="app">
-        <Navbar />
-        <main className="container">
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <ExperienceProvider config={experienceConfig}>
+      <Router>
+        <ScrollToTop />
+        <div className="app">
+          <Navbar />
+          <main className="container">
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ExperienceProvider>
   );
 }
 

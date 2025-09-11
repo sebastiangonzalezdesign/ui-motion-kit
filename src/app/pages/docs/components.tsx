@@ -11,6 +11,7 @@ import {
   MapIcon,
   ChatBubbleBottomCenterTextIcon,
   PlayIcon,
+  SparklesIcon,
   // Philosophy icons
   SwatchIcon,
   UserGroupIcon,
@@ -39,7 +40,7 @@ interface ComponentCategory {
 const Components = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedCategory, setSelectedCategory] = useState<string>('ui-basics');
+  const [selectedCategory, setSelectedCategory] = useState<string>('experience-system');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   // Initialize category from URL params on mount
@@ -58,6 +59,34 @@ const Components = () => {
 
   const categories: ComponentCategory[] = useMemo(
     () => [
+      {
+        id: 'experience-system',
+        name: 'Experience System',
+        description: 'Context-aware, adaptive components that understand user intent',
+        components: [
+          {
+            id: 'smart-button',
+            name: 'Smart Button',
+            description: 'Intent-driven buttons that adapt to user context and behavior',
+            status: 'pro',
+            path: '/examples/experience-demo',
+          },
+          {
+            id: 'confirmation-flow',
+            name: 'Confirmation Flow',
+            description: 'Intelligent confirmation dialogs that adapt to user expertise',
+            status: 'pro',
+            path: '/examples/confirmation-flow',
+          },
+          {
+            id: 'adaptive-forms',
+            name: 'Adaptive Forms',
+            description: 'Forms that adapt validation and guidance based on user behavior',
+            status: 'coming-soon',
+            path: '/examples/adaptive-forms',
+          },
+        ],
+      },
       {
         id: 'ui-basics',
         name: 'UI Basics',
@@ -208,6 +237,15 @@ const Components = () => {
   const sidebarItems = useMemo(
     () => [
       {
+        id: 'experience-system',
+        label: 'Experience System',
+        description: 'Context-aware, adaptive components',
+        icon: <SparklesIcon width="16" height="16" />,
+        isPro: true,
+        isNew: true,
+        count: categories.find((cat) => cat.id === 'experience-system')?.components.length,
+      },
+      {
         id: 'ui-basics',
         label: 'UI Basics',
         description: 'Essential interactive elements',
@@ -312,7 +350,7 @@ const Components = () => {
 
       <Hero
         headline="Component Library"
-        description="Explore our comprehensive collection of UI components, organized by category and use case."
+        description="Explore our comprehensive collection of UI components, featuring the new Experience System that creates context-aware, adaptive interfaces."
         backgroundColor="brand-light"
         borderRadius="lg"
         size="md"

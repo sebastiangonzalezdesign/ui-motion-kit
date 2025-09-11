@@ -2155,4 +2155,384 @@
       }
     }
   }
+
+  // Experience System Specific Styles
+  .new-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  .philosophy-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 1.5rem 0;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .comparison-side {
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-primary);
+
+      h4 {
+        margin: 0 0 1rem 0;
+        color: var(--text-primary);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.25rem;
+
+        li {
+          margin-bottom: 0.5rem;
+          color: var(--text-secondary);
+        }
+      }
+
+      &:first-child {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(220, 38, 38, 0.02));
+        border-color: rgba(239, 68, 68, 0.2);
+      }
+
+      &:last-child {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(5, 150, 105, 0.02));
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+    }
+  }
+
+  .experience-comparison-preview {
+    .old-way,
+    .new-way {
+      margin-bottom: 1rem;
+
+      h5 {
+        margin: 0 0 0.5rem 0;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      code {
+        display: block;
+        padding: 0.75rem;
+        background: var(--surface-secondary);
+        border-radius: 6px;
+        font-size: 0.875rem;
+        border-left: 4px solid var(--border-primary);
+      }
+    }
+
+    .old-way code {
+      border-left-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .new-way code {
+      border-left-color: rgba(16, 185, 129, 0.5);
+    }
+  }
+
+  .intent-preview {
+    .intent-example {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 6px;
+      background: var(--surface-secondary);
+
+      .intent-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        min-width: 120px;
+        text-align: center;
+
+        &.primary {
+          background: rgba(59, 130, 246, 0.1);
+          color: rgb(59, 130, 246);
+        }
+
+        &.destructive {
+          background: rgba(239, 68, 68, 0.1);
+          color: rgb(239, 68, 68);
+        }
+
+        &.navigation {
+          background: rgba(16, 185, 129, 0.1);
+          color: rgb(16, 185, 129);
+        }
+
+        &.secondary {
+          background: rgba(107, 114, 128, 0.1);
+          color: rgb(107, 114, 128);
+        }
+      }
+
+      span:last-child {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .adaptive-preview {
+    .adaptation-example {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background: var(--surface-secondary);
+      border-left: 4px solid var(--accent-primary);
+
+      strong {
+        display: block;
+        margin-bottom: 0.25rem;
+        color: var(--text-primary);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .learning-preview {
+    .learning-example {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.02));
+      border: 1px solid rgba(59, 130, 246, 0.1);
+
+      strong {
+        margin-bottom: 0.25rem;
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .demo-link-container {
+    margin: 1.5rem 0;
+  }
+
+  .demo-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(67, 56, 202, 0.05));
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    svg {
+      color: rgb(99, 102, 241);
+      flex-shrink: 0;
+    }
+
+    .demo-description {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    &:hover::before {
+      left: 100%;
+    }
+  }
+
+  .implementation-steps {
+    .step {
+      margin-bottom: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 8px;
+      background: var(--surface-secondary);
+      border-left: 4px solid var(--accent-primary);
+      position: relative;
+
+      h4 {
+        margin: 0 0 0.5rem 0;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &::before {
+          content: counter(step-counter);
+          counter-increment: step-counter;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 24px;
+          height: 24px;
+          background: var(--accent-primary);
+          color: white;
+          border-radius: 50%;
+          font-size: 0.75rem;
+          font-weight: 600;
+        }
+      }
+
+      p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .implementation-steps {
+    counter-reset: step-counter;
+  }
+
+  .setup-preview {
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+
+      div {
+        padding: 0.75rem;
+        background: rgba(16, 185, 129, 0.05);
+        border-radius: 6px;
+        border: 1px solid rgba(16, 185, 129, 0.1);
+        font-size: 0.875rem;
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .experience-preview {
+    .experience-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 8px;
+      background: var(--surface-secondary);
+      border: 1px solid var(--border-primary);
+
+      svg {
+        color: var(--accent-primary);
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+      }
+
+      div {
+        flex: 1;
+
+        strong {
+          display: block;
+          margin-bottom: 0.25rem;
+          color: var(--text-primary);
+          font-weight: 600;
+        }
+
+        p {
+          margin: 0;
+          color: var(--text-secondary);
+          font-size: 0.875rem;
+          line-height: 1.4;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .semantic-motion-preview {
+    .motion-example {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.05), rgba(147, 51, 234, 0.02));
+      border: 1px solid rgba(168, 85, 247, 0.1);
+
+      strong {
+        display: block;
+        margin-bottom: 0.25rem;
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

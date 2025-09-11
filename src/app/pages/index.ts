@@ -9,6 +9,8 @@ export {
   Buttons,
   Cards,
   Modals,
+  ExperienceDemo,
+  ConfirmationFlow,
   TabsPage,
   ToastPage,
   CommandPalettePage,

@@ -72,7 +72,7 @@ const Home = () => {
           <Card variant="icon" icon={CursorArrowRaysIcon}>
             <h3>Interactive Buttons</h3>
             <p>Smooth hover animations and click feedback with multiple variants and sizes.</p>
-            <Link to="/buttons" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link to="/examples/buttons" style={{ color: 'inherit', textDecoration: 'none' }}>
               <Button variant="ghost" size="sm">
                 View Examples
               </Button>
@@ -89,7 +89,7 @@ const Home = () => {
           <Card variant="icon" icon={RectangleStackIcon}>
             <h3>Animated Cards</h3>
             <p>Fade-in effects, hover states, and flexible layouts with loading states.</p>
-            <Link to="/cards" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link to="/examples/cards" style={{ color: 'inherit', textDecoration: 'none' }}>
               <Button variant="ghost" size="sm">
                 View Examples
               </Button>
@@ -106,9 +106,31 @@ const Home = () => {
           <Card variant="icon" icon={Squares2X2Icon}>
             <h3>Slide-in Modals</h3>
             <p>Professional modal dialogs with smooth animations and accessibility features.</p>
-            <Link to="/modals" style={{ color: 'inherit', textDecoration: 'none' }}>
+            <Link to="/examples/modals" style={{ color: 'inherit', textDecoration: 'none' }}>
               <Button variant="ghost" size="sm">
                 View Examples
+              </Button>
+            </Link>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Card variant="icon" icon={SparklesIcon}>
+            <h3>
+              Experience System <span className="new-badge">New</span>
+            </h3>
+            <p>Components that understand user intent and adapt to context automatically.</p>
+            <Link
+              to="/examples/experience-demo"
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              <Button variant="ghost" size="sm">
+                Try Interactive Demo
               </Button>
             </Link>
           </Card>

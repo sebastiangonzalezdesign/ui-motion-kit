@@ -2,6 +2,8 @@
 export { default as Buttons } from './Buttons';
 export { default as Cards } from './Cards';
 export { default as Modals } from './Modals';
+export { default as ExperienceDemo } from './ExperienceDemo';
+export { default as ConfirmationFlow } from './ConfirmationFlow';
 export { default as TabsPage } from './tabs';
 export { default as ToastPage } from './toast';
 export { default as CommandPalettePage } from './command-palette';

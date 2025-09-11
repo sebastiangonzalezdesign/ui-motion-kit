@@ -22,7 +22,12 @@ import {
 } from '@heroicons/react/24/outline';
 import './design-tokens.scss';
 
-type SectionId = 'getting-started' | 'customization' | 'motion-system' | 'theming';
+type SectionId =
+  | 'getting-started'
+  | 'customization'
+  | 'motion-system'
+  | 'experience-system'
+  | 'theming';
 
 const Documentation = () => {
   const [selectedSection, setSelectedSection] = useState<SectionId>('getting-started');
@@ -46,6 +51,13 @@ const Documentation = () => {
           label: 'Motion System',
           description: 'Animation philosophy and best practices',
           isPro: true,
+        },
+        {
+          id: 'experience-system',
+          label: 'Experience System',
+          description: 'Context-aware, adaptive components',
+          isPro: true,
+          isNew: true,
         },
         {
           id: 'theming',
@@ -77,6 +89,14 @@ const Documentation = () => {
         description: 'Animation philosophy and best practices',
         icon: <PlayIcon width="16" height="16" />,
         isPro: true,
+      },
+      {
+        id: 'experience-system',
+        label: 'Experience System',
+        description: 'Context-aware, adaptive components',
+        icon: <SparklesIcon width="16" height="16" />,
+        isPro: true,
+        isNew: true,
       },
       {
         id: 'theming',
@@ -124,13 +144,37 @@ import '@motion-ui/kit/dist/styles.css';`;
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from '@motion-ui/kit';
+import { ExperienceProvider } from '@motion-ui/kit/experience';
 import './styles/main.scss';
 import App from './App.tsx';
+
+const experienceConfig = {
+  adaptationRules: [
+    {
+      condition: (context) => context.userType === 'first-time',
+      adaptations: [
+        {
+          componentType: 'button',
+          adaptations: {
+            guidance: 'show-hints',
+            complexity: 'simplified',
+          },
+        },
+      ],
+    },
+  ],
+  enableUsageTracking: true,
+  enableAutomaticAdaptation: true,
+  enablePredictiveLoading: false,
+  enableSmartBatching: false,
+};
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
-      <App />
+      <ExperienceProvider config={experienceConfig}>
+        <App />
+      </ExperienceProvider>
     </ThemeProvider>
   </StrictMode>
 );`;
@@ -295,6 +339,176 @@ const customTheme = {
   <App />
 </ThemeProvider>`;
 
+  // Experience System Code Examples
+  const experienceSystemIntroCode = `// Traditional Button vs Smart Button
+// Old way: Just visual variants
+<Button variant="primary">Save</Button>
+<Button variant="destructive">Delete</Button>
+
+// Experience System: Intent-driven components
+<SmartButton 
+  intent="primary-action"
+  criticality="high"
+  userJourneyStage="purchase"
+  adaptToUser={true}
+>
+  Complete Purchase
+</SmartButton>
+
+<SmartButton 
+  intent="destructive"
+  criticality="critical"
+  flowPosition="confirmation"
+  onInteraction={(type, metadata) => {
+    console.log('User interaction:', type, metadata);
+  }}
+>
+  Delete Account
+</SmartButton>`;
+
+  const experienceContextCode = `// Experience Context Provider Setup
+import { ExperienceProvider, useExperienceContext } from '@motion-ui/kit/experience';
+
+const experienceConfig = {
+  adaptationRules: [
+    {
+      condition: (context) => context.userType === 'first-time',
+      adaptations: [
+        {
+          componentType: 'button',
+          adaptations: {
+            guidance: 'show-hints',
+            complexity: 'simplified',
+          },
+        },
+      ],
+    },
+    {
+      condition: (context) => context.device === 'mobile',
+      adaptations: [
+        {
+          componentType: 'button',
+          adaptations: {
+            layout: 'spacious', // Larger touch targets
+          },
+        },
+      ],
+    },
+  ],
+  enableUsageTracking: true,
+  enableAutomaticAdaptation: true,
+};
+
+function App() {
+  return (
+    <ExperienceProvider config={experienceConfig}>
+      <YourComponents />
+    </ExperienceProvider>
+  );
+}`;
+
+  const adaptiveComponentCode = `// Components that adapt to user context
+import { useExperienceContext, SmartButton } from '@motion-ui/kit/experience';
+
+function AdaptiveInterface() {
+  const { context } = useExperienceContext();
+  
+  return (
+    <div>
+      {/* Button adapts based on user type */}
+      <SmartButton
+        intent="primary-action"
+        criticality="high"
+        adaptToUser={true}
+        learningEnabled={true}
+      >
+        {context.userType === 'first-time' 
+          ? 'Get Started - Click Here!' 
+          : 'Continue'
+        }
+      </SmartButton>
+      
+      {/* Confirmation flow adapts to user expertise */}
+      <ConfirmationFlow
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+        isDestructive={true}
+        // Automatically adapts button sizes for mobile
+        // Shows more prominent warnings for first-time users
+        // Reduces friction for power users
+      />
+    </div>
+  );
+}`;
+
+  const intentDrivenCode = `// Intent-driven component design
+// Instead of asking "How should this look?"
+// Ask "What is the user trying to accomplish?"
+
+const UserIntentExamples = () => (
+  <div>
+    {/* Primary Action - The main thing users want to do */}
+    <SmartButton intent="primary-action" criticality="high">
+      Save Document
+    </SmartButton>
+    
+    {/* Navigation - Moving between sections */}
+    <SmartButton 
+      intent="navigation" 
+      criticality="low"
+      userJourneyStage="discovery"
+    >
+      Learn More
+    </SmartButton>
+    
+    {/* Destructive - Actions that can't be undone */}
+    <SmartButton 
+      intent="destructive" 
+      criticality="critical"
+      flowPosition="confirmation"
+    >
+      Delete Account
+    </SmartButton>
+    
+    {/* Secondary Action - Supporting actions */}
+    <SmartButton intent="secondary-action" criticality="medium">
+      Share
+    </SmartButton>
+  </div>
+);`;
+
+  const learningSystemCode = `// Components that learn from user behavior
+import { SmartButton } from '@motion-ui/kit/experience';
+
+function LearningComponent() {
+  return (
+    <SmartButton
+      intent="destructive"
+      criticality="critical"
+      learningEnabled={true}
+      onInteraction={(type, metadata) => {
+        // Track user interactions
+        console.log('Interaction:', {
+          type, // 'hover', 'click', 'focus'
+          intent: metadata.intent,
+          userType: metadata.userType,
+          device: metadata.deviceType,
+          timestamp: metadata.timestamp,
+        });
+      }}
+    >
+      Delete File
+    </SmartButton>
+  );
+}
+
+// Learning behaviors:
+// - If users frequently misclick destructive actions,
+//   the button becomes less prominent
+// - Mobile users automatically get larger touch targets
+// - First-time users see more guidance
+// - Power users get streamlined interfaces`;
+
   return (
     <div className="design-tokens-page">
       {/* Breadcrumb Navigation */}
@@ -357,6 +571,7 @@ const customTheme = {
                     <span className="nav-icon">{item.icon}</span>
                     <span className="nav-label">{item.label}</span>
                     {item.isPro && <span className="pro-badge">Pro</span>}
+                    {item.isNew && <span className="new-badge">New</span>}
                   </button>
                 ))}
               </nav>
@@ -431,6 +646,62 @@ function MyComponent() {
     <Button size="md" onClick={() => alert('Hello!')}>
       My First Button
     </Button>
+  );
+}`}
+                  />
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>🧠 Experience System (Pro)</h3>
+                  <div className="new-badge">New</div>
+                  <p>
+                    Upgrade to smart components that understand user intent and adapt to context:
+                  </p>
+                  <CodePreview
+                    title="Smart Components"
+                    preview={
+                      <div className="experience-preview">
+                        <div className="experience-feature">
+                          <SparklesIcon width="20" height="20" />
+                          <div>
+                            <strong>Intent-Driven</strong>
+                            <p>Components understand what users are trying to accomplish</p>
+                          </div>
+                        </div>
+                        <div className="experience-feature">
+                          <CubeIcon width="20" height="20" />
+                          <div>
+                            <strong>Context-Aware</strong>
+                            <p>
+                              Automatically adapts to device, accessibility needs, and user type
+                            </p>
+                          </div>
+                        </div>
+                        <div className="experience-feature">
+                          <DocumentTextIcon width="20" height="20" />
+                          <div>
+                            <strong>Learning System</strong>
+                            <p>Improves over time based on user behavior patterns</p>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                    code={`import { SmartButton, ExperienceProvider } from '@motion-ui/kit/experience';
+
+function App() {
+  return (
+    <ExperienceProvider config={experienceConfig}>
+      <SmartButton 
+        intent="primary-action"
+        criticality="high"
+        adaptToUser={true}
+        onInteraction={(type, metadata) => {
+          console.log('User interaction:', type, metadata);
+        }}
+      >
+        Complete Purchase
+      </SmartButton>
+    </ExperienceProvider>
   );
 }`}
                   />
@@ -556,6 +827,274 @@ function MyComponent() {
                     }
                     code={springPresetsCode}
                   />
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>🧠 Semantic Motion with Experience System</h3>
+                  <div className="new-badge">Enhanced</div>
+                  <p>Motion that adapts to user context and behavior patterns:</p>
+                  <CodePreview
+                    title="Context-Aware Motion"
+                    preview={
+                      <div className="semantic-motion-preview">
+                        <div className="motion-example">
+                          <strong>Micro-interactions:</strong> Subtle feedback for user actions
+                        </div>
+                        <div className="motion-example">
+                          <strong>Entrance animations:</strong> Welcome users with purposeful motion
+                        </div>
+                        <div className="motion-example">
+                          <strong>Emphasis motion:</strong> Draw attention when needed
+                        </div>
+                        <div className="motion-example">
+                          <strong>Adaptive timing:</strong> Faster for power users, gentler for
+                          first-time users
+                        </div>
+                      </div>
+                    }
+                    code={`// Semantic motion roles that adapt to user context
+const motionSemantics = {
+  'micro-interaction': {
+    duration: context.userType === 'power-user' ? '100ms' : '150ms',
+    easing: 'ease-emphasized',
+  },
+  'entrance': {
+    duration: context.reducedMotion ? '150ms' : '300ms',
+    easing: 'ease-decelerate',
+  },
+  'emphasis': {
+    duration: context.device === 'mobile' ? '200ms' : '400ms',
+    easing: 'ease-spring',
+  },
+  'feedback': {
+    duration: '250ms',
+    easing: context.accessibilityNeeds.reducedMotion 
+      ? 'ease-out' 
+      : 'ease-emphasized',
+  }
+};
+
+// Usage with Experience System
+<SmartButton
+  intent="primary-action"
+  motion="micro-interaction"  // Automatically adapts based on context
+  adaptToUser={true}
+>
+  Save Changes
+</SmartButton>`}
+                  />
+                </Card>
+              </div>
+            </section>
+          )}
+
+          {/* Experience System Section */}
+          {selectedSection === 'experience-system' && (
+            <section className="token-section">
+              <div className="section-header">
+                <h2>Experience System</h2>
+                <div className="pro-badge">Pro Feature</div>
+                <div className="new-badge">New</div>
+                <p>
+                  Revolutionary approach to component design. Build components that understand user
+                  intent, adapt to context, and learn from behavior patterns.
+                </p>
+              </div>
+
+              <div className="doc-content">
+                <Card className="doc-card">
+                  <h3>🧠 Philosophy: Beyond Static Components</h3>
+                  <p>Traditional component libraries ask "How should this look?"</p>
+                  <p>
+                    <strong>Experience Systems ask "What is the user trying to accomplish?"</strong>
+                  </p>
+
+                  <div className="philosophy-comparison">
+                    <div className="comparison-side">
+                      <h4>Traditional Approach</h4>
+                      <ul>
+                        <li>Static visual variants</li>
+                        <li>One-size-fits-all design</li>
+                        <li>Developer-focused APIs</li>
+                        <li>Visual consistency priority</li>
+                      </ul>
+                    </div>
+                    <div className="comparison-side">
+                      <h4>Experience System</h4>
+                      <ul>
+                        <li>Intent-driven components</li>
+                        <li>Context-aware adaptation</li>
+                        <li>User-focused APIs</li>
+                        <li>Behavioral intelligence priority</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <CodePreview
+                    title="Traditional vs Experience System"
+                    preview={
+                      <div className="experience-comparison-preview">
+                        <div className="old-way">
+                          <h5>Old Way:</h5>
+                          <code>&lt;Button variant="primary"&gt;Save&lt;/Button&gt;</code>
+                        </div>
+                        <div className="new-way">
+                          <h5>Experience System:</h5>
+                          <code>
+                            &lt;SmartButton intent="primary-action" criticality="high"
+                            adaptToUser&gt;Save&lt;/SmartButton&gt;
+                          </code>
+                        </div>
+                      </div>
+                    }
+                    code={experienceSystemIntroCode}
+                  />
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>🚀 Quick Start</h3>
+                  <p>Set up the Experience System with context providers:</p>
+                  <CodePreview
+                    title="Experience Provider Setup"
+                    preview={
+                      <div className="setup-preview">
+                        <p>
+                          Wrap your app with ExperienceProvider to enable context-aware components
+                        </p>
+                        <div className="feature-list">
+                          <div>✅ Automatic device detection</div>
+                          <div>✅ Accessibility preference detection</div>
+                          <div>✅ User behavior tracking</div>
+                          <div>✅ Component adaptation rules</div>
+                        </div>
+                      </div>
+                    }
+                    code={experienceContextCode}
+                  />
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>🎯 Intent-Driven Design</h3>
+                  <p>
+                    Components understand <em>what</em> users are trying to accomplish:
+                  </p>
+                  <CodePreview
+                    title="Intent-Based Components"
+                    preview={
+                      <div className="intent-preview">
+                        <div className="intent-example">
+                          <span className="intent-badge primary">primary-action</span>
+                          <span>The main thing users want to do</span>
+                        </div>
+                        <div className="intent-example">
+                          <span className="intent-badge destructive">destructive</span>
+                          <span>Actions that can't be undone</span>
+                        </div>
+                        <div className="intent-example">
+                          <span className="intent-badge navigation">navigation</span>
+                          <span>Moving between sections</span>
+                        </div>
+                        <div className="intent-example">
+                          <span className="intent-badge secondary">secondary-action</span>
+                          <span>Supporting actions</span>
+                        </div>
+                      </div>
+                    }
+                    code={intentDrivenCode}
+                  />
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>🔄 Adaptive Components</h3>
+                  <p>Components that automatically adapt based on user context:</p>
+                  <CodePreview
+                    title="Context-Aware Adaptation"
+                    preview={
+                      <div className="adaptive-preview">
+                        <div className="adaptation-example">
+                          <strong>📱 Mobile Users:</strong> Larger touch targets, simplified layouts
+                        </div>
+                        <div className="adaptation-example">
+                          <strong>🆕 First-time Users:</strong> More guidance, prominent primary
+                          actions
+                        </div>
+                        <div className="adaptation-example">
+                          <strong>⚡ Power Users:</strong> Streamlined interfaces, advanced features
+                        </div>
+                        <div className="adaptation-example">
+                          <strong>♿ Accessibility:</strong> Reduced motion, high contrast, larger
+                          fonts
+                        </div>
+                      </div>
+                    }
+                    code={adaptiveComponentCode}
+                  />
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>📈 Learning System</h3>
+                  <p>Components that learn from user behavior and improve over time:</p>
+                  <CodePreview
+                    title="Behavioral Learning"
+                    preview={
+                      <div className="learning-preview">
+                        <div className="learning-example">
+                          <strong>Usage Patterns:</strong> Track how users interact with components
+                        </div>
+                        <div className="learning-example">
+                          <strong>Mistake Prevention:</strong> Reduce prominence of frequently
+                          misclicked actions
+                        </div>
+                        <div className="learning-example">
+                          <strong>Optimization:</strong> Adapt layouts based on success rates
+                        </div>
+                        <div className="learning-example">
+                          <strong>Personalization:</strong> Remember user preferences and behaviors
+                        </div>
+                      </div>
+                    }
+                    code={learningSystemCode}
+                  />
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>🎮 Try the Interactive Demo</h3>
+                  <p>Experience the system in action with our interactive demonstration:</p>
+                  <div className="demo-link-container">
+                    <Link to="/experience-demo" className="demo-link">
+                      <SparklesIcon width="20" height="20" />
+                      Open Experience System Demo
+                      <span className="demo-description">
+                        See components adapt in real-time based on user context
+                      </span>
+                    </Link>
+                  </div>
+                </Card>
+
+                <Card className="doc-card">
+                  <h3>📚 Implementation Guide</h3>
+                  <div className="implementation-steps">
+                    <div className="step">
+                      <h4>1. Basic Setup</h4>
+                      <p>Add ExperienceProvider to your app root</p>
+                    </div>
+                    <div className="step">
+                      <h4>2. Replace Components</h4>
+                      <p>Gradually replace Button with SmartButton</p>
+                    </div>
+                    <div className="step">
+                      <h4>3. Define Intent</h4>
+                      <p>Add intent and criticality props to clarify purpose</p>
+                    </div>
+                    <div className="step">
+                      <h4>4. Enable Learning</h4>
+                      <p>Turn on usage tracking and behavioral adaptation</p>
+                    </div>
+                    <div className="step">
+                      <h4>5. Customize Rules</h4>
+                      <p>Define your own adaptation rules for specific contexts</p>
+                    </div>
+                  </div>
                 </Card>
               </div>
             </section>

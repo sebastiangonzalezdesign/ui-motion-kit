@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../../../components/primitives';
+import { SmartButton } from '../../../components/primitives';
 import { Toggle } from '../../../components/primitives';
 import { CodePreview } from '../../components';
 import { Card } from '../../../components/primitives';
@@ -180,6 +181,101 @@ export default function IconButtonExample() {
       <IconButton icon={PlayIcon} size="sm" aria-label="Play small" />
       <IconButton icon={PlayIcon} size="md" aria-label="Play medium" />
       <IconButton icon={PlayIcon} size="lg" aria-label="Play large" />
+    </div>
+  );
+}
+`}
+      />
+
+      <CodePreview
+        title="🌟 Experience System - Smart Button"
+        preview={
+          <div className="grid grid-2">
+            <div>
+              <h4>Context-Aware Behavior</h4>
+              <div className="space-y-3">
+                <SmartButton
+                  intent="primary-action"
+                  userJourneyStage="discovery"
+                  criticality="high"
+                >
+                  Get Started
+                </SmartButton>
+                <SmartButton
+                  intent="primary-action"
+                  userJourneyStage="purchase"
+                  criticality="critical"
+                >
+                  Complete Purchase
+                </SmartButton>
+                <SmartButton intent="destructive" criticality="high" flowPosition="confirmation">
+                  Delete Account
+                </SmartButton>
+              </div>
+            </div>
+            <div>
+              <h4>Adaptive Variants</h4>
+              <div className="space-y-3">
+                <SmartButton intent="primary-action" criticality="critical" flowPosition="entry">
+                  Urgent Action
+                </SmartButton>
+                <SmartButton intent="secondary-action" criticality="low" flowPosition="middle">
+                  Optional Task
+                </SmartButton>
+                <SmartButton intent="navigation" criticality="medium" userJourneyStage="evaluation">
+                  Learn More
+                </SmartButton>
+              </div>
+            </div>
+          </div>
+        }
+        code={`// SmartButtonExample.jsx
+import { SmartButton } from '../../../components/primitives';
+
+export default function SmartButtonExample() {
+  return (
+    <div>
+      {/* Context-aware buttons adapt their appearance and behavior */}
+      <SmartButton 
+        intent="primary-action" 
+        userJourneyStage="discovery"
+        criticality="high"
+      >
+        Get Started
+      </SmartButton>
+      
+      <SmartButton 
+        intent="primary-action" 
+        userJourneyStage="purchase"
+        criticality="critical"
+      >
+        Complete Purchase
+      </SmartButton>
+      
+      <SmartButton 
+        intent="destructive" 
+        criticality="high"
+        flowPosition="confirmation"
+      >
+        Delete Account
+      </SmartButton>
+      
+      {/* Adaptive variants based on urgency and priority */}
+      <SmartButton 
+        intent="primary-action" 
+        criticality="critical"
+        flowPosition="entry"
+      >
+        Urgent Action
+      </SmartButton>
+      
+      <SmartButton 
+        intent="secondary-action" 
+        criticality="low"
+        flowPosition="middle"
+      >
+        Optional Task
+      </SmartButton>
     </div>
   );
 }
