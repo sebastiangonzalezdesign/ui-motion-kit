@@ -1,9 +1,9 @@
 # Motion UI Kit Pro
 
-A **premium, comprehensive library** of **UI micro-interactions** built with **React 19, Vite, TypeScript, SCSS, and Framer Motion**.  
+A **comprehensive, open-source library** of **UI micro-interactions** built with **React 19, Vite, TypeScript, SCSS, and Framer Motion**.  
 Motion UI Kit Pro delivers advanced components, sophisticated animations, **revolutionary Experience System**, and a complete design system for professional applications.
 
-> **🌟 NEW: Experience System** - Revolutionary context-aware components that understand user intent and adapt automatically to provide intelligent, personalized interfaces.
+> **� FREE & OPEN SOURCE** - Complete Experience System with context-aware components that understand user intent and adapt automatically to provide intelligent, personalized interfaces.
 
 ---
 
@@ -71,7 +71,7 @@ The Experience System automatically:
 
 👉 [View Live Demo](https://motion-pro.sebastiangonzalez.design/)
 
-Experience the full range of premium components, advanced animations, and the revolutionary Experience System in action.
+Experience the full range of open-source components, advanced animations, and the revolutionary Experience System in action.
 
 > **Status:** Phase 2 Complete ✅ — Experience System implemented with Smart Button and Confirmation Flow components, comprehensive design system, and intelligent navigation
 
@@ -81,7 +81,7 @@ Experience the full range of premium components, advanced animations, and the re
 
 - 🎨 **Advanced Design System** — centralized theme configuration with automatic generation, eliminating duplication across 7 complete color scales (50-900 shades)
 - 🌗 **Enhanced Theme System** — sophisticated light/dark modes with CSS custom properties and runtime switching
-- 🌀 **Premium Motion System** — UX-focused semantic motion roles with professional easing curves and accessibility-first approach
+- 🌀 **Advanced Motion System** — UX-focused semantic motion roles with professional easing curves and accessibility-first approach
 - 📚 **Professional Components** — production-ready components with TypeScript support and accessibility built-in
 - ⚡ **Interactive UI Library** — enhanced buttons, cards, modals with hover states and micro-interactions
 - 🧩 **Modular Design System** — scalable SCSS architecture with semantic tokens and utility functions
