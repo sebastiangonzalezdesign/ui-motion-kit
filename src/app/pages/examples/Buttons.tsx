@@ -295,8 +295,8 @@ export default function SmartButtonExample() {
           Pro Tip
         </h3>
         <p>
-          More button variants (outlined, icon buttons, motion presets) are available in the Pro
-          version.
+          The SmartButton component is part of the revolutionary Experience System - buttons that
+          understand user intent and adapt their behavior automatically.
         </p>
       </Card>
     </div>

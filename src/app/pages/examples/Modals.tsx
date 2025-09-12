@@ -196,7 +196,8 @@ export default function CustomModalExample() {
           Pro Tip
         </h3>
         <p>
-          More modal variants (sizes, animations, form modals) are available in the Pro version.
+          The Modal component provides smooth slide-in animations with backdrop overlay and
+          automatic focus management for accessibility.
         </p>
       </Card>
     </div>
