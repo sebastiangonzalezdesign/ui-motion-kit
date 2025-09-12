@@ -1,9 +1,9 @@
 {
-  "name": "motion-ui-kit-pro",
-  "private": true,
+  "name": "ui-motion-kit",
+  "private": false,
   "version": "1.0.0",
   "type": "module",
-  "description": "Premium UI component library with sophisticated animations and comprehensive design system",
+  "description": "Open-source UI component library with sophisticated animations and comprehensive design system",
   "keywords": [
     "react",
     "ui",
