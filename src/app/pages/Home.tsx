@@ -446,7 +446,7 @@ const Home = () => {
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         >
           <a
-            href="https://github.com/sebastiangonzalezdesign/motion-ui-kit-pro"
+            href="https://github.com/sebastiangonzalezdesign/ui-motion-kit"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: 'inherit', textDecoration: 'none' }}

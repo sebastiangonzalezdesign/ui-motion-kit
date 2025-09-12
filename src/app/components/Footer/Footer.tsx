@@ -53,7 +53,7 @@ const Footer = () => {
         <div className="footer-links">
           <nav className="footer-nav">
             <a
-              href="https://github.com/sebastiangonzalezdesign/ui-motion-kit-pro"
+              href="https://github.com/sebastiangonzalezdesign/ui-motion-kit"
               target="_blank"
               rel="noopener noreferrer"
             >
