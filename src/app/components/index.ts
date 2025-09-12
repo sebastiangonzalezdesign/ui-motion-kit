@@ -5,3 +5,4 @@ export { default as Footer } from './Footer/Footer';
 export { default as CodePreview } from './CodePreview/CodePreview';
 export { default as ThemeToggle } from './ThemeToggle/ThemeToggle';
 export { DocsSidebar } from './DocsSidebar';
+export { default as MotionShowcase } from './MotionShowcase';

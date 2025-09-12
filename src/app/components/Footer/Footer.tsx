@@ -49,7 +49,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Center Section - Links */}
+        {/* Center Section - Open Source Links */}
         <div className="footer-links">
           <nav className="footer-nav">
             <a
@@ -57,12 +57,21 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              GitHub
+              ⭐ GitHub
             </a>
             <a href="https://sebastiangonzalez.design/" target="_blank" rel="noopener noreferrer">
               Portfolio
             </a>
           </nav>
+          <p
+            style={{
+              fontSize: '0.75rem',
+              color: 'var(--color-text-tertiary)',
+              marginTop: '0.5rem',
+            }}
+          >
+            Open source & community driven
+          </p>
         </div>
 
         {/* Right Section - Pro Waitlist CTA */}

@@ -16,9 +16,13 @@
   ],
   "scripts": {
     "dev": "vite",
+    "dev:pro": "cp .env.pro .env.local && vite",
     "build": "tsc -b && vite build",
+    "build:free": "cp .env.example .env.local && tsc -b && vite build",
+    "build:pro": "cp .env.pro .env.local && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "preview:pro": "npm run build:pro && vite preview",
     "format": "prettier --write .",
     "test": "vitest",
     "storybook": "storybook dev -p 6006",

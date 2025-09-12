@@ -187,7 +187,7 @@ const Navbar = () => {
                   window.open('https://sebastiangonzalez.design/motion-ui-kit', '_blank')
                 }
               >
-                Upgrade to Pro
+                Join Pro Waitlist
               </Button>
             </li>
             <ThemeToggle />

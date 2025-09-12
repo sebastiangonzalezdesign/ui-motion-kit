@@ -27,8 +27,21 @@ dist-ssr
 .DS_Store
 .env
 .env.local
+.env.pro
 .env.development.local
 .env.test.local
 .env.production.local
 *storybook.log
 storybook-static
+
+# Additional pro/private files
+.env.premium
+.env.private
+*.env.secret
+/private/
+/premium/
+/pro-assets/
+/customer-assets/
+*.key
+*.secret
+.secrets/

@@ -18,6 +18,35 @@ interface ChangelogEntry {
 const Changelog = () => {
   const entries: ChangelogEntry[] = [
     {
+      version: '2.1.0',
+      date: '2025-03-15',
+      type: 'minor',
+      description:
+        'Revolutionary Experience System launch with context-aware components and intelligent UI adaptation.',
+      changes: [
+        {
+          category: 'added',
+          items: [
+            'Experience System - Context-aware component behavior',
+            'Smart Motion Buttons with adaptive timing',
+            'Intelligent Forms with progressive disclosure',
+            'Smart Data Display components',
+            'User behavior analytics integration',
+            'Device-specific optimizations',
+            'Accessibility adaptation system',
+          ],
+        },
+        {
+          category: 'changed',
+          items: [
+            'Enhanced motion token system',
+            'Improved component performance',
+            'Updated documentation structure',
+          ],
+        },
+      ],
+    },
+    {
       version: '2.0.0',
       date: '2025-01-15',
       type: 'major',
@@ -158,8 +187,8 @@ const Changelog = () => {
   return (
     <div className="changelog-page">
       <Hero
-        headline="Changelog"
-        description="Stay up to date with new features, improvements, and bug fixes. See what's new in each version."
+        headline="Roadmap & Changelog"
+        description="Follow our development journey and see what's planned ahead. Track new features, improvements, and the future of Motion UI Kit Pro."
         backgroundColor="brand-gradient"
         borderRadius="lg"
         size="lg"
@@ -203,7 +232,36 @@ const Changelog = () => {
 
       {/* Changelog Entries */}
       <section className="changelog-entries">
-        <h2>Release History</h2>
+        <h2 className="text-heading-lg">Upcoming Roadmap</h2>
+        <div className="entries-list">
+          <Card className="roadmap-item upcoming">
+            <div className="entry-header">
+              <div className="version-info">
+                <h3>v2.2.0</h3>
+                <span className="version-badge version-badge--minor">Minor</span>
+                <span className="entry-date">Q4 2025</span>
+              </div>
+            </div>
+            <p className="entry-description">
+              Advanced ML integration and predictive UI adaptation
+            </p>
+            <div className="entry-changes">
+              <div className="change-group">
+                <h4 className="change-category change-category--success">🔮 Planned Features</h4>
+                <ul className="change-list">
+                  <li>Machine learning for predictive UI adaptation</li>
+                  <li>Advanced analytics dashboard</li>
+                  <li>Real-time user behavior insights</li>
+                  <li>A/B testing framework integration</li>
+                </ul>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        <h2 className="text-heading-lg" style={{ marginTop: '3rem' }}>
+          Release History
+        </h2>
         <div className="entries-list">
           {entries.map((entry, index) => (
             <Card key={entry.version} className={`changelog-entry ${index === 0 ? 'latest' : ''}`}>
