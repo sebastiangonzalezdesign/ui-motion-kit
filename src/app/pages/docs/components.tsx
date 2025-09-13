@@ -69,14 +69,14 @@ const Components = () => {
             name: 'Smart Button',
             description: 'Intent-driven buttons that adapt to user context and behavior',
             status: 'available',
-            path: '/examples/buttons',
+            path: '/examples/experience-demo',
           },
           {
             id: 'confirmation-flow',
             name: 'Confirmation Flow',
             description: 'Intelligent confirmation dialogs that adapt to user expertise',
             status: 'available',
-            path: '/examples/modals',
+            path: '/examples/confirmation-flow',
           },
           {
             id: 'adaptive-forms',

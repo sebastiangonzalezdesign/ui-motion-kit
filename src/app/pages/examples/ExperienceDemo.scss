@@ -1,0 +1,266 @@
+@use '../../../styles/abstracts' as *;
+
+.experience-demo {
+  padding: var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .configuration-panel {
+    margin-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      margin: 0 0 var(--spacing-md) 0;
+      font-size: var(--font-size-heading-md);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-primary);
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--accent-primary);
+      }
+    }
+
+    .panel-description {
+      margin: 0 0 var(--spacing-lg) 0;
+      color: var(--text-secondary);
+      font-size: var(--font-size-md);
+
+      .highlight {
+        color: var(--text-primary);
+        font-weight: var(--font-weight-medium);
+      }
+    }
+
+    .configuration-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-xl);
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+    }
+
+    .config-section {
+      .section-header {
+        margin-bottom: var(--spacing-lg);
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-medium);
+
+        .icon {
+          width: 1.25rem;
+          height: 1.25rem;
+          color: var(--accent-primary);
+        }
+      }
+
+      .form-controls {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+
+  .active-adaptations {
+    padding: 1rem;
+    background-color: var(--color-background-secondary);
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+
+    .adaptations-title {
+      color: var(--color-text-primary);
+      font-weight: var(--font-weight-medium);
+      margin-bottom: 0.5rem;
+    }
+
+    .adaptations-list {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+      color: var(--color-text-secondary);
+
+      li {
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+
+  .benefits-section {
+    margin-bottom: 2rem;
+
+    .benefits-title {
+      font-size: var(--font-size-heading-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .benefit-card {
+      .benefit-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+
+        .benefit-icon {
+          width: 1.5rem;
+          height: 1.5rem;
+          color: var(--color-accent-primary);
+          flex-shrink: 0;
+        }
+
+        .benefit-text {
+          .benefit-title {
+            margin: 0 0 0.5rem 0;
+            color: var(--color-text-primary);
+            font-size: var(--font-size-md);
+            font-weight: var(--font-weight-medium);
+          }
+
+          .benefit-description {
+            margin: 0;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            line-height: var(--line-height-relaxed);
+          }
+        }
+      }
+    }
+  }
+
+  .try-system-card {
+    .system-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 0 0.75rem 0;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--color-accent-primary);
+      }
+    }
+
+    .system-description {
+      margin: 0 0 1rem 0;
+      color: var(--color-text-secondary);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .pro-tip {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--color-accent-primary);
+      font-weight: var(--font-weight-medium);
+      padding: 0.5rem 0.75rem;
+      background-color: var(--color-accent-soft);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-accent-primary);
+    }
+  }
+}
+
+// 🔧 Accessibility Utility Classes
+// ================================
+
+// Reduced Motion: Disable all animations and transitions for buttons
+.button.reduced-motion {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  // Disable any pseudo-element animations too
+  &::before,
+  &::after {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+// High Contrast: Enhanced visual emphasis for buttons using existing design tokens
+.button.high-contrast {
+  // Enhanced contrast using CSS filters and existing tokens
+  filter: contrast(1.5) saturate(1.3) brightness(0.9) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important;
+
+  // Enhanced outline variants
+  &.button--outline,
+  &.button--ghost {
+    border-width: 3px !important;
+  }
+
+  // Make focus states more prominent
+  &:focus {
+    outline: 3px solid var(--accent-primary) !important;
+    outline-offset: 2px !important;
+  }
+
+  // Enhanced hover states that work with existing tokens
+  &:hover {
+    filter: contrast(1.6) saturate(1.4) brightness(0.85) !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5) !important;
+  }
+}
+
+// Prefers reduced motion support at system level
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+    animation: none;
+    transform: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      transition: none;
+      animation: none;
+      transform: none;
+    }
+  }
+}
+
+// Prefers high contrast support at system level
+@media (prefers-contrast: high) {
+  .button {
+    filter: contrast(1.3) saturate(1.2);
+
+    &--outline,
+    &--ghost {
+      border-width: 2px;
+    }
+  }
+}

@@ -11,8 +11,9 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
-  variant?: 'primary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'outline' | 'ghost' | 'danger';
   style?: React.CSSProperties;
+  className?: string;
   onMouseEnter?: (e: React.MouseEvent) => void;
   onFocus?: (e: React.FocusEvent) => void;
 }
@@ -58,6 +59,11 @@ export const SmartButton: React.FC<SmartButtonProps> = ({
     // Adapt size based on device and accessibility needs
     if (context.device === 'mobile' || context.accessibilityNeeds?.largeFonts) {
       contextualProps.size = props.size || 'lg';
+    }
+
+    // Adapt variant based on intent
+    if (intent === 'destructive' && !props.variant) {
+      contextualProps.variant = 'danger';
     }
 
     // Adapt variant based on user expertise and criticality
@@ -123,6 +129,23 @@ export const SmartButton: React.FC<SmartButtonProps> = ({
     ...adaptiveProps,
   };
 
+  // Handle variant combinations for proper CSS class generation
+  let buttonClass = `button button-${finalProps.size || 'md'}`;
+
+  if (finalProps.variant) {
+    if (intent === 'destructive' && finalProps.variant === 'outline') {
+      buttonClass += ' button--danger--outline';
+    } else if (intent === 'destructive' && finalProps.variant === 'ghost') {
+      buttonClass += ' button--danger--ghost';
+    } else {
+      buttonClass += ` button--${finalProps.variant}`;
+    }
+  } else if (intent === 'destructive') {
+    buttonClass += ' button--danger';
+  } else {
+    buttonClass += ' button--primary';
+  }
+
   // Create enhanced onClick handler
   const enhancedOnClick = () => {
     handleInteraction('click');
@@ -130,7 +153,7 @@ export const SmartButton: React.FC<SmartButtonProps> = ({
 
   return (
     <div onMouseEnter={() => handleInteraction('hover')} onFocus={() => handleInteraction('focus')}>
-      <Button {...finalProps} onClick={enhancedOnClick}>
+      <Button {...finalProps} className={buttonClass} onClick={enhancedOnClick}>
         {children}
       </Button>
     </div>

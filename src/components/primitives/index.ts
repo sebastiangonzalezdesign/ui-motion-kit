@@ -9,4 +9,6 @@ export { default as SmartButton } from './SmartButton/SmartButton';
 export { default as SearchInput } from './SearchInput';
 export { default as CopyButton } from './CopyButton';
 export { default as ColorSwatch } from './ColorSwatch';
+export { default as Select } from './Select/Select';
+export { default as Checkbox } from './Checkbox/Checkbox';
 export type { SearchableItem } from './SearchInput';

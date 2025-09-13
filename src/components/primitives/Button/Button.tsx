@@ -7,8 +7,10 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
-  variant?: 'primary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'outline' | 'ghost' | 'danger';
   style?: React.CSSProperties;
+  className?: string;
+  onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -19,12 +21,18 @@ const Button: React.FC<ButtonProps> = ({
   iconPosition = 'left',
   variant = 'primary',
   style,
+  className,
+  onMouseEnter,
 }) => {
+  const defaultClassName = `button button-${size} button--${variant}`;
+  const finalClassName = className ? `${defaultClassName} ${className}` : defaultClassName;
+
   return (
     <motion.button
-      className={`button button-${size} button--${variant}`}
+      className={finalClassName}
       onClick={onClick}
       style={style}
+      onMouseEnter={onMouseEnter}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ duration: 0.2 }}

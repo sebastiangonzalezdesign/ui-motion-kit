@@ -1,0 +1,259 @@
+@use 'sass:map';
+@use '../../../styles/abstracts/colors' as colors;
+@use '../../../styles/abstracts/spacing' as *;
+@use '../../../styles/abstracts/tokens' as *;
+
+.checkbox-group {
+  position: relative;
+  width: 100%;
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+
+    .checkbox__wrapper {
+      pointer-events: none;
+    }
+  }
+
+  &--error {
+    .checkbox__box {
+      border-color: var(--feedback-error);
+    }
+
+    .checkbox__label {
+      color: var(--feedback-error);
+    }
+  }
+}
+
+.checkbox__wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-sm;
+  cursor: pointer;
+  width: 100%;
+
+  .checkbox-group--sm & {
+    gap: $space-xs;
+  }
+
+  .checkbox-group--lg & {
+    gap: $space-md;
+  }
+}
+
+.checkbox__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.checkbox__box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-light);
+  border-radius: $radius-sm;
+  background: var(--background-primary);
+  transition: all $transition-fast ease;
+  flex-shrink: 0;
+
+  // Size variants
+  .checkbox-group--sm & {
+    width: 16px;
+    height: 16px;
+    border-radius: $radius-none;
+  }
+
+  .checkbox-group--md & {
+    width: 20px;
+    height: 20px;
+  }
+
+  .checkbox-group--lg & {
+    width: 24px;
+    height: 24px;
+    border-radius: $radius-md;
+  }
+
+  // Hover state
+  .checkbox__wrapper:hover & {
+    border-color: var(--accent-secondary);
+
+    &.checkbox__box--checked {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+  }
+
+  // Focus state
+  .checkbox__input:focus + & {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  }
+
+  // Checked state
+  &--checked {
+    border-color: var(--accent-primary);
+    background: var(--accent-primary);
+
+    .checkbox-group--solid & {
+      background: var(--accent-primary);
+    }
+
+    .checkbox-group--minimal & {
+      background: transparent;
+      border-color: var(--accent-primary);
+    }
+  }
+
+  // Variant styles
+  .checkbox-group--solid & {
+    border: none;
+    background: var(--background-secondary);
+
+    &--checked {
+      background: var(--accent-primary);
+    }
+  }
+
+  .checkbox-group--minimal & {
+    border: 1px solid var(--border-light);
+    background: transparent;
+
+    &--checked {
+      border-color: var(--accent-primary);
+      background: transparent;
+    }
+  }
+}
+
+.checkbox__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.checkbox__check {
+  stroke: white;
+  stroke-width: 3;
+
+  .checkbox-group--sm & {
+    width: 10px;
+    height: 10px;
+    stroke-width: 4;
+  }
+
+  .checkbox-group--md & {
+    width: 12px;
+    height: 12px;
+  }
+
+  .checkbox-group--lg & {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.5;
+  }
+
+  .checkbox-group--minimal & {
+    stroke: $accent-primary;
+  }
+}
+
+.checkbox__indeterminate {
+  width: 60%;
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+
+  .checkbox-group--sm & {
+    height: 1.5px;
+  }
+
+  .checkbox-group--lg & {
+    height: 3px;
+  }
+
+  .checkbox-group--minimal & {
+    background: var(--accent-primary);
+  }
+}
+
+.checkbox__content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  flex: 1;
+}
+
+.checkbox__label {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: var(--text-primary);
+  line-height: 1.4;
+  cursor: pointer;
+  user-select: none;
+
+  .checkbox-group--sm & {
+    font-size: $font-size-sm;
+    line-height: 1.5;
+  }
+
+  .checkbox-group--lg & {
+    font-size: $font-size-lg;
+    line-height: 1.3;
+  }
+}
+
+.checkbox__description {
+  font-size: $font-size-sm;
+  color: var(--text-secondary);
+  line-height: 1.5;
+
+  .checkbox-group--sm & {
+    font-size: $font-size-xs;
+  }
+
+  .checkbox-group--lg & {
+    font-size: $font-size-base;
+    line-height: 1.4;
+  }
+}
+
+.checkbox__error {
+  margin-top: $space-xs;
+  font-size: $font-size-sm;
+  color: var(--feedback-error);
+  line-height: 1.5;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .checkbox__box {
+    border-width: 3px;
+
+    &--checked {
+      border-color: var(--accent-primary);
+    }
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .checkbox__box,
+  .checkbox__icon {
+    transition: none;
+  }
+}

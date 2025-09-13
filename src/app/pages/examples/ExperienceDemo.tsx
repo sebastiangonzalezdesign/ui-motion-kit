@@ -1,262 +1,653 @@
-// Experience System Demo
-// This shows how components adapt based on user context
-
 import React, { useState } from 'react';
-import { ExperienceProvider } from '../../../utils/experience-context';
-import type { UserContext, ExperienceSystemConfig } from '../../../utils/experience-context';
+import { Button, Card, Select, Checkbox } from '../../../components/primitives';
+import { Hero, CodePreview } from '../../components';
+import { Breadcrumb } from '../../../components/navigation';
 import {
-  SmartButton,
-  ConfirmationFlow,
-} from '../../../components/primitives/SmartButton/SmartButton';
+  CpuChipIcon,
+  LightBulbIcon,
+  ChartBarIcon,
+  UserIcon,
+  StarIcon,
+  EyeIcon,
+  AdjustmentsHorizontalIcon,
+} from '@heroicons/react/20/solid';
+import './ExperienceDemo.scss';
 
-const ExperienceDemo: React.FC = () => {
-  const [userContext, setUserContext] = useState<Partial<UserContext>>({
-    userType: 'first-time',
-    device: 'desktop',
-    accessibilityNeeds: {
-      reducedMotion: false,
-      highContrast: false,
-      screenReader: false,
-      largeFonts: false,
-    },
-  });
+// Mock SmartButton that demonstrates adaptive behavior
+const MockSmartButton: React.FC<{
+  intent?: string;
+  userJourneyStage?: string;
+  criticality?: string;
+  flowPosition?: string;
+  variant?: 'primary' | 'outline' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  onClick?: () => void;
+  onInteraction?: (type: string, metadata: Record<string, unknown>) => void;
+  children: React.ReactNode;
+  userContext: UserContextState;
+}> = ({
+  intent,
+  userJourneyStage,
+  criticality,
+  flowPosition,
+  variant: initialVariant = 'primary',
+  size: initialSize = 'md',
+  onClick,
+  onInteraction,
+  children,
+  userContext,
+}) => {
+  // Adaptive logic based on user context
+  const getAdaptiveProps = () => {
+    let variant = initialVariant;
+    let size = initialSize;
 
-  const [showConfirmation, setShowConfirmation] = useState(false);
+    // Adapt based on user type
+    if (userContext.userType === 'first-time' && criticality === 'high') {
+      variant = 'primary'; // More prominent for new users
+    }
 
-  const experienceConfig: ExperienceSystemConfig = {
-    adaptationRules: [
-      {
-        condition: (context) => context.userType === 'first-time',
-        adaptations: [
-          {
-            componentType: 'button',
-            adaptations: {
-              guidance: 'show-hints',
-              complexity: 'simplified',
-            },
-          },
-        ],
-      },
-    ],
-    enableUsageTracking: true,
-    enableAutomaticAdaptation: true,
-    enablePredictiveLoading: false,
-    enableSmartBatching: false,
+    // Adapt based on device
+    if (userContext.device === 'mobile' || userContext.largeFonts) {
+      size = 'lg'; // Larger for mobile/accessibility
+    }
+
+    // Adapt based on intent
+    if (intent === 'destructive' && !initialVariant) {
+      variant = 'danger';
+    }
+
+    return { variant, size };
+  };
+
+  // Get adaptive button labels based on user type
+  const getAdaptiveLabel = () => {
+    if (intent === 'primary-action') {
+      switch (userContext.userType) {
+        case 'first-time':
+          return 'Start Your Journey';
+        case 'returning':
+          return 'Continue';
+        case 'power-user':
+          return 'Launch';
+        default:
+          return children;
+      }
+    }
+
+    if (intent === 'navigation') {
+      switch (userContext.userType) {
+        case 'first-time':
+          return 'Tell Me More';
+        case 'returning':
+          return 'Learn More';
+        case 'power-user':
+          return 'Docs';
+        default:
+          return children;
+      }
+    }
+
+    if (intent === 'destructive') {
+      switch (userContext.userType) {
+        case 'first-time':
+          return 'Delete Account (Permanent)';
+        case 'returning':
+          return 'Delete Account';
+        case 'power-user':
+          return 'Delete';
+        default:
+          return children;
+      }
+    }
+
+    return children;
+  };
+
+  const { variant, size } = getAdaptiveProps();
+
+  const handleClick = () => {
+    onClick?.();
+    onInteraction?.('click', {
+      intent,
+      criticality,
+      flowPosition,
+      userJourneyStage,
+      timestamp: Date.now(),
+      adaptations: getAdaptiveProps(),
+    });
+  };
+
+  // Get adaptive styles based on accessibility preferences
+  const getAdaptiveStyles = () => {
+    const styles: React.CSSProperties = {};
+
+    // Only add styles that aren't handled by CSS classes
+    // The CSS classes handle the main styling, these are just supplementary
+
+    return styles;
+  };
+
+  // Get adaptive class names for CSS-based behavior
+  const getAdaptiveClassNames = () => {
+    const classNames = [];
+
+    // Add reduced motion class to disable CSS transitions
+    if (userContext.reducedMotion) {
+      classNames.push('reduced-motion');
+    }
+
+    // Add high contrast class for CSS-based enhancements
+    if (userContext.highContrast) {
+      classNames.push('high-contrast');
+    }
+
+    return classNames.join(' ');
   };
 
   return (
-    <ExperienceProvider config={experienceConfig} initialContext={userContext}>
-      <div style={{ padding: '20px', maxWidth: '800px' }}>
-        <h1>🧠 Experience System Demo</h1>
+    <Button
+      variant={variant}
+      size={size}
+      onClick={handleClick}
+      style={getAdaptiveStyles()}
+      className={getAdaptiveClassNames()}
+      onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
+        // Prevent any hover animations for reduced motion
+        if (userContext.reducedMotion) {
+          e.currentTarget.style.transform = 'none';
+          e.currentTarget.style.transition = 'none';
+        }
+      }}
+    >
+      {getAdaptiveLabel()}
+    </Button>
+  );
+};
 
-        <div
-          style={{
-            marginBottom: '30px',
-            padding: '20px',
-            border: '1px solid #ccc',
-            borderRadius: '8px',
-          }}
-        >
-          <h3>Current User Context</h3>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '10px',
-            }}
-          >
-            <label>
-              User Type:
-              <select
-                value={userContext.userType}
-                onChange={(e) =>
-                  setUserContext((prev) => ({
-                    ...prev,
-                    userType: e.target.value as 'first-time' | 'returning' | 'power-user',
-                  }))
-                }
-              >
-                <option value="first-time">First Time</option>
-                <option value="returning">Returning</option>
-                <option value="power-user">Power User</option>
-              </select>
-            </label>
+interface UserContextState {
+  userType: 'first-time' | 'returning' | 'power-user';
+  device: 'mobile' | 'tablet' | 'desktop';
+  reducedMotion: boolean;
+  largeFonts: boolean;
+  highContrast: boolean;
+}
 
-            <label>
-              Device:
-              <select
-                value={userContext.device}
-                onChange={(e) =>
-                  setUserContext((prev) => ({
-                    ...prev,
-                    device: e.target.value as 'mobile' | 'tablet' | 'desktop',
-                  }))
-                }
-              >
-                <option value="mobile">Mobile</option>
-                <option value="tablet">Tablet</option>
-                <option value="desktop">Desktop</option>
-              </select>
-            </label>
+const ExperienceDemo: React.FC = () => {
+  const [userContext, setUserContext] = useState<UserContextState>({
+    userType: 'first-time',
+    device: 'desktop',
+    reducedMotion: false,
+    largeFonts: false,
+    highContrast: false,
+  });
 
-            <label>
-              <input
-                type="checkbox"
-                checked={userContext.accessibilityNeeds?.reducedMotion}
-                onChange={(e) =>
-                  setUserContext((prev) => ({
-                    ...prev,
-                    accessibilityNeeds: {
-                      ...prev.accessibilityNeeds!,
-                      reducedMotion: e.target.checked,
-                    },
-                  }))
-                }
-              />
-              Reduced Motion
-            </label>
+  const getActiveAdaptations = () => {
+    const adaptations = [];
+    if (userContext.device === 'mobile') adaptations.push('Mobile-optimized button sizes');
+    if (userContext.userType === 'first-time')
+      adaptations.push('Prominent primary actions for new users');
+    if (userContext.userType === 'power-user')
+      adaptations.push('Streamlined interface for experienced users');
+    if (userContext.largeFonts) adaptations.push('Larger button sizes for accessibility');
+    if (userContext.reducedMotion) adaptations.push('Reduced animations');
+    if (userContext.highContrast) adaptations.push('Enhanced visual contrast');
+    return adaptations;
+  };
 
-            <label>
-              <input
-                type="checkbox"
-                checked={userContext.accessibilityNeeds?.largeFonts}
-                onChange={(e) =>
-                  setUserContext((prev) => ({
-                    ...prev,
-                    accessibilityNeeds: {
-                      ...prev.accessibilityNeeds!,
-                      largeFonts: e.target.checked,
-                    },
-                  }))
-                }
-              />
-              Large Fonts
-            </label>
+  // Get responsive grid class based on device
+  const getGridClass = () => {
+    switch (userContext.device) {
+      case 'desktop':
+        return 'grid grid-3'; // 3 columns
+      case 'tablet':
+        return 'grid grid-2'; // 2 columns
+      case 'mobile':
+        return 'grid grid-1'; // 1 column (stacked)
+      default:
+        return 'grid grid-3';
+    }
+  };
+
+  const userTypeOptions = [
+    { value: 'first-time', label: 'First Time User' },
+    { value: 'returning', label: 'Returning User' },
+    { value: 'power-user', label: 'Power User' },
+  ];
+
+  const deviceOptions = [
+    { value: 'mobile', label: 'Mobile' },
+    { value: 'tablet', label: 'Tablet' },
+    { value: 'desktop', label: 'Desktop' },
+  ];
+
+  return (
+    <div className="page experience-demo">
+      <Breadcrumb />
+      <Hero
+        headline="Smart Button Experience System"
+        description="Context-aware buttons that understand user intent and adapt their behavior automatically based on user expertise, device context, and interaction patterns."
+        backgroundColor="brand-soft"
+        borderRadius="md"
+        size="md"
+        showIllustrations={false}
+      />
+
+      {/* Settings Panel */}
+      <div className="configuration-panel">
+        <Card className="card--highlight">
+          <h2 className="panel-header">
+            <AdjustmentsHorizontalIcon className="icon" />
+            Configuration Panel
+          </h2>
+          <p className="panel-description">
+            Adjust the settings below and click the Smart Buttons to see how they adapt their
+            behavior.
+            <strong className="highlight"> Open your browser console</strong> to view detailed
+            adaptation metadata.
+          </p>
+
+          <div className="configuration-grid">
+            <div className="config-section">
+              <h4 className="section-header">
+                <UserIcon className="icon" />
+                User Profile
+              </h4>
+              <div className="form-controls">
+                <Select
+                  label="User Type"
+                  variant="outlined"
+                  size="md"
+                  options={userTypeOptions}
+                  value={userContext.userType}
+                  onChange={(e) =>
+                    setUserContext((prev) => ({
+                      ...prev,
+                      userType: e.target.value as UserContextState['userType'],
+                    }))
+                  }
+                />
+                <Select
+                  label="Device Type"
+                  variant="outlined"
+                  size="md"
+                  options={deviceOptions}
+                  value={userContext.device}
+                  onChange={(e) =>
+                    setUserContext((prev) => ({
+                      ...prev,
+                      device: e.target.value as UserContextState['device'],
+                    }))
+                  }
+                />
+              </div>
+            </div>
+
+            <div className="config-section">
+              <h4 className="section-header">
+                <EyeIcon className="icon" />
+                Accessibility Preferences
+              </h4>
+              <div className="form-controls">
+                <Checkbox
+                  variant="default"
+                  size="md"
+                  label="Reduced Motion"
+                  description="Minimize animations and transitions"
+                  checked={userContext.reducedMotion}
+                  onChange={(e) =>
+                    setUserContext((prev) => ({ ...prev, reducedMotion: e.target.checked }))
+                  }
+                />
+                <Checkbox
+                  variant="default"
+                  size="md"
+                  label="Large Fonts"
+                  description="Increase text size for better readability"
+                  checked={userContext.largeFonts}
+                  onChange={(e) =>
+                    setUserContext((prev) => ({ ...prev, largeFonts: e.target.checked }))
+                  }
+                />
+                <Checkbox
+                  variant="default"
+                  size="md"
+                  label="High Contrast"
+                  description="Enhanced color contrast for visibility"
+                  checked={userContext.highContrast}
+                  onChange={(e) =>
+                    setUserContext((prev) => ({ ...prev, highContrast: e.target.checked }))
+                  }
+                />
+              </div>
+            </div>
           </div>
-        </div>
+        </Card>
+      </div>
 
-        <div style={{ marginBottom: '30px' }}>
-          <h3>🎯 Smart Buttons (Context-Aware)</h3>
-          <p>These buttons automatically adapt based on the user context above:</p>
-
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
-            <SmartButton
-              intent="primary-action"
-              criticality="high"
-              onInteraction={(type, metadata) => {
-                console.log(`🔄 ${type} interaction:`, metadata);
-              }}
-            >
-              Save Document
-            </SmartButton>
-
-            <SmartButton intent="navigation" criticality="low" userJourneyStage="discovery">
-              Learn More
-            </SmartButton>
-
-            <SmartButton
-              intent="destructive"
-              criticality="critical"
-              onInteraction={(type, metadata) => {
-                console.log(`⚠️ Destructive ${type}:`, metadata);
-                if (type === 'click') {
-                  setShowConfirmation(true);
-                }
-              }}
-            >
-              Delete Account
-            </SmartButton>
-          </div>
-
-          <div style={{ padding: '15px', backgroundColor: '#f0f8ff', borderRadius: '6px' }}>
-            <strong>Adaptive Behaviors Active:</strong>
-            <ul style={{ margin: '8px 0', paddingLeft: '20px' }}>
-              {userContext.device === 'mobile' && <li>🔘 Mobile-optimized button sizes</li>}
-              {userContext.userType === 'first-time' && (
-                <li>🎯 Prominent primary actions for new users</li>
-              )}
-              {userContext.accessibilityNeeds?.largeFonts && (
-                <li>📏 Larger button sizes for accessibility</li>
-              )}
-              {userContext.accessibilityNeeds?.reducedMotion && <li>🔇 Reduced animations</li>}
-            </ul>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: '30px' }}>
-          <h3>🔄 Compound Components (Workflow-Aware)</h3>
-          <p>These components understand user intent and context within workflows:</p>
-
-          {!showConfirmation ? (
-            <SmartButton variant="outline" onClick={() => setShowConfirmation(true)}>
-              Show Confirmation Flow
-            </SmartButton>
-          ) : (
+      <CodePreview
+        title="Context-Aware Smart Buttons"
+        preview={
+          <div>
             <div
               style={{
-                padding: '20px',
-                border: '2px solid #ff6b6b',
-                borderRadius: '8px',
-                backgroundColor: '#fff5f5',
+                padding: '1rem',
+                backgroundColor: 'var(--color-background-secondary)',
+                borderRadius: 'var(--radius-md)',
+                marginBottom: '1.5rem',
               }}
             >
-              <h4>⚠️ Are you sure you want to delete your account?</h4>
-              <p>This action cannot be undone. All your data will be permanently deleted.</p>
-
-              <ConfirmationFlow
-                onConfirm={() => {
-                  alert('Account deletion confirmed (demo)');
-                  setShowConfirmation(false);
+              <strong style={{ color: 'var(--color-text-primary)' }}>Active Adaptations:</strong>
+              <ul
+                style={{
+                  margin: '0.5rem 0',
+                  paddingLeft: '1.5rem',
+                  color: 'var(--color-text-secondary)',
                 }}
-                onCancel={() => setShowConfirmation(false)}
-                confirmText="Yes, Delete Account"
-                cancelText="Keep My Account"
-                isDestructive={true}
-              />
-            </div>
-          )}
-        </div>
-
-        <div style={{ marginBottom: '30px' }}>
-          <h3>📊 Experience System Benefits</h3>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-              gap: '15px',
-            }}
-          >
-            <div style={{ padding: '15px', border: '1px solid #4caf50', borderRadius: '6px' }}>
-              <strong>🎯 Intent-Driven</strong>
-              <p>
-                Components understand <em>why</em> they're being used, not just <em>how</em>.
-              </p>
+              >
+                {userContext.device === 'mobile' && <li>Mobile layout: Stacked buttons</li>}
+                {userContext.device === 'tablet' && <li>Tablet layout: 2-column grid</li>}
+                {userContext.device === 'desktop' && <li>Desktop layout: 3-column grid</li>}
+                {userContext.userType === 'first-time' && (
+                  <li>First-time user: Descriptive button labels</li>
+                )}
+                {userContext.userType === 'returning' && (
+                  <li>Returning user: Familiar button labels</li>
+                )}
+                {userContext.userType === 'power-user' && (
+                  <li>Power user: Concise button labels</li>
+                )}
+                {userContext.largeFonts && <li>Larger button sizes for accessibility</li>}
+                {userContext.reducedMotion && <li>Reduced animations</li>}
+                {userContext.highContrast && <li>Enhanced visual contrast</li>}
+              </ul>
             </div>
 
-            <div style={{ padding: '15px', border: '1px solid #2196f3', borderRadius: '6px' }}>
-              <strong>🧠 Context-Aware</strong>
-              <p>Adapts to user type, device, accessibility needs, and journey stage.</p>
-            </div>
-
-            <div style={{ padding: '15px', border: '1px solid #ff9800', borderRadius: '6px' }}>
-              <strong>📈 Learning System</strong>
-              <p>Tracks usage patterns and improves over time.</p>
-            </div>
-
-            <div style={{ padding: '15px', border: '1px solid #9c27b0', borderRadius: '6px' }}>
-              <strong>🔮 Predictive</strong>
-              <p>Anticipates user needs and prevents common mistakes.</p>
+            <div className={getGridClass()} style={{ gap: '1rem' }}>
+              <MockSmartButton
+                intent="primary-action"
+                userJourneyStage="discovery"
+                criticality="high"
+                size="md"
+                userContext={userContext}
+                onClick={() => console.log('Get Started clicked - User:', userContext)}
+                onInteraction={(type: string, metadata: Record<string, unknown>) => {
+                  console.log(`${type} interaction:`, {
+                    ...metadata,
+                    userContext,
+                    adaptations: getActiveAdaptations(),
+                  });
+                }}
+              >
+                Get Started
+              </MockSmartButton>
+              <MockSmartButton
+                variant="outline"
+                intent="navigation"
+                userJourneyStage="evaluation"
+                criticality="medium"
+                size="md"
+                userContext={userContext}
+                onClick={() => console.log('Learn More clicked - User:', userContext)}
+                onInteraction={(type: string, metadata: Record<string, unknown>) => {
+                  console.log(`${type} interaction:`, {
+                    ...metadata,
+                    userContext,
+                    adaptations: getActiveAdaptations(),
+                  });
+                }}
+              >
+                Learn More
+              </MockSmartButton>
+              <MockSmartButton
+                intent="destructive"
+                criticality="critical"
+                flowPosition="confirmation"
+                size="md"
+                userContext={userContext}
+                onClick={() => console.log('Delete Account clicked - User:', userContext)}
+                onInteraction={(type: string, metadata: Record<string, unknown>) => {
+                  console.log(`${type} interaction:`, {
+                    ...metadata,
+                    userContext,
+                    adaptations: getActiveAdaptations(),
+                  });
+                }}
+              >
+                Delete Account
+              </MockSmartButton>
             </div>
           </div>
-        </div>
+        }
+        code={`// Context-Aware Smart Buttons with Adaptive Behavior
+import { Button } from '../../../components/primitives';
 
-        <div style={{ padding: '20px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
-          <h4>🔍 Open Developer Console</h4>
-          <p>Click buttons above to see interaction tracking and metadata in the console.</p>
-          <p>Notice how button behavior changes when you modify the user context!</p>
+// MockSmartButton with adaptive props and accessibility support
+const MockSmartButton = ({ 
+  intent, 
+  userContext, 
+  variant = 'primary', 
+  size = 'md',
+  children 
+}) => {
+  // Adaptive class names for accessibility
+  const getAdaptiveClassNames = () => {
+    const classNames = [];
+    
+    if (userContext.reducedMotion) {
+      classNames.push('reduced-motion');
+    }
+    
+    if (userContext.highContrast) {
+      classNames.push('high-contrast');
+    }
+    
+    return classNames.join(' ');
+  };
+
+  // Adaptive labels based on user type
+  const getAdaptiveLabel = () => {
+    if (intent === 'primary-action') {
+      switch (userContext.userType) {
+        case 'first-time': return 'Start Your Journey';
+        case 'returning': return 'Continue';
+        case 'power-user': return 'Launch';
+        default: return children;
+      }
+    }
+    return children;
+  };
+
+  return (
+    <Button
+      variant={variant}
+      size={size}
+      className={getAdaptiveClassNames()}
+      onMouseEnter={(e) => {
+        // Disable animations for reduced motion
+        if (userContext.reducedMotion) {
+          e.currentTarget.style.transform = 'none';
+          e.currentTarget.style.transition = 'none';
+        }
+      }}
+    >
+      {getAdaptiveLabel()}
+    </Button>
+  );
+};
+
+// Usage Examples:
+<MockSmartButton
+  intent="primary-action"
+  userContext={userContext}
+  variant="primary"
+  size="md"
+>
+  Get Started
+</MockSmartButton>
+
+<MockSmartButton
+  intent="navigation"
+  userContext={userContext}
+  variant="outline"
+  size="md"
+>
+  Learn More
+</MockSmartButton>
+
+<MockSmartButton
+  intent="destructive"
+  userContext={userContext}
+  variant="danger"
+  size="md"
+>
+  Delete Account
+</MockSmartButton>
+
+/* CSS for Accessibility Features */
+.button.reduced-motion {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.button.high-contrast {
+  filter: contrast(1.5) saturate(1.3) brightness(0.9) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important;
+}`}
+      />
+
+      <div style={{ marginBottom: '2rem' }}>
+        <h2
+          style={{
+            fontSize: 'var(--font-size-heading-lg)',
+            fontWeight: 'var(--font-weight-bold)',
+            color: 'var(--color-text-primary)',
+            marginBottom: '1rem',
+          }}
+        >
+          Experience System Benefits
+        </h2>
+
+        <div className="grid grid-2" style={{ gap: '1.5rem' }}>
+          <Card>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <CpuChipIcon
+                style={{
+                  width: '1.5rem',
+                  height: '1.5rem',
+                  color: 'var(--color-accent-primary)',
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
+                  Intent-Driven Design
+                </h3>
+                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                  Components understand what users are trying to accomplish, not just how they
+                  interact.
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <LightBulbIcon
+                style={{
+                  width: '1.5rem',
+                  height: '1.5rem',
+                  color: 'var(--color-accent-primary)',
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
+                  Context-Aware Adaptation
+                </h3>
+                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                  Automatically adapts to user type, device, accessibility needs, and journey stage.
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <ChartBarIcon
+                style={{
+                  width: '1.5rem',
+                  height: '1.5rem',
+                  color: 'var(--color-accent-primary)',
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
+                  Learning System
+                </h3>
+                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                  Tracks usage patterns and improves interface decisions over time.
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card>
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+              <EyeIcon
+                style={{
+                  width: '1.5rem',
+                  height: '1.5rem',
+                  color: 'var(--color-accent-primary)',
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
+                  Predictive Interface
+                </h3>
+                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                  Anticipates user needs and prevents common mistakes before they happen.
+                </p>
+              </div>
+            </div>
+          </Card>
         </div>
       </div>
-    </ExperienceProvider>
+
+      <Card className="card--highlight">
+        <h3
+          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 0.75rem 0' }}
+        >
+          <StarIcon
+            style={{ width: '1.25rem', height: '1.25rem', color: 'var(--color-accent-primary)' }}
+          />
+          Try the Experience System
+        </h3>
+        <p style={{ margin: '0 0 1rem 0', color: 'var(--color-text-secondary)' }}>
+          Change the configuration settings above, then click any Smart Button below to see
+          real-time adaptation. Each button will automatically adjust its behavior, styling, and
+          interaction patterns based on your selections.
+        </p>
+        <p
+          style={{
+            margin: 0,
+            fontSize: '0.875rem',
+            color: 'var(--color-accent-primary)',
+            fontWeight: 'var(--font-weight-medium)',
+            padding: '0.5rem 0.75rem',
+            backgroundColor: 'var(--color-accent-soft)',
+            borderRadius: 'var(--radius-sm)',
+            border: '1px solid var(--color-accent-primary)',
+          }}
+        >
+          💡 Pro Tip: Open your browser's developer console (F12) to see detailed adaptation
+          metadata and interaction tracking logs.
+        </p>
+      </Card>
+    </div>
   );
 };
 
