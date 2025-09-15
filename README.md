@@ -5,9 +5,14 @@ Motion UI Kit Pro delivers advanced components, sophisticated animations, **revo
 
 > **🆓 FREE & OPEN SOURCE** - Complete Experience System with context-aware components that understand user intent and adapt automatically to provide intelligent, personalized interfaces.
 
-**📅 Current Version: v1.0.0** (Released September 14, 2025)on UI Kit Pro
+**📅 Current Version: v1.0.0** (Released September 14, 2025)
 
-A **comprehensive, open-source library** of **UI micro-interactions** built with **React 19, Vite, TypeScript, SCSS, and Framer Motion**.  
+---
+
+## 📦 Available Versions
+
+- **🆓 Open Source (This Repository)** - Complete component library with React 19, TypeScript, and Framer Motion
+- **💎 Premium Package** - Includes additional documentation, setup guides, and premium support ([Available on Gumroad](https://your-gumroad-link.com))  
 Motion UI Kit Pro delivers advanced components, sophisticated animations, **revolutionary Experience System**, and a complete design system for professional applications.
 
 > **� FREE & OPEN SOURCE** - Complete Experience System with context-aware components that understand user intent and adapt automatically to provide intelligent, personalized interfaces.

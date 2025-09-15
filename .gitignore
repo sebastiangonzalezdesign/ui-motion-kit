@@ -45,3 +45,6 @@ storybook-static
 *.key
 *.secret
 .secrets/
+
+# Gumroad package documentation (not for repository)
+gumroad-docs/
