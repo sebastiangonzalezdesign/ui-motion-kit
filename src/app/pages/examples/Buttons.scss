@@ -1,0 +1,41 @@
+@use '../../../styles/abstracts' as *;
+
+// Buttons page specific utility classes
+// ==============================================
+
+// Padding utilities
+.p-6 {
+  padding: $space-6;
+}
+
+// Margin utilities
+.mb-4 {
+  margin-bottom: $space-4;
+}
+
+// Typography utilities
+.text-lg {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-normal;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+// Combined typography utility
+.mb-4.text-lg.font-semibold {
+  margin-bottom: $space-4;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+// Additional margin utilities
+.mt-6 {
+  margin-top: $space-6;
+}
+
+// Additional padding utilities
+.p-4 {
+  padding: $space-4;
+}

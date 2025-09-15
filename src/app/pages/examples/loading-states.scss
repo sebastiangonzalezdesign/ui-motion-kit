@@ -1,0 +1,417 @@
+@use '../../../styles/abstracts' as *;
+
+.loading-states-page {
+  padding: $space-8;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    margin-bottom: $space-4;
+    color: $text-primary;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+  }
+
+  .page-description {
+    margin-bottom: $space-12;
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    line-height: 1.6;
+  }
+
+  // Demo Section
+  .demo-section {
+    margin-bottom: $space-16;
+
+    h2 {
+      margin-bottom: $space-6;
+      color: $text-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    .configuration-panel {
+      margin-bottom: $space-8;
+
+      .card--highlight {
+        border: 2px solid $accent-primary;
+        background: linear-gradient(
+          135deg,
+          rgba($accent-primary, 0.05) 0%,
+          rgba($accent-primary, 0.02) 100%
+        );
+      }
+
+      .panel-header {
+        margin-bottom: $space-3;
+        color: $text-primary;
+        display: flex;
+        align-items: center;
+        gap: $space-3;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+
+        .icon {
+          width: 1.5rem;
+          height: 1.5rem;
+          color: $accent-primary;
+        }
+      }
+
+      .panel-description {
+        margin-bottom: $space-6;
+        color: $text-secondary;
+        font-size: $font-size-base;
+        line-height: 1.6;
+      }
+
+      .configuration-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $space-6;
+
+        @media (max-width: 768px) {
+          grid-template-columns: 1fr;
+          gap: $space-4;
+        }
+
+        .config-section {
+          .section-header {
+            margin-bottom: $space-4;
+            color: $text-primary;
+            display: flex;
+            align-items: center;
+            gap: $space-2;
+            font-size: $font-size-lg;
+            font-weight: $font-weight-medium;
+
+            .icon {
+              width: 1.25rem;
+              height: 1.25rem;
+              color: $accent-primary;
+            }
+          }
+
+          .form-controls {
+            display: flex;
+            flex-direction: column;
+            gap: $space-4;
+
+            .control-group {
+              .control-label {
+                display: block;
+                margin-bottom: $space-2;
+                color: $text-secondary;
+                font-weight: $font-weight-medium;
+                font-size: $font-size-sm;
+              }
+
+              .button-group {
+                display: flex;
+                gap: $space-2;
+                flex-wrap: wrap;
+                align-items: center;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .demo-card {
+      padding: $space-6;
+
+      .loading-demo-wrapper {
+        .demo-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: $space-6;
+
+          .demo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: $space-4;
+            padding: $space-4;
+            border: 1px solid $border-light;
+            border-radius: $radius-md;
+            background: $background-secondary;
+
+            h3 {
+              color: $text-primary;
+              font-size: $font-size-lg;
+              font-weight: $font-weight-medium;
+              margin: 0;
+            }
+
+            // Progress demo styles
+            .progress-demo {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 80px;
+
+              .progress-linear {
+                width: 200px;
+                height: 8px;
+                background: $border-light;
+                border-radius: $radius-full;
+                overflow: hidden;
+                position: relative;
+
+                .progress-bar {
+                  height: 100%;
+                  background: linear-gradient(90deg, $accent-primary, $accent-primary-hover);
+                  border-radius: $radius-full;
+                  transition: width 0.3s ease;
+                }
+              }
+
+              .progress-circular {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                svg {
+                  transform: rotate(-90deg);
+                }
+
+                .progress-text {
+                  position: absolute;
+                  color: $text-primary;
+                  font-weight: $font-weight-semibold;
+                  font-size: $font-size-sm;
+                }
+              }
+
+              .progress-stepped {
+                display: flex;
+                gap: $space-2;
+                align-items: center;
+
+                .step {
+                  width: 32px;
+                  height: 8px;
+                  background: $border-light;
+                  border-radius: $radius-sm;
+                  transition: all 0.3s ease;
+
+                  &.completed {
+                    background: $accent-primary;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Examples Section
+  .examples-section {
+    h2 {
+      margin-bottom: $space-8;
+      color: $text-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    .spinner-preview-wrapper {
+      display: flex;
+      gap: $space-4;
+      align-items: center;
+      justify-content: center;
+      padding: $space-6;
+      background: $background-secondary;
+      border-radius: $radius-md;
+    }
+
+    .card-preview-wrapper {
+      padding: $space-6;
+      background: $background-secondary;
+      border-radius: $radius-md;
+      display: flex;
+      justify-content: center;
+    }
+
+    .progress-preview-wrapper {
+      padding: $space-6;
+      background: $background-secondary;
+      border-radius: $radius-md;
+      display: flex;
+      flex-direction: column;
+      gap: $space-6;
+
+      .progress-item {
+        h4 {
+          margin-bottom: $space-3;
+          color: $text-primary;
+          font-size: $font-size-base;
+          font-weight: $font-weight-medium;
+        }
+
+        .progress-linear {
+          width: 300px;
+          height: 8px;
+          background: $border-light;
+          border-radius: $radius-full;
+          overflow: hidden;
+
+          .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, $accent-primary, $accent-primary-hover);
+            border-radius: $radius-full;
+            transition: width 0.3s ease;
+          }
+        }
+
+        .progress-circular {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            transform: rotate(-90deg);
+          }
+
+          .progress-text {
+            position: absolute;
+            color: $text-primary;
+            font-weight: $font-weight-semibold;
+            font-size: $font-size-sm;
+          }
+        }
+      }
+    }
+
+    .advanced-loading-wrapper {
+      padding: $space-6;
+      background: $background-secondary;
+      border-radius: $radius-md;
+      text-align: center;
+
+      p {
+        color: $text-secondary;
+        margin: 0;
+      }
+    }
+  }
+
+  // Features Section
+  .features-section {
+    h2 {
+      margin-bottom: $space-8;
+      color: $text-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: $space-6;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: $space-3;
+
+      .benefit-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        background: rgba($accent-primary, 0.1);
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .benefit-icon-svg {
+          width: 20px;
+          height: 20px;
+          color: $accent-primary;
+        }
+      }
+
+      .benefit-title {
+        margin-bottom: $space-1;
+        color: $text-primary;
+        font-size: $font-size-base;
+        font-weight: $font-weight-semibold;
+      }
+
+      .benefit-description {
+        color: $text-secondary;
+        font-size: $font-size-sm;
+        line-height: 1.5;
+        margin: 0;
+      }
+    }
+  }
+
+  // Responsive Design
+  @media (max-width: 768px) {
+    padding: $space-4;
+
+    h1 {
+      font-size: $font-size-2xl;
+    }
+
+    .page-description {
+      font-size: $font-size-base;
+    }
+
+    .demo-section .demo-card .loading-demo-wrapper .demo-grid {
+      grid-template-columns: 1fr;
+      gap: $space-4;
+    }
+
+    .examples-section {
+      .progress-preview-wrapper .progress-item .progress-linear {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+
+    .features-section .features-grid {
+      grid-template-columns: 1fr;
+      gap: $space-4;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: $font-size-xl;
+    }
+
+    .demo-section h2,
+    .examples-section h2,
+    .features-section h2 {
+      font-size: $font-size-xl;
+    }
+  }
+}
+
+// Dark mode considerations
+[data-theme='dark'] {
+  .loading-states-page {
+    .demo-section .demo-card .loading-demo-wrapper .demo-grid .demo-item {
+      background: $background-tertiary;
+      border-color: $border-medium;
+    }
+
+    .examples-section {
+      .spinner-preview-wrapper,
+      .card-preview-wrapper,
+      .progress-preview-wrapper,
+      .advanced-loading-wrapper {
+        background: $background-tertiary;
+      }
+    }
+  }
+}

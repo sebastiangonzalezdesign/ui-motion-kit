@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { useToast } from '../../../components/feedback';
 import { Button } from '../../../components/primitives';
 import { Card } from '../../../components/primitives';
+import { Input } from '../../../components/primitives';
+import { Checkbox } from '../../../components/primitives';
 import { CodePreview } from '../../components';
 import { Breadcrumb } from '../../../components/navigation';
+import { CheckCircleIcon, InformationCircleIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import './toast.scss';
 
 const ToastPage: React.FC = () => {
@@ -129,93 +132,131 @@ function App() {
       <section className="interactive-demo">
         <h2>Interactive Demo</h2>
 
-        <div className="demo-controls">
-          <h3>Toast Configuration</h3>
+        {/* Configuration Panel */}
+        <div className="configuration-panel">
+          <Card className="card--highlight">
+            <h2 className="panel-header">
+              <Bars3Icon className="icon" />
+              Toast Configuration
+            </h2>
+            <p className="panel-description">
+              Customize your toast notifications and see them in action.
+            </p>
 
-          <div className="control-group">
-            <label>Toast Type</label>
-            <div className="button-group">
-              {(['success', 'error', 'warning', 'info'] as const).map((type) => (
-                <button
-                  key={type}
-                  className={selectedType === type ? 'active' : ''}
-                  onClick={() => setSelectedType(type)}
-                >
-                  {type.charAt(0).toUpperCase() + type.slice(1)}
-                </button>
-              ))}
+            <div className="configuration-grid">
+              <div className="config-section">
+                <h4 className="section-header">
+                  <CheckCircleIcon className="icon" />
+                  Toast Settings
+                </h4>
+                <div className="form-controls">
+                  <div className="control-group">
+                    <label className="control-label">Toast Type:</label>
+                    <div className="button-group">
+                      <Button
+                        variant={selectedType === 'success' ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setSelectedType('success')}
+                      >
+                        Success
+                      </Button>
+                      <Button
+                        variant={selectedType === 'error' ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setSelectedType('error')}
+                      >
+                        Error
+                      </Button>
+                      <Button
+                        variant={selectedType === 'warning' ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setSelectedType('warning')}
+                      >
+                        Warning
+                      </Button>
+                      <Button
+                        variant={selectedType === 'info' ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setSelectedType('info')}
+                      >
+                        Info
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="control-group">
+                    <label className="control-label">Position:</label>
+                    <div className="button-group">
+                      {(
+                        [
+                          'top-left',
+                          'top-center',
+                          'top-right',
+                          'bottom-left',
+                          'bottom-center',
+                          'bottom-right',
+                        ] as const
+                      ).map((position) => (
+                        <Button
+                          key={position}
+                          variant={selectedPosition === position ? 'primary' : 'outline'}
+                          size="sm"
+                          onClick={() => handleChangePosition(position)}
+                        >
+                          {position.replace('-', ' ')}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="config-section">
+                <h4 className="section-header">
+                  <InformationCircleIcon className="icon" />
+                  Content & Behavior
+                </h4>
+                <div className="form-controls">
+                  <Input
+                    labelVariant="fixed"
+                    label="Custom Title (optional)"
+                    value={customTitle}
+                    onChange={(e) => setCustomTitle(e.target.value)}
+                    placeholder="Enter toast title..."
+                    size="sm"
+                  />
+
+                  <Input
+                    labelVariant="fixed"
+                    label="Message"
+                    value={customMessage}
+                    onChange={(e) => setCustomMessage(e.target.value)}
+                    placeholder="Enter toast message..."
+                    size="sm"
+                  />
+
+                  <Input
+                    labelVariant="fixed"
+                    label="Auto-dismiss Duration (ms)"
+                    type="number"
+                    value={duration}
+                    onChange={(e) => setDuration(Number(e.target.value))}
+                    min="0"
+                    step="1000"
+                    size="sm"
+                  />
+
+                  <Checkbox
+                    label="Show dismiss button"
+                    description="Allow users to manually dismiss the toast"
+                    checked={dismissible}
+                    onChange={(e) => setDismissible(e.target.checked)}
+                    size="md"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="control-group">
-            <label>Position</label>
-            <div className="button-group">
-              {(
-                [
-                  'top-left',
-                  'top-center',
-                  'top-right',
-                  'bottom-left',
-                  'bottom-center',
-                  'bottom-right',
-                ] as const
-              ).map((position) => (
-                <button
-                  key={position}
-                  className={selectedPosition === position ? 'active' : ''}
-                  onClick={() => handleChangePosition(position)}
-                >
-                  {position.replace('-', ' ')}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="control-group">
-            <label htmlFor="title">Custom Title (optional)</label>
-            <input
-              id="title"
-              type="text"
-              value={customTitle}
-              onChange={(e) => setCustomTitle(e.target.value)}
-              placeholder="Enter toast title..."
-            />
-          </div>
-
-          <div className="control-group">
-            <label htmlFor="message">Message</label>
-            <input
-              id="message"
-              type="text"
-              value={customMessage}
-              onChange={(e) => setCustomMessage(e.target.value)}
-              placeholder="Enter toast message..."
-            />
-          </div>
-
-          <div className="control-group">
-            <label htmlFor="duration">Auto-dismiss Duration (ms)</label>
-            <input
-              id="duration"
-              type="number"
-              value={duration}
-              onChange={(e) => setDuration(Number(e.target.value))}
-              min="0"
-              step="1000"
-            />
-            <small>Set to 0 to disable auto-dismiss</small>
-          </div>
-
-          <div className="control-group">
-            <label>
-              <input
-                type="checkbox"
-                checked={dismissible}
-                onChange={(e) => setDismissible(e.target.checked)}
-              />
-              Show dismiss button
-            </label>
-          </div>
+          </Card>
         </div>
 
         <div className="demo-actions">
@@ -288,21 +329,17 @@ function App() {
               <Button
                 onClick={() => success('Success message!')}
                 variant="primary"
-                style={{ marginRight: '0.5rem' }}
+                className="mr-2"
               >
                 Success
               </Button>
-              <Button
-                onClick={() => error('Error message!')}
-                variant="outline"
-                style={{ marginRight: '0.5rem' }}
-              >
+              <Button onClick={() => error('Error message!')} variant="outline" className="mr-2">
                 Error
               </Button>
               <Button
                 onClick={() => warning('Warning message!')}
                 variant="outline"
-                style={{ marginRight: '0.5rem' }}
+                className="mr-2"
               >
                 Warning
               </Button>

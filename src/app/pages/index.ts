@@ -22,4 +22,5 @@ export {
   LoadersPage,
   MicroInteractionsPage,
   PageTransitionsPage,
+  BreadcrumbPage,
 } from './examples';

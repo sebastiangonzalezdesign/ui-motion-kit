@@ -207,7 +207,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   return createPortal(
     <AnimatePresence>
       <motion.div
-        className={`drawer-backdrop ${backdropClassName}`}
+        className={`drawer__backdrop ${backdropClassName}`}
         variants={backdropVariants}
         initial="hidden"
         animate="visible"

@@ -11,9 +11,14 @@ interface BreadcrumbItem {
 export interface BreadcrumbProps {
   items?: BreadcrumbItem[];
   className?: string;
+  preventNavigation?: boolean;
 }
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' }) => {
+const Breadcrumb: React.FC<BreadcrumbProps> = ({
+  items,
+  className = '',
+  preventNavigation = false,
+}) => {
   const location = useLocation();
 
   // Auto-generate breadcrumbs if not provided
@@ -29,7 +34,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' }) => {
     tabs: 'navigation',
     navbar: 'navigation',
     sidebar: 'navigation',
-    breadcrumbs: 'navigation',
+    breadcrumb: 'navigation',
 
     // Feedback
     modals: 'feedback',
@@ -97,6 +102,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, className = '' }) => {
                   to={item.path}
                   className="breadcrumb__link"
                   aria-current={isLast ? 'page' : undefined}
+                  onClick={preventNavigation ? (e) => e.preventDefault() : undefined}
                 >
                   {isFirst && <HomeIcon className="breadcrumb__home-icon" />}
                   {item.label}

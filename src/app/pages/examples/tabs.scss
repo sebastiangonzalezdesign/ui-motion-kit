@@ -266,6 +266,7 @@
 .demo-card {
   padding: 2rem !important;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 
   .tabs {
     width: 100%;
@@ -289,5 +290,31 @@
         background: var(--surface-tertiary);
       }
     }
+  }
+}
+
+// Feature grid for individual features
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+// Features section styling
+.features-section {
+  margin-top: 4rem;
+
+  h2 {
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    font-size: 1.875rem;
+    font-weight: 600;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
 }

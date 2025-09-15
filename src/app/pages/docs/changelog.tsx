@@ -2,6 +2,20 @@ import { Link } from 'react-router-dom';
 import { Card } from '../../../components/primitives';
 import { Hero } from '../../components';
 import { Button } from '../../../components/primitives';
+import { Breadcrumb } from '../../../components/navigation';
+import {
+  BugAntIcon,
+  SparklesIcon,
+  RocketLaunchIcon,
+  ArrowPathIcon,
+  TrashIcon,
+  DocumentTextIcon,
+  GiftIcon,
+  ShieldCheckIcon,
+  CubeIcon,
+  CodeBracketIcon,
+  PaintBrushIcon,
+} from '@heroicons/react/24/outline';
 import './changelog.scss';
 
 interface ChangelogEntry {
@@ -18,115 +32,36 @@ interface ChangelogEntry {
 const Changelog = () => {
   const entries: ChangelogEntry[] = [
     {
-      version: '2.1.0',
-      date: '2025-03-15',
-      type: 'minor',
-      description:
-        'Revolutionary Experience System launch with context-aware components and intelligent UI adaptation.',
-      changes: [
-        {
-          category: 'added',
-          items: [
-            'Experience System - Context-aware component behavior',
-            'Smart Motion Buttons with adaptive timing',
-            'Intelligent Forms with progressive disclosure',
-            'Smart Data Display components',
-            'User behavior analytics integration',
-            'Device-specific optimizations',
-            'Accessibility adaptation system',
-          ],
-        },
-        {
-          category: 'changed',
-          items: [
-            'Enhanced motion token system',
-            'Improved component performance',
-            'Updated documentation structure',
-          ],
-        },
-      ],
-    },
-    {
-      version: '2.0.0',
-      date: '2025-01-15',
+      version: '1.0.0',
+      date: '2025-09-14',
       type: 'major',
       description:
-        'Complete Pro version transformation with premium components and advanced motion system.',
+        'Initial release of Motion UI Kit Pro with comprehensive component library and design system.',
       changes: [
         {
           category: 'added',
           items: [
-            'Advanced Tabs component with lazy loading and animations',
-            'Toast notification system with positioning and stacking',
+            'Complete component library (Button, Card, Modal, Tabs, Toast)',
+            'Advanced motion system with spring animations',
             'Comprehensive design token system',
-            'Motion tokens with spring presets',
+            'Hero component with animations and illustrations',
+            'ThemeToggle with smooth transitions',
             'Dark mode support across all components',
             'TypeScript interfaces for all components',
-            'Responsive design system',
+            'Experience System with SmartButton',
+            'Responsive design system with breakpoints',
+            'SCSS architecture with design tokens',
+            'Navigation components (Navbar, Breadcrumb, Drawer)',
+            'Documentation site with interactive examples',
           ],
         },
         {
           category: 'changed',
           items: [
-            'Redesigned navigation structure',
-            'Improved component documentation',
+            'Migrated from Tailwind to custom design system',
             'Enhanced accessibility features',
+            'Improved component APIs',
             'Updated color system with semantic tokens',
-          ],
-        },
-        {
-          category: 'fixed',
-          items: [
-            'Animation performance optimizations',
-            'Mobile responsive issues',
-            'Theme switching persistence',
-          ],
-        },
-      ],
-    },
-    {
-      version: '1.5.0',
-      date: '2024-12-20',
-      type: 'minor',
-      description: 'Enhanced components and improved developer experience.',
-      changes: [
-        {
-          category: 'added',
-          items: [
-            'New Card component with ratings and badges',
-            'Enhanced Button variants',
-            'Improved Modal animations',
-            'Code preview components',
-          ],
-        },
-        {
-          category: 'changed',
-          items: [
-            'Simplified component APIs',
-            'Better TypeScript support',
-            'Improved documentation',
-          ],
-        },
-        {
-          category: 'fixed',
-          items: ['Button focus states', 'Modal backdrop clicks', 'Animation timing issues'],
-        },
-      ],
-    },
-    {
-      version: '1.0.0',
-      date: '2024-11-15',
-      type: 'major',
-      description: 'Initial release of Motion UI Kit with core components.',
-      changes: [
-        {
-          category: 'added',
-          items: [
-            'Button component with hover animations',
-            'Modal component with slide transitions',
-            'Basic theme system',
-            'Framer Motion integration',
-            'Core SCSS architecture',
           ],
         },
       ],
@@ -149,15 +84,15 @@ const Changelog = () => {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'added':
-        return '✨';
+        return <SparklesIcon className="category-icon" />;
       case 'changed':
-        return '🔄';
+        return <ArrowPathIcon className="category-icon" />;
       case 'fixed':
-        return '🐛';
+        return <BugAntIcon className="category-icon" />;
       case 'removed':
-        return '🗑️';
+        return <TrashIcon className="category-icon" />;
       default:
-        return '📝';
+        return <DocumentTextIcon className="category-icon" />;
     }
   };
 
@@ -186,12 +121,20 @@ const Changelog = () => {
 
   return (
     <div className="changelog-page">
+      <Breadcrumb
+        items={[
+          { label: 'Home', path: '/' },
+          { label: 'Changelog', path: '/docs/changelog' },
+        ]}
+        className="changelog-breadcrumb"
+      />
+
       <Hero
-        headline="Roadmap & Changelog"
-        description="Follow our development journey and see what's planned ahead. Track new features, improvements, and the future of Motion UI Kit Pro."
-        backgroundColor="brand-gradient"
+        headline="Changelog & Roadmap"
+        description="Track our development journey and see what's coming next. Follow new features, improvements, and the evolution of Motion UI Kit Pro."
+        backgroundColor="brand-medium"
         borderRadius="lg"
-        size="lg"
+        size="md"
         showIllustrations={false}
       />
 
@@ -232,36 +175,67 @@ const Changelog = () => {
 
       {/* Changelog Entries */}
       <section className="changelog-entries">
-        <h2 className="text-heading-lg">Upcoming Roadmap</h2>
+        <h2 className="section-heading">Upcoming Roadmap</h2>
         <div className="entries-list">
           <Card className="roadmap-item upcoming">
             <div className="entry-header">
               <div className="version-info">
-                <h3>v2.2.0</h3>
+                <h3>v1.1.0</h3>
                 <span className="version-badge version-badge--minor">Minor</span>
                 <span className="entry-date">Q4 2025</span>
               </div>
             </div>
             <p className="entry-description">
-              Advanced ML integration and predictive UI adaptation
+              Enhanced components and improved developer experience
             </p>
             <div className="entry-changes">
               <div className="change-group">
-                <h4 className="change-category change-category--success">🔮 Planned Features</h4>
+                <h4 className="change-category change-category--success">
+                  <RocketLaunchIcon className="category-icon" />
+                  Planned Features
+                </h4>
                 <ul className="change-list">
-                  <li>Machine learning for predictive UI adaptation</li>
-                  <li>Advanced analytics dashboard</li>
-                  <li>Real-time user behavior insights</li>
+                  <li>Command Palette component improvements</li>
+                  <li>Enhanced drawer animations and positioning</li>
+                  <li>Advanced input components (Select, Autocomplete)</li>
+                  <li>Form validation system</li>
+                  <li>NPM package distribution</li>
+                  <li>Storybook documentation</li>
+                </ul>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="roadmap-item future">
+            <div className="entry-header">
+              <div className="version-info">
+                <h3>v1.2.0</h3>
+                <span className="version-badge version-badge--minor">Minor</span>
+                <span className="entry-date">Q1 2026</span>
+              </div>
+            </div>
+            <p className="entry-description">
+              Advanced Experience System and AI-powered adaptations
+            </p>
+            <div className="entry-changes">
+              <div className="change-group">
+                <h4 className="change-category change-category--info">
+                  <SparklesIcon className="category-icon" />
+                  Future Vision
+                </h4>
+                <ul className="change-list">
+                  <li>Enhanced Experience System with machine learning</li>
+                  <li>Predictive UI adaptation</li>
+                  <li>Advanced analytics and insights</li>
                   <li>A/B testing framework integration</li>
+                  <li>Performance optimization tools</li>
                 </ul>
               </div>
             </div>
           </Card>
         </div>
 
-        <h2 className="text-heading-lg" style={{ marginTop: '3rem' }}>
-          Release History
-        </h2>
+        <h2 className="section-heading">Release History</h2>
         <div className="entries-list">
           {entries.map((entry, index) => (
             <Card key={entry.version} className={`changelog-entry ${index === 0 ? 'latest' : ''}`}>
@@ -302,23 +276,38 @@ const Changelog = () => {
       {/* Pro Version Benefits */}
       <section className="pro-benefits">
         <Card className="card--highlight">
-          <h3>🚀 Pro Version Benefits</h3>
+          <div className="benefit-header">
+            <RocketLaunchIcon className="benefit-header-icon" />
+            <h3>Pro Version Benefits</h3>
+          </div>
           <p>
             Pro buyers get access to all updates and new components as they're released. Your
             purchase includes lifetime updates and priority support.
           </p>
           <div className="benefits-list">
             <div className="benefit">
-              <strong>Lifetime Updates:</strong> Get all future versions at no extra cost
+              <GiftIcon className="benefit-icon" />
+              <div>
+                <strong>Lifetime Updates:</strong> Get all future versions at no extra cost
+              </div>
             </div>
             <div className="benefit">
-              <strong>Priority Support:</strong> Get help directly from the creator
+              <ShieldCheckIcon className="benefit-icon" />
+              <div>
+                <strong>Priority Support:</strong> Get help directly from the creator
+              </div>
             </div>
             <div className="benefit">
-              <strong>Advanced Components:</strong> Access to premium motion components
+              <CubeIcon className="benefit-icon" />
+              <div>
+                <strong>Advanced Components:</strong> Access to premium motion components
+              </div>
             </div>
             <div className="benefit">
-              <strong>Source Code:</strong> Full access to component source and examples
+              <CodeBracketIcon className="benefit-icon" />
+              <div>
+                <strong>Source Code:</strong> Full access to component source and examples
+              </div>
             </div>
           </div>
           <div className="pro-actions">
@@ -329,7 +318,7 @@ const Changelog = () => {
             >
               Upgrade to Pro
             </Button>
-            <Link to="/components">
+            <Link to="/docs/components">
               <Button variant="outline">View Components</Button>
             </Link>
           </div>
@@ -341,27 +330,36 @@ const Changelog = () => {
         <h3>Looking for Something Specific?</h3>
         <div className="nav-grid">
           <Card>
-            <h4>🎨 Design Tokens</h4>
+            <div className="nav-card-header">
+              <PaintBrushIcon className="nav-card-icon" />
+              <h4>Design Tokens</h4>
+            </div>
             <p>See the complete token system</p>
-            <Link to="/design-tokens">
+            <Link to="/docs/design-tokens">
               <Button size="sm" variant="outline">
                 View Tokens
               </Button>
             </Link>
           </Card>
           <Card>
-            <h4>📚 Documentation</h4>
+            <div className="nav-card-header">
+              <DocumentTextIcon className="nav-card-icon" />
+              <h4>Documentation</h4>
+            </div>
             <p>Learn how to use and customize</p>
-            <Link to="/docs">
+            <Link to="/docs/documentation">
               <Button size="sm" variant="outline">
                 Read Docs
               </Button>
             </Link>
           </Card>
           <Card>
-            <h4>🧩 Components</h4>
+            <div className="nav-card-header">
+              <CubeIcon className="nav-card-icon" />
+              <h4>Components</h4>
+            </div>
             <p>Browse all components</p>
-            <Link to="/components">
+            <Link to="/docs/components">
               <Button size="sm" variant="outline">
                 View Components
               </Button>

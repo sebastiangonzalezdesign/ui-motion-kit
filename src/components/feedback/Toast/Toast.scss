@@ -1,18 +1,16 @@
 // Toast Component Styles
-@use '../../../styles/abstracts/tokens' as *;
-@use '../../../styles/abstracts/breakpoints' as *;
-@use '../../../styles/abstracts/motion' as *;
+@use '../../../styles/abstracts' as *;
 
 // Toast Container positioning
 .toast-container {
   position: fixed;
-  z-index: 9999;
+  z-index: $z-toast;
   pointer-events: none;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: $space-3;
   max-height: 100vh;
-  padding: 1rem;
+  padding: $space-4;
   overflow: hidden;
 
   // Position variants
@@ -60,7 +58,7 @@
   // Responsive adjustments
   @media (max-width: 640px) {
     width: 100%;
-    padding: 0.75rem;
+    padding: $space-3;
 
     &--top-center,
     &--bottom-center {
@@ -75,16 +73,14 @@
   pointer-events: auto;
   min-width: 300px;
   max-width: 500px;
-  padding: 1rem;
-  background: var(--surface-primary);
-  border: 1px solid var(--border-primary);
-  border-radius: 12px;
-  box-shadow:
-    0 10px 38px -10px rgba(22, 23, 24, 0.35),
-    0 10px 20px -15px rgba(22, 23, 24, 0.2);
+  padding: $space-4;
+  background: $background-primary;
+  border: 1px solid $border-light;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-xl;
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: $space-3;
   position: relative;
   backdrop-filter: blur(8px);
 
@@ -93,41 +89,41 @@
 
   // Type-specific styling
   &--success {
-    border-left: 4px solid var(--success-primary);
+    border-left: 4px solid $feedback-success;
 
     .toast__icon {
-      color: var(--success-primary);
+      color: $feedback-success;
     }
   }
 
   &--error {
-    border-left: 4px solid var(--error-primary);
+    border-left: 4px solid $feedback-error;
 
     .toast__icon {
-      color: var(--error-primary);
+      color: $feedback-error;
     }
   }
 
   &--warning {
-    border-left: 4px solid var(--warning-primary);
+    border-left: 4px solid $feedback-warning;
 
     .toast__icon {
-      color: var(--warning-primary);
+      color: $feedback-warning;
     }
   }
 
   &--info {
-    border-left: 4px solid var(--accent-primary);
+    border-left: 4px solid $feedback-info;
 
     .toast__icon {
-      color: var(--accent-primary);
+      color: $feedback-info;
     }
   }
 
   // Icon styling
   &__icon {
     flex-shrink: 0;
-    margin-top: 0.125rem;
+    margin-top: $space-0-5;
 
     svg {
       width: 20px;
@@ -143,78 +139,32 @@
 
   // Title styling
   &__title {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 0.25rem;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $space-1;
     line-height: 1.4;
   }
 
   // Message styling
   &__message {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
+    font-size: $font-size-sm;
+    color: $text-secondary;
     line-height: 1.5;
     word-wrap: break-word;
   }
 
-  // Action button
+  // Action button - using design system button styles
   &__action {
-    margin-top: 0.75rem;
-    padding: 0.375rem 0.75rem;
-    background: var(--accent-primary);
-    color: var(--accent-contrast);
-    border: none;
-    border-radius: 6px;
+    margin-top: $space-3;
     font-size: 0.8125rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background: var(--accent-secondary);
-      transform: translateY(-1px);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--accent-primary);
-      outline-offset: 2px;
-    }
   }
 
-  // Dismiss button
+  // Dismiss button - using design system button styles
   &__dismiss {
     flex-shrink: 0;
-    padding: 0.25rem;
-    background: none;
-    border: none;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
     margin-top: -0.125rem;
     margin-right: -0.25rem;
-
-    &:hover {
-      background: var(--surface-secondary);
-      color: var(--text-secondary);
-    }
-
-    &:active {
-      transform: scale(0.95);
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--accent-primary);
-      outline-offset: 2px;
-    }
 
     svg {
       width: 16px;
@@ -228,10 +178,10 @@
     max-width: none;
     width: 100%;
     margin: 0;
-    padding: 0.875rem;
+    padding: $space-3-5;
 
     &__content {
-      margin-right: 0.5rem;
+      margin-right: $space-2;
     }
 
     &__title {
@@ -243,35 +193,23 @@
     }
 
     &__action {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      margin-top: 1rem;
+      font-size: $font-size-sm;
+      margin-top: $space-4;
     }
   }
 
   // Reduced motion
   @media (prefers-reduced-motion: reduce) {
     transition: none;
-
-    &__action,
-    &__dismiss {
-      transition: none;
-    }
   }
 }
 
 // Dark mode adjustments
 [data-theme='dark'] {
   .toast {
-    background: var(--surface-secondary);
-    border-color: var(--border-secondary);
-    box-shadow:
-      0 10px 38px -10px rgba(0, 0, 0, 0.5),
-      0 10px 20px -15px rgba(0, 0, 0, 0.4);
-
-    &__dismiss:hover {
-      background: var(--surface-tertiary);
-    }
+    background: $background-secondary;
+    border-color: $border-medium;
+    box-shadow: $shadow-xl-dark;
   }
 }
 
@@ -294,14 +232,6 @@
 
     &--info {
       border-left-width: 6px;
-    }
-
-    &__action {
-      border: 1px solid var(--accent-primary);
-    }
-
-    &__dismiss {
-      border: 1px solid var(--border-primary);
     }
   }
 }
@@ -339,8 +269,8 @@
   bottom: 0;
   left: 0;
   height: 2px;
-  background: var(--accent-primary);
-  border-radius: 0 0 12px 12px;
+  background: $accent-primary;
+  border-radius: 0 0 $radius-lg $radius-lg;
   transform-origin: left;
   animation: progress linear;
 
@@ -362,12 +292,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--warning-primary) 80%,
-    var(--error-primary) 100%
-  );
+  background: linear-gradient(90deg, transparent 0%, $feedback-warning 80%, $feedback-error 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }

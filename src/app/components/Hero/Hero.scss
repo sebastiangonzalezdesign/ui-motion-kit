@@ -6,6 +6,8 @@
 .hero {
   width: 100%;
   padding: calc($space-2xl + 2rem) 0 calc($space-2xl + 4rem);
+  position: relative; // Ensure illustrations are contained within hero
+  overflow: hidden; // Prevent illustrations from escaping on wide screens
 
   @include respond('sm') {
     padding: calc($space-2xl + 2.5rem) 0 calc($space-2xl + 4rem);
@@ -150,21 +152,38 @@
   // Desktop positioning adjustments (moved outside mobile block)
   @include respond('md') {
     .hero__floating-preview--1 {
-      right: 12% !important; // ← Adjust this (0-20%)
-      top: 25% !important; // ← Position relative to hero section instead of viewport
-      transform: scale(0.9); // Remove !important to allow Framer Motion animations
+      right: min(
+        12%,
+        calc((100vw - 1200px) / 2 + 80px)
+      ) !important; // Responsive to container width
+      top: 25% !important;
+      transform: scale(0.9);
       z-index: 3;
-      left: auto !important; // Override any conflicting left positioning
+      left: auto !important;
     }
 
     .hero__floating-preview--2 {
-      right: 15% !important; // ← Adjust this (0-20%)
-      top: 30% !important; // ← Position relative to hero section instead of viewport
-      transform: scale(0.8); // Remove !important to allow Framer Motion animations
+      right: min(
+        15%,
+        calc((100vw - 1200px) / 2 + 100px)
+      ) !important; // Responsive to container width
+      top: 30% !important;
+      transform: scale(0.8);
       z-index: 2;
       transform-origin: top left;
-      translate: -8% 8%; // ← Adjust this offset
-      left: auto !important; // Override any conflicting left positioning
+      translate: -8% 8%;
+      left: auto !important;
+    }
+  }
+
+  // Extra wide screens - ensure illustrations don't float too far
+  @media (min-width: 1400px) {
+    .hero__floating-preview--1 {
+      right: calc((100vw - 1200px) / 2 + 120px) !important;
+    }
+
+    .hero__floating-preview--2 {
+      right: calc((100vw - 1200px) / 2 + 140px) !important;
     }
   }
 
@@ -428,6 +447,7 @@
   margin: 0 0 $space-lg 0;
   line-height: 1.6;
   opacity: 0.8;
+  max-width: 600px; // Prevent text from overlapping illustrations
 
   @include respond('sm') {
     font-size: $font-size-lg;

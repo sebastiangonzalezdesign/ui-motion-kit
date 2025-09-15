@@ -67,7 +67,8 @@ export const SmartButton: React.FC<SmartButtonProps> = ({
     }
 
     // Adapt variant based on user expertise and criticality
-    if (context.userType === 'first-time' && criticality === 'high') {
+    // Only override if not already set by intent-based adaptation
+    if (context.userType === 'first-time' && criticality === 'high' && !contextualProps.variant) {
       contextualProps.variant = 'primary'; // Make important actions more prominent for new users
     }
 

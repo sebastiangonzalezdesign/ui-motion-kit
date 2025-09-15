@@ -1,21 +1,318 @@
 @use '../../../styles/abstracts' as *;
 
-.loaders-page {
+.loading-states-page {
   padding: $space-xl;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
 
-  .demo-section {
-    margin-bottom: $space-xl;
+  // Configuration section - Full width with horizontal config groups
+  .configuration-section {
+    width: 100%;
 
-    .loader-examples {
-      ul {
-        list-style: disc;
-        padding-left: $space-lg;
+    .config-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $space-xl;
+      margin-top: $space-lg;
+    }
 
-        li {
-          margin-bottom: $space-sm;
+    .config-group {
+      h4 {
+        margin-bottom: $space-md;
+        color: $text-primary;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-base;
+      }
+
+      .config-controls {
+        display: flex;
+        flex-direction: column;
+        gap: $space-md;
+      }
+
+      .config-item {
+        display: flex;
+        flex-direction: column;
+        gap: $space-xs;
+
+        label {
+          font-size: $font-size-sm;
+          font-weight: $font-weight-medium;
           color: $text-secondary;
+        }
+
+        .button-group {
+          display: flex;
+          gap: $space-xs;
+          flex-wrap: wrap;
+
+          button {
+            flex: 1;
+            min-width: auto;
+          }
+        }
+
+        .range-value {
+          font-size: $font-size-sm;
+          color: $accent-primary;
+          font-weight: $font-weight-medium;
+          text-align: center;
+          padding: $space-xs;
+          background: rgba($accent-primary, 0.1);
+          border-radius: $radius-sm;
+          min-width: 50px;
+        }
+      }
+    }
+  }
+
+  // Demos grid
+  .demos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: $space-lg;
+  }
+
+  .demo-wrapper {
+    width: 100%;
+
+    .demo-content {
+      display: flex;
+      flex-direction: column;
+      gap: $space-lg;
+
+      .demo-area {
+        background: $background-secondary;
+        border-radius: $radius-md;
+        padding: $space-xl;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 120px;
+        position: relative;
+        border: 1px solid $border-light;
+
+        .success-state {
+          display: flex;
+          align-items: center;
+          gap: $space-sm;
+          color: $feedback-success;
+          font-weight: $font-weight-medium;
+
+          .success-icon {
+            font-size: $font-size-lg;
+            background: $feedback-success;
+            color: white;
+            border-radius: $radius-full;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        .card-content {
+          width: 100%;
+          max-width: 300px;
+
+          p {
+            margin-bottom: $space-md;
+            color: $text-secondary;
+            line-height: 1.5;
+          }
+
+          .card-actions {
+            display: flex;
+            gap: $space-sm;
+          }
+        }
+      }
+    }
+  }
+
+  // Bottom sections - Features and Guidelines horizontal layout
+  .bottom-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-xl;
+    width: 100%;
+  }
+
+  // Features section
+  .features-section {
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $space-md;
+      margin-top: $space-lg;
+
+      .feature-item {
+        padding: $space-md;
+        border-radius: $radius-md;
+        background: $background-secondary;
+        border: 1px solid $border-light;
+        transition: all 0.2s ease;
+
+        &:hover {
+          border-color: $accent-primary;
+          box-shadow: 0 4px 12px rgba($accent-primary, 0.1);
+          transform: translateY(-2px);
+        }
+
+        h4 {
+          color: $text-primary;
+          font-weight: $font-weight-semibold;
+          margin-bottom: $space-sm;
+          font-size: $font-size-sm;
+        }
+
+        p {
+          color: $text-secondary;
+          line-height: 1.5;
+          font-size: $font-size-xs;
+        }
+      }
+    }
+  }
+
+  // Guidelines section
+  .guidelines-section {
+    .guidelines-content {
+      display: flex;
+      flex-direction: column;
+      gap: $space-lg;
+      margin-top: $space-lg;
+
+      .guideline-section {
+        h4 {
+          color: $text-primary;
+          font-weight: $font-weight-semibold;
+          margin-bottom: $space-md;
+          font-size: $font-size-base;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+
+          li {
+            position: relative;
+            padding-left: $space-lg;
+            margin-bottom: $space-sm;
+            color: $text-secondary;
+            line-height: 1.5;
+            font-size: $font-size-sm;
+
+            &::before {
+              content: '•';
+              position: absolute;
+              left: 0;
+              color: $accent-primary;
+              font-weight: bold;
+              font-size: $font-size-lg;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    padding: $space-lg;
+    gap: $space-lg;
+
+    .configuration-section {
+      .config-grid {
+        grid-template-columns: 1fr;
+        gap: $space-lg;
+      }
+    }
+
+    .bottom-sections {
+      grid-template-columns: 1fr;
+      gap: $space-lg;
+    }
+
+    .features-section {
+      .features-grid {
+        .feature-item {
+          padding: $space-lg;
+
+          h4 {
+            font-size: $font-size-base;
+          }
+
+          p {
+            font-size: $font-size-sm;
+          }
+        }
+      }
+    }
+
+    .demo-wrapper {
+      .demo-content {
+        .demo-area {
+          padding: $space-lg;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: $space-md;
+
+    .demo-wrapper {
+      .demo-content {
+        .demo-area {
+          padding: $space-md;
+          min-height: 100px;
+        }
+      }
+    }
+
+    .configuration-section {
+      .config-group {
+        .config-item {
+          .button-group {
+            button {
+              flex: none;
+              min-width: 60px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Dark mode adjustments
+[data-theme='dark'] {
+  .loading-states-page {
+    .demo-wrapper {
+      .demo-content {
+        .demo-area {
+          background: $background-tertiary;
+          border-color: $border-medium;
+        }
+      }
+    }
+
+    .features-section {
+      .features-grid {
+        .feature-item {
+          background: $background-tertiary;
+          border-color: $border-medium;
+
+          &:hover {
+            border-color: $accent-primary;
+            box-shadow: 0 4px 12px rgba($accent-primary, 0.2);
+          }
         }
       }
     }

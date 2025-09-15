@@ -1,23 +1,349 @@
 @use '../../../styles/abstracts' as *;
 
 .navbar-page {
-  padding: $space-xl;
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 
+  h1 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .page-description {
+    margin-bottom: 3rem;
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
   .demo-section {
-    margin-bottom: $space-xl;
+    margin-bottom: 4rem;
 
-    .navbar-examples {
-      ul {
-        list-style: disc;
-        padding-left: $space-lg;
+    h2 {
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+    }
 
-        li {
-          margin-bottom: $space-sm;
-          color: $text-secondary;
+    .configuration-panel {
+      .configuration-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-lg);
+
+        @media (max-width: 768px) {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+
+        .config-section {
+          .section-header {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-medium);
+
+            .icon {
+              width: 1.25rem;
+              height: 1.25rem;
+              color: var(--accent-primary);
+            }
+          }
+
+          .form-controls {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            position: relative;
+            z-index: 1;
+
+            .control-group {
+              .button-group {
+                display: flex;
+                gap: var(--spacing-sm);
+                flex-wrap: wrap;
+                align-items: center;
+              }
+            }
+          }
         }
       }
+    }
+
+    .demo-controls {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--surface-primary);
+      border: 1px solid var(--border-primary);
+      border-radius: 12px;
+
+      .control-group {
+        margin-bottom: 1.5rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: var(--text-secondary);
+          font-weight: 500;
+        }
+
+        .button-group {
+          display: flex;
+          gap: var(--spacing-sm);
+          flex-wrap: wrap;
+          align-items: center;
+
+          .control-button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            background: var(--surface-secondary);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+
+            &:hover {
+              background: var(--surface-tertiary);
+              color: var(--text-primary);
+            }
+
+            &:focus {
+              outline: none;
+              border-color: var(--accent-primary);
+              box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.2);
+            }
+
+            &:focus-visible {
+              outline: none;
+              border-color: var(--accent-primary);
+              box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.2);
+            }
+
+            &.active {
+              background: var(--accent-primary);
+              color: var(--accent-contrast);
+              border-color: var(--accent-primary);
+            }
+          }
+        }
+        .checkbox-group {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+
+          .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+
+            input[type='checkbox'] {
+              width: 1rem;
+              height: 1rem;
+              accent-color: var(--accent-primary);
+              outline: none;
+
+              &:focus {
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.2);
+              }
+
+              &:focus-visible {
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(var(--accent-primary-rgb), 0.2);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .demo-card {
+      width: 100%;
+      max-width: none;
+      padding: var(--spacing-lg);
+      margin-top: var(--spacing-lg);
+      transition: all 0.3s ease;
+
+      .navbar-demo-wrapper {
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--surface-primary);
+        border-radius: var(--radius-md);
+        padding: var(--spacing-md);
+        border: 1px solid var(--border-primary);
+        transition: all 0.3s ease;
+        position: relative;
+
+        // Add space for mobile menu when it's open
+        .navbar.navbar--mobile-menu-open ~ .navbar-mobile-menu {
+          margin-top: var(--spacing-md);
+        }
+
+        // Make the wrapper expand when mobile menu is open
+        .navbar.navbar--mobile-menu-open {
+          & ~ .navbar-mobile-menu {
+            animation: slideDown 0.3s ease-out;
+          }
+        }
+
+        // Ensure mobile menu is visible and styled properly
+        .navbar-mobile-menu {
+          position: relative;
+          top: auto;
+          left: auto;
+          right: auto;
+          width: 100%;
+          background: var(--surface-primary);
+          border: 1px solid var(--border-primary);
+          border-radius: var(--radius-md);
+          margin-top: var(--spacing-sm);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+
+          &.open {
+            max-height: 400px;
+          }
+        }
+      }
+    }
+
+    // Animation for mobile menu
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    // Responsive styles for mobile menu
+    @media (max-width: 768px) {
+      .navbar-demo-wrapper {
+        .navbar-mobile-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          border-radius: 0 0 var(--radius-md) var(--radius-md);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+      }
+    }
+  }
+
+  .examples-section {
+    margin-bottom: 4rem;
+
+    h2 {
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+    }
+
+    .navbar-preview-wrapper {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      background: var(--surface-secondary);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+  }
+
+  .features-section {
+    margin-top: 4rem;
+
+    h2 {
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .navbar-page {
+    padding: 1rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .page-description {
+      font-size: 1rem;
+    }
+
+    .demo-section .demo-controls {
+      padding: 1rem;
+
+      .control-group .button-group {
+        gap: var(--spacing-xs);
+
+        .control-button {
+          padding: var(--spacing-xs) var(--spacing-sm);
+          font-size: 0.8125rem;
+        }
+      }
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-md);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-page {
+    h1 {
+      font-size: 1.75rem;
+    }
+
+    .page-description {
+      font-size: 1rem;
+    }
+
+    .demo-section h2,
+    .examples-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .demo-section .demo-controls .control-group .button-group .control-button {
+      padding: var(--spacing-xs) var(--spacing-xs);
+      font-size: 0.75rem;
     }
   }
 }

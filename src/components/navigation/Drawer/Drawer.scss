@@ -115,7 +115,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $space-md;
+    padding: $space-4;
     border-bottom: 1px solid $color-border;
     background: $color-surface;
     flex-shrink: 0;
@@ -136,12 +136,13 @@
     height: 2rem;
     padding: 0;
     margin: 0;
+    margin-left: auto; // Move to right
     background: transparent;
     border: 1px solid $color-border;
     border-radius: $radius-sm;
     color: $color-text-secondary;
     cursor: pointer;
-    transition: all $transition-fast;
+    transition: $transition-fast;
 
     &:hover {
       background: $color-surface-hover;
@@ -169,12 +170,12 @@
   &__content {
     flex: 1;
     overflow-y: auto;
-    padding: $space-md;
+    padding: $space-4;
   }
 
   // Footer
   &__footer {
-    padding: $space-md;
+    padding: $space-4;
     border-top: 1px solid $color-border;
     background: $color-surface;
     flex-shrink: 0;
@@ -191,32 +192,64 @@
     }
   }
 
-  &--left &__drag-handle {
-    top: 0;
-    right: -4px;
-    bottom: 0;
-    width: 8px;
+  // Drag indicator
+  &__drag-indicator {
+    position: absolute;
+    z-index: 1;
+
+    .drag-handle {
+      background: $color-border;
+      border-radius: $radius-sm;
+      transition: $transition-fast;
+
+      &:hover {
+        background: $color-border-hover;
+      }
+    }
   }
 
-  &--right &__drag-handle {
-    top: 0;
-    left: -4px;
-    bottom: 0;
-    width: 8px;
+  &--left &__drag-indicator {
+    top: 50%;
+    right: $space-1;
+    transform: translateY(-50%);
+
+    .drag-handle {
+      width: 4px;
+      height: $space-8;
+    }
   }
 
-  &--top &__drag-handle {
-    left: 0;
-    right: 0;
-    bottom: -4px;
-    height: 8px;
+  &--right &__drag-indicator {
+    top: 50%;
+    left: $space-1;
+    transform: translateY(-50%);
+
+    .drag-handle {
+      width: 4px;
+      height: $space-8;
+    }
   }
 
-  &--bottom &__drag-handle {
-    left: 0;
-    right: 0;
-    top: -4px;
-    height: 8px;
+  &--top &__drag-indicator {
+    left: 50%;
+    bottom: $space-1;
+    transform: translateX(-50%);
+
+    .drag-handle {
+      width: $space-8;
+      height: 4px;
+    }
+  }
+
+  &--bottom &__drag-indicator {
+    left: 50%;
+    top: $space-1;
+    transform: translateX(-50%);
+
+    .drag-handle {
+      width: $space-8;
+      height: 4px;
+    }
   }
 
   // Responsive adjustments
@@ -264,15 +297,15 @@
     }
 
     &__header {
-      padding: $space-sm;
+      padding: $space-3;
     }
 
     &__content {
-      padding: $space-sm;
+      padding: $space-3;
     }
 
     &__footer {
-      padding: $space-sm;
+      padding: $space-3;
     }
   }
 

@@ -11,8 +11,8 @@ $themes: (
   light: (
     // Background tokens
     background-primary: map.get(colors.$gray, 50),
-    background-secondary: map.get(colors.$gray, 100),
-    background-tertiary: map.get(colors.$gray, 200),
+    background-secondary: map.get(colors.$gray, 200),
+    background-tertiary: map.get(colors.$gray, 300),
     background-accent: map.get(colors.$blue, 600),
     background-white: map.get(colors.$base, white),
     background-inverse: map.get(colors.$gray, 900),

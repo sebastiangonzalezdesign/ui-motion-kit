@@ -2,13 +2,160 @@
 
 // Design Tokens Page Styles
 .design-tokens-page {
-  padding: 2rem;
+  padding: $space-8;
   max-width: 1400px;
   margin: 0 auto;
 
   // Custom breadcrumb spacing
   .design-tokens-breadcrumb {
-    margin-bottom: 2rem;
+    margin-bottom: $space-8;
+  }
+
+  // Card header with icon styles
+  .card-header-with-icon {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-4;
+
+    .section-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-primary);
+      flex-shrink: 0;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: var(--text-primary);
+    }
+  }
+
+  // Quick link header styles
+  .quick-link-header {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    margin-bottom: $space-4;
+
+    svg {
+      color: var(--accent-primary);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-base;
+      font-weight: $font-weight-medium;
+      color: var(--text-primary);
+    }
+  }
+
+  // Theme toggle demo styles
+  .theme-toggle-demo {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    padding: $space-4;
+    background: var(--background-secondary);
+    border-radius: $radius-md;
+    border: 1px solid var(--border-light);
+
+    .toggle-description {
+      font-size: $font-size-sm;
+      color: var(--text-secondary);
+    }
+  }
+
+  // Coming soon badge
+  .coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: $space-1 $space-2;
+    background: var(--feedback-warning);
+    color: white;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    margin-bottom: $space-2;
+  }
+
+  .future-feature-notice {
+    padding: $space-4;
+    background: var(--background-tertiary);
+    border-radius: $radius-md;
+    border-left: 4px solid var(--feedback-warning);
+
+    p {
+      margin: $space-2 0 0 0;
+      color: var(--text-secondary);
+      font-size: $font-size-sm;
+    }
+  }
+
+  // Next steps card styling
+  .next-steps-card {
+    border: 2px solid var(--accent-primary);
+    background: linear-gradient(
+      135deg,
+      var(--background-primary) 0%,
+      var(--background-secondary) 100%
+    );
+  }
+
+  .next-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    margin-top: $space-4;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $space-4;
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--accent-primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: $font-weight-bold;
+      font-size: $font-size-sm;
+      flex-shrink: 0;
+    }
+
+    div {
+      flex: 1;
+
+      strong {
+        display: block;
+        color: var(--text-primary);
+        font-weight: $font-weight-semibold;
+        margin-bottom: $space-1;
+      }
+
+      p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: $font-size-sm;
+        line-height: 1.5;
+
+        a {
+          color: var(--accent-primary);
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
 
   // Layout

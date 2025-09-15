@@ -13,6 +13,7 @@ import {
   StarIcon,
 } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/solid';
+import './Home.scss';
 
 const Home = () => {
   return (
@@ -56,14 +57,6 @@ const Home = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         viewport={{ once: true }}
-        style={{
-          padding: '4rem 0',
-          textAlign: 'center',
-          background:
-            'linear-gradient(135deg, var(--color-background-subtle) 0%, var(--color-background-muted) 100%)',
-          margin: '2rem 0',
-          borderRadius: 'var(--radius-lg)',
-        }}
       >
         <motion.div
           className="section-header"
@@ -81,31 +74,12 @@ const Home = () => {
         </motion.div>
 
         {/* Interactive Motion Token Demo */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            marginBottom: '2rem',
-          }}
-        >
+        <div className="motion-demo-chips">
           <motion.div
             className="motion-demo-chip"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.1, ease: 'easeOut' }}
-            style={{
-              padding: '0.75rem 1.25rem',
-              background: 'var(--accent-primary-light)',
-              color: 'var(--accent-primary)',
-              borderRadius: '9999px',
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              cursor: 'pointer',
-              border: '1px solid var(--border-light)',
-              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-            }}
           >
             motion-fast (150ms)
           </motion.div>
@@ -114,17 +88,6 @@ const Home = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            style={{
-              padding: '0.75rem 1.25rem',
-              background: 'var(--accent-primary-light)',
-              color: 'var(--accent-primary)',
-              borderRadius: '9999px',
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              cursor: 'pointer',
-              border: '1px solid var(--border-light)',
-              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-            }}
           >
             motion-normal (300ms)
           </motion.div>
@@ -133,17 +96,6 @@ const Home = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-            style={{
-              padding: '0.75rem 1.25rem',
-              background: 'var(--accent-primary-light)',
-              color: 'var(--accent-primary)',
-              borderRadius: '9999px',
-              fontSize: '0.875rem',
-              fontWeight: '500',
-              cursor: 'pointer',
-              border: '1px solid var(--border-light)',
-              boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-            }}
           >
             ease-spring
           </motion.div>
@@ -161,21 +113,22 @@ const Home = () => {
         </motion.div>
       </motion.section>
 
-      <section className="features-grid grid grid-3">
-        <motion.div
-          className="features-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-heading-xl">Revolutionary Experience System</h2>
-          <p className="text-body-lg">
-            Context-aware components that understand user intent and adapt automatically. The future
-            of intelligent UI frameworks.
-          </p>
-        </motion.div>
+      {/* Features Section */}
+      <motion.div
+        className="features-header"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-heading-xl">Revolutionary Experience System</h2>
+        <p className="text-body-lg">
+          Context-aware components that understand user intent and adapt automatically. The future
+          of intelligent UI frameworks.
+        </p>
+      </motion.div>
 
+      <section className="feature-cards-grid grid grid-3">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -262,77 +215,37 @@ const Home = () => {
       >
         <div className="section-header">
           <h2 className="text-heading-xl">
-            What's Next: V1.1 Development{' '}
-            <span
-              style={{
-                fontSize: '0.875rem',
-                color: 'var(--color-text-secondary)',
-                fontWeight: 'normal',
-              }}
-            >
-              (Q4 2025)
-            </span>
+            What's Next: V1.1 Development <span className="roadmap-date">(Q4 2025)</span>
           </h2>
           <p className="text-body-lg">
             Follow live development progress as we build the future of adaptive UI frameworks:
           </p>
         </div>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '1rem',
-            marginTop: '2rem',
-          }}
-        >
+        <div className="roadmap-cards">
           <Card>
             <h4>
               Intelligent Forms <ProBadge variant="premium" />
             </h4>
             <p>Adaptive validation and progressive disclosure based on user expertise</p>
-            <div
-              style={{
-                fontSize: '0.75rem',
-                color: 'var(--color-text-tertiary)',
-                marginTop: '0.5rem',
-              }}
-            >
-              Oct 2025
-            </div>
+            <div className="roadmap-date">Oct 2025</div>
           </Card>
           <Card>
             <h4>
               Smart Data Display <ProBadge variant="premium" />
             </h4>
             <p>Tables and lists that adapt complexity to user needs</p>
-            <div
-              style={{
-                fontSize: '0.75rem',
-                color: 'var(--color-text-tertiary)',
-                marginTop: '0.5rem',
-              }}
-            >
-              Nov 2025
-            </div>
+            <div className="roadmap-date">Nov 2025</div>
           </Card>
           <Card>
             <h4>
               ML Integration <ProBadge variant="premium" />
             </h4>
             <p>Machine learning for predictive UI adaptation</p>
-            <div
-              style={{
-                fontSize: '0.75rem',
-                color: 'var(--color-text-tertiary)',
-                marginTop: '0.5rem',
-              }}
-            >
-              Q1 2026
-            </div>
+            <div className="roadmap-date">Q1 2026</div>
           </Card>
         </div>
         <motion.div
-          style={{ marginTop: '2rem' }}
+          className="roadmap-cta"
           whileHover={{ scale: 1.02 }}
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         >
@@ -365,29 +278,15 @@ const Home = () => {
             href={getProCTALink()}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              color: 'inherit',
-              textDecoration: 'none',
-              display: 'block',
-              maxWidth: '320px',
-              margin: '0 auto',
-            }}
+            className="cta-button"
           >
             <Button size="lg" icon={<SparklesIcon />}>
               {getProCTAText()}
             </Button>
           </a>
         </motion.div>
-        <p style={{ fontSize: '0.875rem', marginTop: '1rem', opacity: 0.7 }}>
-          <HeartIcon
-            style={{
-              width: '1rem',
-              height: '1rem',
-              display: 'inline',
-              marginRight: '0.5rem',
-              color: 'var(--feedback-error)',
-            }}
-          />
+        <p className="disclaimer">
+          <HeartIcon className="heart-icon" />
           Everything above is free and open source. Pro tier adds premium templates and priority
           support.
         </p>
@@ -401,14 +300,6 @@ const Home = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true }}
-          style={{
-            marginTop: '3rem',
-            padding: '2rem',
-            background:
-              'linear-gradient(135deg, var(--accent-primary-light), var(--accent-secondary-light))',
-            borderRadius: 'var(--radius-lg)',
-            border: '2px solid var(--accent-primary)',
-          }}
         >
           <h2 className="text-heading-lg">
             🎉 Welcome Pro User! <ProBadge variant="premium" />
@@ -417,7 +308,7 @@ const Home = () => {
             You have access to exclusive premium templates, advanced components, and priority
             support.
           </p>
-          <div style={{ marginTop: '1.5rem' }}>
+          <div>
             <Button variant="outline">Access Pro Dashboard</Button>
           </div>
         </motion.section>
@@ -429,19 +320,18 @@ const Home = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         viewport={{ once: true }}
-        style={{ marginTop: '3rem', textAlign: 'center' }}
       >
         <h3>Open Source & Community Driven</h3>
         <p>
           Built by Sebastian González, used by designers & developers experimenting with
           motion-driven UIs.
         </p>
-        <p style={{ marginTop: '1rem' }}>
+        <p>
           This complete Experience System v1.0 is open source. Star us on GitHub and follow v1.1
           development!
         </p>
         <motion.div
-          style={{ marginTop: '1.5rem' }}
+          className="github-button"
           whileHover={{ scale: 1.02 }}
           transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         >
@@ -449,7 +339,7 @@ const Home = () => {
             href="https://github.com/sebastiangonzalezdesign/ui-motion-kit"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: 'inherit', textDecoration: 'none' }}
+            className="github-button"
           >
             <Button variant="outline" icon={<StarIcon />}>
               Star on GitHub

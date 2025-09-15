@@ -5,6 +5,7 @@ import { Hero } from '../../components';
 import { Button, SearchInput } from '../../../components/primitives';
 import { CodePreview } from '../../components';
 import { Breadcrumb } from '../../../components/navigation';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
 import type { SearchableItem } from '../../../components/primitives';
 import {
   // Documentation section icons
@@ -19,6 +20,13 @@ import {
   SparklesIcon,
   // Toggle icon
   Bars3Icon,
+  // Additional icons for content sections
+  ArchiveBoxIcon,
+  AcademicCapIcon,
+  BeakerIcon,
+  BuildingLibraryIcon,
+  Cog6ToothIcon,
+  CpuChipIcon,
 } from '@heroicons/react/24/outline';
 import './design-tokens.scss';
 
@@ -131,54 +139,6 @@ const Documentation = () => {
     }
   };
 
-  const installationCode = `# Install the Motion UI Kit
-npm install @motion-ui/kit
-
-# Or with yarn
-yarn add @motion-ui/kit
-
-# Import the CSS in your main.tsx or App.tsx
-import '@motion-ui/kit/dist/styles.css';`;
-
-  const setupCode = `// main.tsx
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { ThemeProvider } from '@motion-ui/kit';
-import { ExperienceProvider } from '@motion-ui/kit/experience';
-import './styles/main.scss';
-import App from './App.tsx';
-
-const experienceConfig = {
-  adaptationRules: [
-    {
-      condition: (context) => context.userType === 'first-time',
-      adaptations: [
-        {
-          componentType: 'button',
-          adaptations: {
-            guidance: 'show-hints',
-            complexity: 'simplified',
-          },
-        },
-      ],
-    },
-  ],
-  enableUsageTracking: true,
-  enableAutomaticAdaptation: true,
-  enablePredictiveLoading: false,
-  enableSmartBatching: false,
-};
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ThemeProvider>
-      <ExperienceProvider config={experienceConfig}>
-        <App />
-      </ExperienceProvider>
-    </ThemeProvider>
-  </StrictMode>
-);`;
-
   const tokenCustomizationCode = `// Override design tokens
 :root {
   /* Primary color customization */
@@ -290,57 +250,41 @@ const stiffSpring = {
   Hover me for gentle spring animation
 </motion.div>`;
 
-  const themingSetupCode = `// Theme Provider Setup
-import { ThemeProvider, useTheme } from '@motion-ui/kit';
-
-function App() {
-  return (
-    <ThemeProvider defaultTheme="light">
-      <YourAppContent />
-    </ThemeProvider>
-  );
+  const customThemeCode = `// Create a custom theme by overriding CSS custom properties
+:root {
+  /* Custom color palette */
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-accent: #f59e0b;
+  
+  /* Custom spacing scale */
+  --space-unit: 0.5rem;
+  --space-xs: calc(var(--space-unit) * 0.5);
+  --space-sm: var(--space-unit);
+  --space-md: calc(var(--space-unit) * 2);
+  --space-lg: calc(var(--space-unit) * 3);
+  
+  /* Custom typography */
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --font-size-base: 1rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
 }
 
-// Using the theme hook
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  
-  return (
-    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-      Switch to {theme === 'light' ? 'dark' : 'light'} mode
-    </button>
-  );
+/* Dark theme overrides */
+[data-theme="dark"] {
+  --surface-primary: #1a1a1a;
+  --surface-secondary: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
 }`;
-
-  const customThemeCode = `// Create a custom theme
-const customTheme = {
-  colors: {
-    primary: {
-      50: '#eff6ff',
-      500: '#3b82f6',
-      900: '#1e3a8a',
-    },
-    // ... more colors
-  },
-  fonts: {
-    sans: ['Inter', 'system-ui', 'sans-serif'],
-    mono: ['SF Mono', 'Monaco', 'monospace'],
-  },
-  spacing: {
-    xs: '0.5rem',
-    sm: '1rem',
-    md: '1.5rem',
-    // ... more spacing
-  }
-};
-
-// Apply custom theme
-<ThemeProvider theme={customTheme}>
-  <App />
-</ThemeProvider>`;
 
   // Experience System Code Examples
   const experienceSystemIntroCode = `// Traditional Button vs Smart Button
+import { Button } from '../../../components/primitives';
+import { SmartButton } from '../../../components/primitives';
+
 // Old way: Just visual variants
 <Button variant="primary">Save</Button>
 <Button variant="destructive">Delete</Button>
@@ -367,7 +311,7 @@ const customTheme = {
 </SmartButton>`;
 
   const experienceContextCode = `// Experience Context Provider Setup
-import { ExperienceProvider, useExperienceContext } from '@motion-ui/kit/experience';
+import { ExperienceProvider } from '../../../utils/experience-context';
 
 const experienceConfig = {
   adaptationRules: [
@@ -408,7 +352,8 @@ function App() {
 }`;
 
   const adaptiveComponentCode = `// Components that adapt to user context
-import { useExperienceContext, SmartButton } from '@motion-ui/kit/experience';
+import { useExperienceContext } from '../../../utils/experience-context';
+import { SmartButton } from '../../../components/primitives';
 
 function AdaptiveInterface() {
   const { context } = useExperienceContext();
@@ -427,16 +372,6 @@ function AdaptiveInterface() {
           : 'Continue'
         }
       </SmartButton>
-      
-      {/* Confirmation flow adapts to user expertise */}
-      <ConfirmationFlow
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-        isDestructive={true}
-        // Automatically adapts button sizes for mobile
-        // Shows more prominent warnings for first-time users
-        // Reduces friction for power users
-      />
     </div>
   );
 }`;
@@ -444,6 +379,8 @@ function AdaptiveInterface() {
   const intentDrivenCode = `// Intent-driven component design
 // Instead of asking "How should this look?"
 // Ask "What is the user trying to accomplish?"
+
+import { SmartButton } from '../../../components/primitives';
 
 const UserIntentExamples = () => (
   <div>
@@ -478,7 +415,7 @@ const UserIntentExamples = () => (
 );`;
 
   const learningSystemCode = `// Components that learn from user behavior
-import { SmartButton } from '@motion-ui/kit/experience';
+import { SmartButton } from '../../../components/primitives';
 
 function LearningComponent() {
   return (
@@ -522,7 +459,7 @@ function LearningComponent() {
 
       <Hero
         headline="Documentation"
-        description="Your complete developer handbook for building with Motion UI Kit. Learn setup, customization, and best practices."
+        description="Complete guide to Motion UI Kit components and design system. Start building with our professionally crafted components, or explore the advanced Experience System for adaptive interfaces."
         backgroundColor="brand-light"
         size="md"
         showIllustrations={false}
@@ -594,52 +531,83 @@ function LearningComponent() {
 
               <div className="doc-content">
                 <Card className="doc-card">
-                  <h3>📦 Installation</h3>
-                  <p>Install Motion UI Kit using your preferred package manager:</p>
+                  <div className="card-header-with-icon">
+                    <ArchiveBoxIcon className="section-icon" />
+                    <h3>Installation</h3>
+                  </div>
+                  <p>
+                    Motion UI Kit is currently in development. Installation via npm will be
+                    available soon:
+                  </p>
                   <CodePreview
-                    title="Package Installation"
+                    title="Future Package Installation"
                     preview={
                       <div className="installation-preview">
-                        <p>
-                          Install via npm or yarn to get started with the complete component
-                          library.
-                        </p>
+                        <div className="future-feature-notice">
+                          <span className="coming-soon-badge">Coming Soon</span>
+                          <p>
+                            NPM package installation will be available in the next release. For now,
+                            explore the components and copy the code you need from the examples.
+                          </p>
+                        </div>
                       </div>
                     }
-                    code={installationCode}
+                    code={`# Future installation (coming soon)
+npm install @motion-ui/kit
+
+# Or with yarn
+yarn add @motion-ui/kit
+
+# Current approach: Copy component code from examples
+# Visit /components to see all available components`}
                   />
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>⚛️ Setup</h3>
-                  <p>Wrap your app with the ThemeProvider and import the base styles:</p>
+                  <div className="card-header-with-icon">
+                    <AcademicCapIcon className="section-icon" />
+                    <h3>Setup</h3>
+                  </div>
+                  <p>Start using Motion UI Kit components in your project:</p>
                   <CodePreview
                     title="Basic Setup"
                     preview={
                       <div className="setup-preview">
                         <p>
-                          The ThemeProvider enables theme switching and component customization.
+                          Import components directly from the codebase or copy the component files
+                          you need.
                         </p>
                       </div>
                     }
-                    code={setupCode}
+                    code={`// Import components from your project structure
+import { Button } from '../../../components/primitives';
+import { Card } from '../../../components/primitives';
+import { Hero } from '../../components/Hero/Hero';
+import { ThemeToggle } from '../../components/ThemeToggle/ThemeToggle';
+
+// All components use SCSS with design system tokens
+// Components are styled with CSS custom properties for theming
+// No additional CSS imports needed - styles are included with components`}
                   />
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🚀 First Component</h3>
+                  <div className="card-header-with-icon">
+                    <CpuChipIcon className="section-icon" />
+                    <h3>First Component</h3>
+                  </div>
                   <p>Import and use your first Motion UI Kit component:</p>
                   <CodePreview
                     title="Using Components"
                     preview={
                       <div className="first-component-preview">
                         <Button size="md">My First Button</Button>
-                        <p style={{ marginTop: '1rem', color: 'var(--text-secondary)' }}>
+                        <p style={{ marginTop: '$space-md', color: 'var(--text-secondary)' }}>
                           A button with built-in hover animations and accessibility features.
                         </p>
                       </div>
                     }
-                    code={`import { Button } from '@motion-ui/kit';
+                    code={`import { Button } from '../../../components/primitives';
 
 function MyComponent() {
   return (
@@ -686,7 +654,29 @@ function MyComponent() {
                         </div>
                       </div>
                     }
-                    code={`import { SmartButton, ExperienceProvider } from '@motion-ui/kit/experience';
+                    code={`import { SmartButton } from '../../../components/primitives';
+import { ExperienceProvider } from '../../../utils/experience-context';
+
+const experienceConfig = {
+  adaptationRules: [
+    {
+      condition: (context) => context.userType === 'first-time',
+      adaptations: [
+        {
+          componentType: 'button',
+          adaptations: {
+            guidance: 'show-hints',
+            complexity: 'simplified',
+          },
+        },
+      ],
+    },
+  ],
+  enableUsageTracking: true,
+  enableAutomaticAdaptation: true,
+  enablePredictiveLoading: false,
+  enableSmartBatching: false,
+};
 
 function App() {
   return (
@@ -723,7 +713,10 @@ function App() {
 
               <div className="doc-content">
                 <Card className="doc-card">
-                  <h3>🎨 Token Customization</h3>
+                  <div className="card-header-with-icon">
+                    <BeakerIcon className="section-icon" />
+                    <h3>Token Customization</h3>
+                  </div>
                   <p>Override design tokens to match your brand:</p>
                   <CodePreview
                     title="Custom Design Tokens"
@@ -743,7 +736,10 @@ function App() {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🔧 Component Overrides</h3>
+                  <div className="card-header-with-icon">
+                    <Cog6ToothIcon className="section-icon" />
+                    <h3>Component Overrides</h3>
+                  </div>
                   <p>Customize individual components with CSS or styled-components:</p>
                   <CodePreview
                     title="Component Styling"
@@ -785,7 +781,10 @@ function App() {
 
               <div className="doc-content">
                 <Card className="doc-card">
-                  <h3>🎯 Motion Philosophy</h3>
+                  <div className="card-header-with-icon">
+                    <PlayIcon className="section-icon" />
+                    <h3>Motion Philosophy</h3>
+                  </div>
                   <p>Our approach to motion design follows three core principles:</p>
                   <CodePreview
                     title="Motion Design Principles"
@@ -807,7 +806,10 @@ function App() {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🌊 Spring Presets</h3>
+                  <div className="card-header-with-icon">
+                    <RocketLaunchIcon className="section-icon" />
+                    <h3>Spring Presets</h3>
+                  </div>
                   <p>Pre-configured spring animations for common use cases:</p>
                   <CodePreview
                     title="Spring Animation System"
@@ -830,7 +832,10 @@ function App() {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🧠 Semantic Motion with Experience System</h3>
+                  <div className="card-header-with-icon">
+                    <SparklesIcon className="section-icon" />
+                    <h3>Semantic Motion with Experience System</h3>
+                  </div>
                   <div className="new-badge">Enhanced</div>
                   <p>Motion that adapts to user context and behavior patterns:</p>
                   <CodePreview
@@ -903,7 +908,10 @@ const motionSemantics = {
 
               <div className="doc-content">
                 <Card className="doc-card">
-                  <h3>🧠 Philosophy: Beyond Static Components</h3>
+                  <div className="card-header-with-icon">
+                    <CpuChipIcon className="section-icon" />
+                    <h3>Philosophy: Beyond Static Components</h3>
+                  </div>
                   <p>Traditional component libraries ask "How should this look?"</p>
                   <p>
                     <strong>Experience Systems ask "What is the user trying to accomplish?"</strong>
@@ -952,7 +960,10 @@ const motionSemantics = {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🚀 Quick Start</h3>
+                  <div className="card-header-with-icon">
+                    <RocketLaunchIcon className="section-icon" />
+                    <h3>Quick Start</h3>
+                  </div>
                   <p>Set up the Experience System with context providers:</p>
                   <CodePreview
                     title="Experience Provider Setup"
@@ -974,7 +985,10 @@ const motionSemantics = {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🎯 Intent-Driven Design</h3>
+                  <div className="card-header-with-icon">
+                    <BuildingLibraryIcon className="section-icon" />
+                    <h3>Intent-Driven Design</h3>
+                  </div>
                   <p>
                     Components understand <em>what</em> users are trying to accomplish:
                   </p>
@@ -1005,7 +1019,10 @@ const motionSemantics = {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🔄 Adaptive Components</h3>
+                  <div className="card-header-with-icon">
+                    <Cog6ToothIcon className="section-icon" />
+                    <h3>Adaptive Components</h3>
+                  </div>
                   <p>Components that automatically adapt based on user context:</p>
                   <CodePreview
                     title="Context-Aware Adaptation"
@@ -1032,7 +1049,10 @@ const motionSemantics = {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>📈 Learning System</h3>
+                  <div className="card-header-with-icon">
+                    <AcademicCapIcon className="section-icon" />
+                    <h3>Learning System</h3>
+                  </div>
                   <p>Components that learn from user behavior and improve over time:</p>
                   <CodePreview
                     title="Behavioral Learning"
@@ -1058,7 +1078,10 @@ const motionSemantics = {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🎮 Try the Interactive Demo</h3>
+                  <div className="card-header-with-icon">
+                    <CubeIcon className="section-icon" />
+                    <h3>Try the Interactive Demo</h3>
+                  </div>
                   <p>Experience the system in action with our interactive demonstration:</p>
                   <div className="demo-link-container">
                     <Link to="/experience-demo" className="demo-link">
@@ -1072,27 +1095,30 @@ const motionSemantics = {
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>📚 Implementation Guide</h3>
+                  <div className="card-header-with-icon">
+                    <DocumentTextIcon className="section-icon" />
+                    <h3>Implementation Guide</h3>
+                  </div>
                   <div className="implementation-steps">
                     <div className="step">
                       <h4>1. Basic Setup</h4>
-                      <p>Add ExperienceProvider to your app root</p>
+                      <p>Copy the ExperienceProvider from utils/experience-context.ts</p>
                     </div>
                     <div className="step">
                       <h4>2. Replace Components</h4>
-                      <p>Gradually replace Button with SmartButton</p>
+                      <p>Gradually replace Button with SmartButton from components/primitives</p>
                     </div>
                     <div className="step">
                       <h4>3. Define Intent</h4>
-                      <p>Add intent and criticality props to clarify purpose</p>
+                      <p>Add intent and criticality props to clarify component purpose</p>
                     </div>
                     <div className="step">
                       <h4>4. Enable Learning</h4>
-                      <p>Turn on usage tracking and behavioral adaptation</p>
+                      <p>Turn on usage tracking and behavioral adaptation in config</p>
                     </div>
                     <div className="step">
                       <h4>5. Customize Rules</h4>
-                      <p>Define your own adaptation rules for specific contexts</p>
+                      <p>Define your own adaptation rules for specific user contexts</p>
                     </div>
                   </div>
                 </Card>
@@ -1113,26 +1139,51 @@ const motionSemantics = {
 
               <div className="doc-content">
                 <Card className="doc-card">
-                  <h3>🌙 Theme Provider</h3>
-                  <p>Set up automatic theme switching and persistence:</p>
+                  <div className="card-header-with-icon">
+                    <PaintBrushIcon className="section-icon" />
+                    <h3>Theme Toggle</h3>
+                  </div>
+                  <p>Implement theme switching with our ThemeToggle component:</p>
                   <CodePreview
-                    title="Theme Setup"
+                    title="Theme Toggle Component"
                     preview={
                       <div className="theme-preview">
-                        <p>
-                          Theme Provider automatically handles light/dark mode switching and
-                          persistence.
-                        </p>
-                        <Button size="sm">Toggle Theme Example</Button>
+                        <p>Click the theme toggle to switch between light and dark modes:</p>
+                        <div className="theme-toggle-demo">
+                          <ThemeToggle />
+                          <span className="toggle-description">
+                            Theme toggle with smooth animations
+                          </span>
+                        </div>
                       </div>
                     }
-                    code={themingSetupCode}
+                    code={`import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
+
+function App() {
+  return (
+    <div>
+      <header>
+        <ThemeToggle />
+      </header>
+      {/* Your app content */}
+    </div>
+  );
+}
+
+// The ThemeToggle component automatically:
+// - Persists theme choice in localStorage
+// - Applies theme to document.documentElement
+// - Includes smooth animations between states
+// - Supports keyboard navigation`}
                   />
                 </Card>
 
                 <Card className="doc-card">
-                  <h3>🎨 Custom Themes</h3>
-                  <p>Create and apply custom themes beyond light/dark:</p>
+                  <div className="card-header-with-icon">
+                    <BeakerIcon className="section-icon" />
+                    <h3>Custom Themes</h3>
+                  </div>
+                  <p>Create custom themes by overriding CSS custom properties:</p>
                   <CodePreview
                     title="Custom Theme Creation"
                     preview={
@@ -1158,36 +1209,36 @@ const motionSemantics = {
         <h2>Quick Links</h2>
         <div className="links-grid">
           <Card>
-            <h3>
+            <div className="quick-link-header">
               <SwatchIcon width="20" height="20" />
-              Design Tokens
-            </h3>
+              <h3>Design Tokens</h3>
+            </div>
             <p>Explore the complete token system</p>
-            <Link to="/design-tokens">
+            <Link to="/docs/design-tokens">
               <Button size="sm" variant="outline">
                 View Tokens
               </Button>
             </Link>
           </Card>
           <Card>
-            <h3>
+            <div className="quick-link-header">
               <CubeIcon width="20" height="20" />
-              Components
-            </h3>
+              <h3>Components</h3>
+            </div>
             <p>Browse all available components</p>
-            <Link to="/components">
+            <Link to="/docs/components">
               <Button size="sm" variant="outline">
                 View Components
               </Button>
             </Link>
           </Card>
           <Card>
-            <h3>
+            <div className="quick-link-header">
               <DocumentTextIcon width="20" height="20" />
-              Changelog
-            </h3>
+              <h3>Changelog</h3>
+            </div>
             <p>See what's new and improved</p>
-            <Link to="/changelog">
+            <Link to="/docs/changelog">
               <Button size="sm" variant="outline">
                 View Updates
               </Button>

@@ -4,6 +4,15 @@ import { Button, Card } from '../../../components/primitives';
 import { CodePreview } from '../../components';
 import { Breadcrumb } from '../../../components/navigation';
 import './tabs.scss';
+import {
+  BoltIcon,
+  PaintBrushIcon,
+  Cog6ToothIcon,
+  DevicePhoneMobileIcon,
+  EyeIcon,
+  MoonIcon,
+  SparklesIcon,
+} from '@heroicons/react/24/outline';
 
 const TabsPage: React.FC = () => {
   const [variant, setVariant] = useState<'default' | 'pills' | 'underline' | 'bordered'>('default');
@@ -161,22 +170,48 @@ const TabsPage: React.FC = () => {
                   <h3>Key Features</h3>
                   <p>Explore the innovative features that make this product stand out:</p>
                   <div className="feature-grid">
-                    <div className="feature-item">
-                      <h4>🚀 Performance</h4>
-                      <p>Optimized for speed and efficiency</p>
-                    </div>
-                    <div className="feature-item">
-                      <h4>🎨 Design</h4>
-                      <p>Beautiful and intuitive user interface</p>
-                    </div>
-                    <div className="feature-item">
-                      <h4>🔧 Customization</h4>
-                      <p>Highly configurable and adaptable</p>
-                    </div>
-                    <div className="feature-item">
-                      <h4>📱 Responsive</h4>
-                      <p>Works perfectly on all devices</p>
-                    </div>
+                    <Card>
+                      <div className="benefit-item">
+                        <BoltIcon className="benefit-icon" />
+                        <div>
+                          <h4 className="heading-sm text-primary mb-2">Performance</h4>
+                          <p className="text-secondary margin-0">
+                            Optimized for speed and efficiency
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
+                    <Card>
+                      <div className="benefit-item">
+                        <PaintBrushIcon className="benefit-icon" />
+                        <div>
+                          <h4 className="heading-sm text-primary mb-2">Design</h4>
+                          <p className="text-secondary margin-0">
+                            Beautiful and intuitive user interface
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
+                    <Card>
+                      <div className="benefit-item">
+                        <Cog6ToothIcon className="benefit-icon" />
+                        <div>
+                          <h4 className="heading-sm text-primary mb-2">Customization</h4>
+                          <p className="text-secondary margin-0">
+                            Highly configurable and adaptable
+                          </p>
+                        </div>
+                      </div>
+                    </Card>
+                    <Card>
+                      <div className="benefit-item">
+                        <DevicePhoneMobileIcon className="benefit-icon" />
+                        <div>
+                          <h4 className="heading-sm text-primary mb-2">Responsive</h4>
+                          <p className="text-secondary margin-0">Works perfectly on all devices</p>
+                        </div>
+                      </div>
+                    </Card>
                   </div>
                 </div>
               </TabContent>
@@ -368,30 +403,72 @@ const TabsPage: React.FC = () => {
         <section className="features-section">
           <h2>Key Features</h2>
           <div className="features-grid">
-            <div className="feature-card">
-              <h3>🎯 Accessible</h3>
-              <p>Full keyboard navigation, ARIA support, and WCAG 2.1 AA compliance</p>
-            </div>
-            <div className="feature-card">
-              <h3>🎨 Customizable</h3>
-              <p>Multiple variants and orientation options to fit any design</p>
-            </div>
-            <div className="feature-card">
-              <h3>⚡ Performance</h3>
-              <p>Lazy loading support and optimized animations for smooth interactions</p>
-            </div>
-            <div className="feature-card">
-              <h3>📱 Responsive</h3>
-              <p>Automatic stacking on mobile and touch-friendly interactions</p>
-            </div>
-            <div className="feature-card">
-              <h3>🌙 Theme Support</h3>
-              <p>Seamless light and dark mode integration</p>
-            </div>
-            <div className="feature-card">
-              <h3>🎪 Animated</h3>
-              <p>Smooth transitions with Framer Motion and spring physics</p>
-            </div>
+            <Card>
+              <div className="benefit-item">
+                <EyeIcon className="benefit-icon" />
+                <div>
+                  <h4 className="heading-sm text-primary mb-2">Accessible</h4>
+                  <p className="text-secondary margin-0">
+                    Full keyboard navigation, ARIA support, and WCAG 2.1 AA compliance
+                  </p>
+                </div>
+              </div>
+            </Card>
+            <Card>
+              <div className="benefit-item">
+                <PaintBrushIcon className="benefit-icon" />
+                <div>
+                  <h4 className="heading-sm text-primary mb-2">Customizable</h4>
+                  <p className="text-secondary margin-0">
+                    Multiple variants and orientation options to fit any design
+                  </p>
+                </div>
+              </div>
+            </Card>
+            <Card>
+              <div className="benefit-item">
+                <BoltIcon className="benefit-icon" />
+                <div>
+                  <h4 className="heading-sm text-primary mb-2">Performance</h4>
+                  <p className="text-secondary margin-0">
+                    Lazy loading support and optimized animations for smooth interactions
+                  </p>
+                </div>
+              </div>
+            </Card>
+            <Card>
+              <div className="benefit-item">
+                <DevicePhoneMobileIcon className="benefit-icon" />
+                <div>
+                  <h4 className="heading-sm text-primary mb-2">Responsive</h4>
+                  <p className="text-secondary margin-0">
+                    Automatic stacking on mobile and touch-friendly interactions
+                  </p>
+                </div>
+              </div>
+            </Card>
+            <Card>
+              <div className="benefit-item">
+                <MoonIcon className="benefit-icon" />
+                <div>
+                  <h4 className="heading-sm text-primary mb-2">Theme Support</h4>
+                  <p className="text-secondary margin-0">
+                    Seamless light and dark mode integration
+                  </p>
+                </div>
+              </div>
+            </Card>
+            <Card>
+              <div className="benefit-item">
+                <SparklesIcon className="benefit-icon" />
+                <div>
+                  <h4 className="heading-sm text-primary mb-2">Animated</h4>
+                  <p className="text-secondary margin-0">
+                    Smooth transitions with Framer Motion and spring physics
+                  </p>
+                </div>
+              </div>
+            </Card>
           </div>
         </section>
       </div>

@@ -1,73 +1,72 @@
 @use '../../../styles/abstracts' as *;
 
 .drawer-page {
-  padding: $space-xl;
+  padding: $space-8;
   max-width: 1200px;
   margin: 0 auto;
 
-  .page-header {
-    margin-bottom: $space-2xl;
-    text-align: center;
+  // Layout containers
+  .examples-container {
+    margin-bottom: $space-16;
+  }
 
-    h1 {
-      font-size: $font-size-3xl;
-      font-weight: $font-weight-bold;
-      color: $text-primary;
-      margin-bottom: $space-md;
-    }
+  .examples-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-8;
+    margin-bottom: $space-16;
 
-    p {
-      font-size: $font-size-lg;
-      color: $text-secondary;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
+    @include breakpoint-down(md) {
+      grid-template-columns: 1fr;
     }
   }
 
-  .demo-section {
-    margin-bottom: $space-xl;
-
-    .direction-demos {
-      display: flex;
-      flex-direction: column;
-      gap: $space-xl;
-
-      .direction-group {
-        h3 {
-          font-size: $font-size-lg;
-          font-weight: $font-weight-semibold;
-          color: $text-primary;
-          margin-bottom: $space-md;
-        }
-
-        .button-group {
-          display: flex;
-          gap: $space-md;
-          flex-wrap: wrap;
-        }
-      }
-    }
-
-    .feature-demo {
-      display: flex;
-      justify-content: center;
+  // Features section
+  .features-section {
+    h2 {
+      margin-bottom: $space-8;
+      color: $text-primary;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      text-align: center;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: $space-lg;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: $space-6;
 
-      .feature {
-        h3 {
-          font-size: $font-size-lg;
-          font-weight: $font-weight-semibold;
-          color: $text-primary;
-          margin-bottom: $space-sm;
+      .benefit-item {
+        display: flex;
+        gap: $space-4;
+        padding: $space-1;
+
+        .benefit-icon {
+          flex-shrink: 0;
+          width: 2.5rem;
+          height: 2.5rem;
+          background: $accent-primary-light;
+          border-radius: $radius-lg;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .benefit-icon-svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: $accent-primary;
+          }
         }
 
-        p {
+        .benefit-title {
+          font-size: $font-size-base;
+          font-weight: $font-weight-semibold;
+          color: $text-primary;
+          margin-bottom: $space-1;
+        }
+
+        .benefit-description {
+          font-size: $font-size-sm;
           color: $text-secondary;
           line-height: 1.5;
         }
@@ -75,69 +74,130 @@
     }
   }
 
+  .demo-section {
+    .direction-demos {
+      display: flex;
+      flex-direction: column;
+      gap: $space-6;
+
+      .direction-group {
+        h3 {
+          font-size: $font-size-lg;
+          font-weight: $font-weight-semibold;
+          color: $text-primary;
+          margin-bottom: $space-4;
+        }
+
+        .button-group {
+          display: flex;
+          gap: $space-3;
+          flex-wrap: wrap;
+
+          svg {
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+
+    .feature-demo {
+      display: flex;
+      justify-content: center;
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+
   // Drawer content styles
   .simple-drawer-content {
-    padding: $space-lg;
+    padding: $space-6;
     text-align: center;
 
     h3 {
       font-size: $font-size-xl;
       font-weight: $font-weight-semibold;
       color: $text-primary;
-      margin-bottom: $space-md;
+      margin-bottom: $space-4;
     }
 
     p {
       color: $text-secondary;
-      margin-bottom: $space-lg;
+      margin-bottom: $space-6;
       line-height: 1.5;
+    }
+
+    // Icon sizing for simple drawer buttons
+    svg {
+      width: 1rem;
+      height: 1rem;
     }
   }
 
+  // Drawer content wrapper for proper layout
+  .drawer-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0; // Allow flex item to shrink
+  }
+
   .navigation-content {
-    padding: $space-lg;
+    flex: 1;
+    overflow-y: auto;
 
     h4 {
       font-size: $font-size-base;
       font-weight: $font-weight-semibold;
       color: $text-primary;
-      margin-bottom: $space-md;
-      padding-bottom: $space-xs;
+      margin-bottom: $space-4;
+      padding-bottom: $space-1;
       border-bottom: 1px solid $border-light;
     }
 
     .drawer-content {
-      margin-bottom: $space-xl;
-    }
+      margin-bottom: $space-8;
 
-    .navigation-item {
-      display: flex;
-      align-items: center;
-      gap: $space-md;
-      padding: $space-sm $space-md;
-      border-radius: $radius-md;
-      color: $text-secondary;
-      cursor: pointer;
-      transition: $transition-fast;
+      .navigation-item {
+        display: flex;
+        align-items: center;
+        gap: $space-3;
+        padding: $space-2 $space-4;
+        border-radius: $radius-md;
+        color: $text-secondary;
+        cursor: pointer;
+        transition: $transition-fast;
 
-      &:hover {
-        background: $background-secondary;
-        color: $text-primary;
-      }
+        svg {
+          width: 1.125rem !important;
+          height: 1.125rem !important;
+          max-width: none !important; // Override global reset
+          flex-shrink: 0; // Prevent icon from shrinking
+        }
 
-      span {
-        font-weight: $font-weight-medium;
+        &:hover {
+          background: $background-secondary;
+          color: $text-primary;
+        }
+
+        span {
+          font-weight: $font-weight-medium;
+          font-size: $font-size-sm;
+        }
       }
     }
 
     .recent-items {
       .recent-item {
-        padding: $space-sm $space-md;
+        padding: $space-2 $space-4;
         background: $background-secondary;
         border-radius: $radius-sm;
         color: $text-secondary;
         font-size: $font-size-sm;
-        margin-bottom: $space-xs;
+        margin-bottom: $space-1;
         cursor: pointer;
         transition: $transition-fast;
 
@@ -155,34 +215,18 @@
 
   .drawer-footer {
     display: flex;
-    gap: $space-md;
+    gap: $space-3;
     justify-content: flex-end;
+    padding: $space-4;
+    border-top: 1px solid $border-light;
+    background: $background-primary;
+    flex-shrink: 0; // Prevent footer from shrinking
+    margin-top: auto; // Push footer to bottom
   }
 
   // Responsive adjustments
-  @include respond('md') {
-    .direction-demos {
-      flex-direction: row;
-      justify-content: space-between;
-
-      .direction-group {
-        flex: 1;
-      }
-    }
-  }
-
-  @include respond-below('sm') {
-    padding: $space-lg;
-
-    .page-header {
-      h1 {
-        font-size: $font-size-2xl;
-      }
-
-      p {
-        font-size: $font-size-base;
-      }
-    }
+  @include breakpoint-down(sm) {
+    padding: $space-6;
 
     .direction-demos {
       .button-group {
@@ -190,23 +234,26 @@
       }
     }
 
-    .features-grid {
-      grid-template-columns: 1fr;
-    }
-
     .simple-drawer-content {
-      padding: $space-md;
+      padding: $space-4;
     }
 
     .navigation-content {
-      padding: $space-md;
+      .navigation-item {
+        gap: $space-2;
+        padding: $space-2;
+      }
     }
 
     .drawer-footer {
+      padding: $space-3;
+      gap: $space-2;
+
+      // Stack buttons on mobile if needed
       flex-direction: column;
 
-      button {
-        width: 100%;
+      @media (min-width: 400px) {
+        flex-direction: row;
       }
     }
   }

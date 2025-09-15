@@ -53,7 +53,7 @@ const MockSmartButton: React.FC<{
     }
 
     // Adapt based on intent
-    if (intent === 'destructive' && !initialVariant) {
+    if (intent === 'destructive') {
       variant = 'danger';
     }
 
@@ -199,13 +199,13 @@ const ExperienceDemo: React.FC = () => {
   const getGridClass = () => {
     switch (userContext.device) {
       case 'desktop':
-        return 'grid grid-3'; // 3 columns
+        return 'grid-3'; // 3 columns
       case 'tablet':
-        return 'grid grid-2'; // 2 columns
+        return 'grid-2'; // 2 columns
       case 'mobile':
-        return 'grid grid-1'; // 1 column (stacked)
+        return 'grid-1'; // 1 column (stacked)
       default:
-        return 'grid grid-3';
+        return 'grid-3';
     }
   };
 
@@ -329,22 +329,9 @@ const ExperienceDemo: React.FC = () => {
         title="Context-Aware Smart Buttons"
         preview={
           <div>
-            <div
-              style={{
-                padding: '1rem',
-                backgroundColor: 'var(--color-background-secondary)',
-                borderRadius: 'var(--radius-md)',
-                marginBottom: '1.5rem',
-              }}
-            >
-              <strong style={{ color: 'var(--color-text-primary)' }}>Active Adaptations:</strong>
-              <ul
-                style={{
-                  margin: '0.5rem 0',
-                  paddingLeft: '1.5rem',
-                  color: 'var(--color-text-secondary)',
-                }}
-              >
+            <div className="adaptations-container">
+              <strong className="text-primary-strong">Active Adaptations:</strong>
+              <ul className="adaptations-list">
                 {userContext.device === 'mobile' && <li>Mobile layout: Stacked buttons</li>}
                 {userContext.device === 'tablet' && <li>Tablet layout: 2-column grid</li>}
                 {userContext.device === 'desktop' && <li>Desktop layout: 3-column grid</li>}
@@ -363,7 +350,7 @@ const ExperienceDemo: React.FC = () => {
               </ul>
             </div>
 
-            <div className={getGridClass()} style={{ gap: '1rem' }}>
+            <div className={`${getGridClass()} gap-4`}>
               <MockSmartButton
                 intent="primary-action"
                 userJourneyStage="discovery"
@@ -400,6 +387,7 @@ const ExperienceDemo: React.FC = () => {
                 Learn More
               </MockSmartButton>
               <MockSmartButton
+                variant="danger"
                 intent="destructive"
                 criticality="critical"
                 flowPosition="confirmation"
@@ -517,34 +505,16 @@ const MockSmartButton = ({
 }`}
       />
 
-      <div style={{ marginBottom: '2rem' }}>
-        <h2
-          style={{
-            fontSize: 'var(--font-size-heading-lg)',
-            fontWeight: 'var(--font-weight-bold)',
-            color: 'var(--color-text-primary)',
-            marginBottom: '1rem',
-          }}
-        >
-          Experience System Benefits
-        </h2>
+      <div className="benefits-section">
+        <h2 className="benefits-heading">Experience System Benefits</h2>
 
-        <div className="grid grid-2" style={{ gap: '1.5rem' }}>
+        <div className="grid-2 gap-6">
           <Card>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-              <CpuChipIcon
-                style={{
-                  width: '1.5rem',
-                  height: '1.5rem',
-                  color: 'var(--color-accent-primary)',
-                  flexShrink: 0,
-                }}
-              />
+            <div className="benefit-item">
+              <CpuChipIcon className="benefit-icon" />
               <div>
-                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
-                  Intent-Driven Design
-                </h3>
-                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                <h3 className="heading-sm text-primary mb-2">Intent-Driven Design</h3>
+                <p className="text-secondary margin-0">
                   Components understand what users are trying to accomplish, not just how they
                   interact.
                 </p>
@@ -553,20 +523,11 @@ const MockSmartButton = ({
           </Card>
 
           <Card>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-              <LightBulbIcon
-                style={{
-                  width: '1.5rem',
-                  height: '1.5rem',
-                  color: 'var(--color-accent-primary)',
-                  flexShrink: 0,
-                }}
-              />
+            <div className="benefit-item">
+              <LightBulbIcon className="benefit-icon" />
               <div>
-                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
-                  Context-Aware Adaptation
-                </h3>
-                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                <h3 className="heading-sm text-primary mb-2">Context-Aware Adaptation</h3>
+                <p className="text-secondary margin-0">
                   Automatically adapts to user type, device, accessibility needs, and journey stage.
                 </p>
               </div>
@@ -574,20 +535,11 @@ const MockSmartButton = ({
           </Card>
 
           <Card>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-              <ChartBarIcon
-                style={{
-                  width: '1.5rem',
-                  height: '1.5rem',
-                  color: 'var(--color-accent-primary)',
-                  flexShrink: 0,
-                }}
-              />
+            <div className="benefit-item">
+              <ChartBarIcon className="benefit-icon" />
               <div>
-                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
-                  Learning System
-                </h3>
-                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                <h3 className="heading-sm text-primary mb-2">Learning System</h3>
+                <p className="text-secondary margin-0">
                   Tracks usage patterns and improves interface decisions over time.
                 </p>
               </div>
@@ -595,20 +547,11 @@ const MockSmartButton = ({
           </Card>
 
           <Card>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-              <EyeIcon
-                style={{
-                  width: '1.5rem',
-                  height: '1.5rem',
-                  color: 'var(--color-accent-primary)',
-                  flexShrink: 0,
-                }}
-              />
+            <div className="benefit-item">
+              <EyeIcon className="benefit-icon" />
               <div>
-                <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text-primary)' }}>
-                  Predictive Interface
-                </h3>
-                <p style={{ margin: 0, color: 'var(--color-text-secondary)' }}>
+                <h3 className="heading-sm text-primary mb-2">Predictive Interface</h3>
+                <p className="text-secondary margin-0">
                   Anticipates user needs and prevents common mistakes before they happen.
                 </p>
               </div>
@@ -618,31 +561,16 @@ const MockSmartButton = ({
       </div>
 
       <Card className="card--highlight">
-        <h3
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 0.75rem 0' }}
-        >
-          <StarIcon
-            style={{ width: '1.25rem', height: '1.25rem', color: 'var(--color-accent-primary)' }}
-          />
+        <h3 className="flex-center gap-2 mb-3">
+          <StarIcon className="star-icon" />
           Try the Experience System
         </h3>
-        <p style={{ margin: '0 0 1rem 0', color: 'var(--color-text-secondary)' }}>
+        <p className="description-text">
           Change the configuration settings above, then click any Smart Button below to see
           real-time adaptation. Each button will automatically adjust its behavior, styling, and
           interaction patterns based on your selections.
         </p>
-        <p
-          style={{
-            margin: 0,
-            fontSize: '0.875rem',
-            color: 'var(--color-accent-primary)',
-            fontWeight: 'var(--font-weight-medium)',
-            padding: '0.5rem 0.75rem',
-            backgroundColor: 'var(--color-accent-soft)',
-            borderRadius: 'var(--radius-sm)',
-            border: '1px solid var(--color-accent-primary)',
-          }}
-        >
+        <p className="accent-text">
           💡 Pro Tip: Open your browser's developer console (F12) to see detailed adaptation
           metadata and interaction tracking logs.
         </p>

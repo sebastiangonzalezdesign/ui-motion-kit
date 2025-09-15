@@ -8,6 +8,7 @@ import { Modal } from '../../../components/feedback';
 import { Hero } from '../../components';
 import { IconButton } from '../../../components/primitives';
 import { Breadcrumb } from '../../../components/navigation';
+import './Buttons.scss';
 import {
   CheckCircleIcon,
   LightBulbIcon,
@@ -25,6 +26,105 @@ const Buttons = () => {
 
   return (
     <div className="page">
+      <style>{`
+        .buttons-group {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-3);
+        }
+        
+        .link-primary {
+          color: var(--text-accent);
+          font-weight: var(--font-weight-medium);
+          text-decoration: underline;
+          transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+        }
+        
+        .link-primary:hover {
+          color: var(--accent-primary-hover);
+          text-decoration: none;
+        }
+        
+        /* Grid layouts */
+        .grid-2 {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-4);
+        }
+        
+        .grid-3 {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: var(--spacing-4);
+        }
+        
+        .grid-2.gap-6 {
+          gap: var(--spacing-6);
+        }
+        
+        /* Spacing utilities */
+        .mb-4 {
+          margin-bottom: var(--spacing-4);
+        }
+        
+        .mt-6 {
+          margin-top: var(--spacing-6);
+        }
+        
+        .p-4 {
+          padding: var(--spacing-4);
+        }
+        
+        .p-6 {
+          padding: var(--spacing-6);
+        }
+        
+        .ml-1 {
+          margin-left: var(--spacing-1);
+        }
+        
+        /* Typography */
+        .text-lg {
+          font-size: var(--font-size-lg);
+          line-height: var(--line-height-snug);
+        }
+        
+        .text-sm {
+          font-size: var(--font-size-sm);
+          line-height: var(--line-height-snug);
+        }
+        
+        .font-semibold {
+          font-weight: var(--font-weight-semibold);
+        }
+        
+        /* Tip box styling */
+        .tip-box {
+          background-color: var(--feedback-info-light);
+          color: var(--text-primary);
+          border: 1px solid var(--border-light);
+          border-radius: var(--border-radius-md);
+          padding: var(--spacing-4);
+        }
+        
+        [data-theme='dark'] .tip-box {
+          background-color: var(--feedback-info-light);
+          border-color: var(--border-medium);
+        }
+        
+        /* Muted text */
+        .muted-text {
+          color: var(--text-tertiary);
+          font-size: var(--font-size-sm);
+        }
+        
+        /* Example block */
+        .example-block {
+          display: block;
+          margin-bottom: var(--spacing-2);
+          font-weight: var(--font-weight-medium);
+        }
+      `}</style>
       <Breadcrumb />
       <Hero
         headline="Button Components"
@@ -104,7 +204,7 @@ const [count, setCount] = useState(0);
       <CodePreview
         title="Toggle Switch with Heroicons"
         preview={
-          <div className="grid grid-2">
+          <div className="grid-2">
             <div>
               <span>Status: {toggleState ? 'ON' : 'OFF'}</span>
             </div>
@@ -121,7 +221,7 @@ export default function ToggleExample() {
   const [state, setState] = useState(false);
 
   return (
-    <div className="grid grid-2">
+    <div className="grid-2">
       <div>
         <span>Status: {state ? 'ON' : 'OFF'}</span>
       </div>
@@ -137,10 +237,10 @@ export default function ToggleExample() {
       <CodePreview
         title="Icon Button Examples"
         preview={
-          <div className="grid grid-2">
+          <div className="grid-2">
             <div>
               <strong>Variants</strong>
-              <div className="grid grid-3">
+              <div className="grid-3">
                 <IconButton icon={XMarkIcon} aria-label="Close" />
                 <IconButton icon={HeartIcon} variant="outline" aria-label="Like" />
                 <IconButton icon={StarIcon} variant="ghost" aria-label="Favorite" />
@@ -150,7 +250,7 @@ export default function ToggleExample() {
 
             <div>
               <strong>Sizes</strong>
-              <div className="grid grid-3">
+              <div className="grid-3">
                 <IconButton icon={PlayIcon} size="sm" aria-label="Play small" />
                 <IconButton icon={PlayIcon} size="md" aria-label="Play medium" />
                 <IconButton icon={PlayIcon} size="lg" aria-label="Play large" />
@@ -170,7 +270,7 @@ import { XMarkIcon, HeartIcon, StarIcon, Cog6ToothIcon, PlayIcon } from '@heroic
 
 export default function IconButtonExample() {
   return (
-    <div>
+    <div className="grid-2">
       {/* Variants */}
       <IconButton icon={XMarkIcon} aria-label="Close" />
       <IconButton icon={HeartIcon} variant="outline" aria-label="Like" />
@@ -188,43 +288,66 @@ export default function IconButtonExample() {
       />
 
       <CodePreview
-        title="🌟 Experience System - Smart Button"
+        title="Experience System - Smart Button"
         preview={
-          <div className="grid grid-2">
-            <div>
-              <h4>Context-Aware Behavior</h4>
-              <div className="space-y-3">
-                <SmartButton
-                  intent="primary-action"
-                  userJourneyStage="discovery"
-                  criticality="high"
-                >
-                  Get Started
-                </SmartButton>
-                <SmartButton
-                  intent="primary-action"
-                  userJourneyStage="purchase"
-                  criticality="critical"
-                >
-                  Complete Purchase
-                </SmartButton>
-                <SmartButton intent="destructive" criticality="high" flowPosition="confirmation">
-                  Delete Account
-                </SmartButton>
+          <div className="p-6">
+            <div className="grid-2 gap-6">
+              <div>
+                <h4 className="mb-4 text-lg font-semibold">Context-Aware Behavior</h4>
+                <div className="buttons-group">
+                  <SmartButton
+                    intent="primary-action"
+                    userJourneyStage="discovery"
+                    criticality="high"
+                  >
+                    Get Started
+                  </SmartButton>
+                  <SmartButton
+                    intent="primary-action"
+                    userJourneyStage="purchase"
+                    criticality="critical"
+                  >
+                    Complete Purchase
+                  </SmartButton>
+                  <SmartButton variant="danger" intent="destructive" flowPosition="confirmation">
+                    Delete Account
+                  </SmartButton>
+                </div>
               </div>
-            </div>
-            <div>
-              <h4>Adaptive Variants</h4>
-              <div className="space-y-3">
-                <SmartButton intent="primary-action" criticality="critical" flowPosition="entry">
-                  Urgent Action
-                </SmartButton>
-                <SmartButton intent="secondary-action" criticality="low" flowPosition="middle">
-                  Optional Task
-                </SmartButton>
-                <SmartButton intent="navigation" criticality="medium" userJourneyStage="evaluation">
-                  Learn More
-                </SmartButton>
+              <div>
+                <h4 className="mb-4 text-lg font-semibold">Adaptive Variants</h4>
+                <div className="buttons-group">
+                  <SmartButton intent="primary-action" criticality="critical" flowPosition="entry">
+                    Urgent Action
+                  </SmartButton>
+                  <SmartButton
+                    intent="secondary-action"
+                    criticality="low"
+                    flowPosition="middle"
+                    variant="outline"
+                  >
+                    Optional Task
+                  </SmartButton>
+                  <SmartButton
+                    intent="navigation"
+                    criticality="medium"
+                    userJourneyStage="evaluation"
+                    variant="outline"
+                  >
+                    Learn More
+                  </SmartButton>
+                </div>
+                <div className="mt-6 p-4 tip-box">
+                  <p className="text-sm">
+                    <strong>💡 Pro Tip:</strong> For comprehensive Smart Button examples with
+                    adaptive behavior, accessibility features, and real-time configuration, visit
+                    the
+                    <a href="/examples/experience-demo" className="link-primary">
+                      Experience Demo
+                    </a>{' '}
+                    page.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -260,26 +383,12 @@ export default function SmartButtonExample() {
         Delete Account
       </SmartButton>
       
-      {/* Adaptive variants based on urgency and priority */}
-      <SmartButton 
-        intent="primary-action" 
-        criticality="critical"
-        flowPosition="entry"
-      >
-        Urgent Action
-      </SmartButton>
-      
-      <SmartButton 
-        intent="secondary-action" 
-        criticality="low"
-        flowPosition="middle"
-      >
-        Optional Task
-      </SmartButton>
+      {/* For comprehensive examples with adaptive behavior, 
+          accessibility features, and real-time configuration, 
+          visit the Experience Demo page */}
     </div>
   );
-}
-`}
+}`}
       />
 
       <Card className="card--highlight ">

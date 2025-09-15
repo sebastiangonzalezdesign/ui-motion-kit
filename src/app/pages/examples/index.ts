@@ -15,3 +15,4 @@ export { default as SidebarPage } from './sidebar';
 export { default as LoadersPage } from './loaders';
 export { default as MicroInteractionsPage } from './micro-interactions';
 export { default as PageTransitionsPage } from './page-transitions';
+export { default as BreadcrumbPage } from './breadcrumb';

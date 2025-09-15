@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useCallback, useReducer } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '../../primitives';
 import './Toast.scss';
 
 // Toast Types
@@ -312,23 +313,29 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onDismiss }) => {
         <div className="toast__message">{toast.message}</div>
 
         {toast.action && (
-          <button className="toast__action" onClick={toast.action.onClick} type="button">
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={toast.action.onClick}
+            className="toast__action"
+          >
             {toast.action.label}
-          </button>
+          </Button>
         )}
       </div>
 
       {toast.dismissible && (
-        <button
-          className="toast__dismiss"
+        <Button
+          size="sm"
+          variant="ghost"
           onClick={() => onDismiss(toast.id)}
+          className="toast__dismiss"
           aria-label="Dismiss notification"
-          type="button"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
           </svg>
-        </button>
+        </Button>
       )}
     </motion.div>
   );

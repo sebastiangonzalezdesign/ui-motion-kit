@@ -1,0 +1,346 @@
+@use '../../../styles/abstracts' as *;
+
+.progress-indicator {
+  position: relative;
+  width: 100%;
+
+  // Label styling
+  &__label {
+    margin-bottom: $space-2;
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  // Linear Progress
+  &--linear {
+    .progress-indicator__track {
+      width: 100%;
+      background: $border-light;
+      border-radius: $radius-full;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          rgba($accent-primary, 0.1) 0%,
+          rgba($accent-primary, 0.05) 50%,
+          rgba($accent-primary, 0.1) 100%
+        );
+        animation: shimmer 2s infinite;
+        opacity: 0;
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
+    }
+
+    .progress-indicator__fill {
+      height: 100%;
+      background: linear-gradient(90deg, $accent-primary 0%, $accent-primary-hover 100%);
+      border-radius: $radius-full;
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          transparent 100%
+        );
+        animation: progress-shine 2s infinite;
+      }
+    }
+
+    // Size variants for linear
+    &.progress-indicator--sm {
+      .progress-indicator__track {
+        height: 4px;
+      }
+    }
+
+    &.progress-indicator--md {
+      .progress-indicator__track {
+        height: 6px;
+      }
+    }
+
+    &.progress-indicator--lg {
+      .progress-indicator__track {
+        height: 8px;
+      }
+    }
+  }
+
+  // Circular Progress
+  &--circular {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .progress-indicator__circular-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .progress-indicator__svg {
+      transform: rotate(-90deg);
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: rotate(-90deg) scale(1.05);
+      }
+    }
+
+    .progress-indicator__track-circle {
+      color: $border-light;
+      opacity: 0.3;
+    }
+
+    .progress-indicator__fill-circle {
+      color: $accent-primary;
+      filter: drop-shadow(0 0 4px rgba($accent-primary, 0.3));
+    }
+
+    .progress-indicator__circular-label {
+      position: absolute;
+      color: $text-primary;
+      font-weight: $font-weight-semibold;
+
+      span {
+        display: block;
+        text-align: center;
+      }
+    }
+
+    // Size variants for circular
+    &.progress-indicator--sm {
+      .progress-indicator__circular-label {
+        font-size: $font-size-xs;
+      }
+    }
+
+    &.progress-indicator--md {
+      .progress-indicator__circular-label {
+        font-size: $font-size-sm;
+      }
+    }
+
+    &.progress-indicator--lg {
+      .progress-indicator__circular-label {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  // Stepped Progress
+  &--stepped {
+    .progress-indicator__steps {
+      display: flex;
+      gap: $space-2;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .progress-indicator__step {
+      background: $border-light;
+      border-radius: $radius-sm;
+      transition: all 0.3s ease;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 4px;
+        height: 4px;
+        background: $text-inverse;
+        border-radius: $radius-full;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &.completed {
+        background: $accent-primary;
+        box-shadow: 0 2px 4px rgba($accent-primary, 0.3);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    // Size variants for stepped
+    &.progress-indicator--sm {
+      .progress-indicator__step {
+        width: 24px;
+        height: 6px;
+      }
+    }
+
+    &.progress-indicator--md {
+      .progress-indicator__step {
+        width: 32px;
+        height: 8px;
+      }
+    }
+
+    &.progress-indicator--lg {
+      .progress-indicator__step {
+        width: 40px;
+        height: 10px;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes progress-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// Dark mode adjustments
+[data-theme='dark'] {
+  .progress-indicator {
+    &--linear {
+      .progress-indicator__track {
+        background: $border-medium;
+      }
+    }
+
+    &--circular {
+      .progress-indicator__track-circle {
+        color: $border-medium;
+      }
+
+      .progress-indicator__fill-circle {
+        filter: drop-shadow(0 0 6px rgba($accent-primary, 0.4));
+      }
+    }
+
+    &--stepped {
+      .progress-indicator__step {
+        background: $border-medium;
+
+        &.completed {
+          box-shadow: 0 2px 4px rgba($accent-primary, 0.4);
+        }
+      }
+    }
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .progress-indicator {
+    &__track::before,
+    &__fill::after {
+      animation: none;
+    }
+
+    &__svg {
+      transition: none;
+
+      &:hover {
+        transform: rotate(-90deg);
+      }
+    }
+
+    &__step {
+      transition: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes progress-shine {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .progress-indicator {
+    &--linear {
+      .progress-indicator__track {
+        border: 1px solid $border-dark;
+      }
+
+      .progress-indicator__fill {
+        border: 1px solid $accent-primary;
+      }
+    }
+
+    &--circular {
+      .progress-indicator__track-circle {
+        stroke-width: 3;
+      }
+
+      .progress-indicator__fill-circle {
+        stroke-width: 3;
+      }
+    }
+
+    &--stepped {
+      .progress-indicator__step {
+        border: 1px solid $border-dark;
+
+        &.completed {
+          border-color: $accent-primary;
+        }
+      }
+    }
+  }
+}

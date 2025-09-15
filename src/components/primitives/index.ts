@@ -11,4 +11,5 @@ export { default as CopyButton } from './CopyButton';
 export { default as ColorSwatch } from './ColorSwatch';
 export { default as Select } from './Select/Select';
 export { default as Checkbox } from './Checkbox/Checkbox';
+export { default as ProgressIndicator } from './ProgressIndicator/ProgressIndicator';
 export type { SearchableItem } from './SearchInput';

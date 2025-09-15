@@ -26,6 +26,7 @@ import {
   LoadersPage,
   MicroInteractionsPage,
   PageTransitionsPage,
+  BreadcrumbPage,
 } from './app/pages';
 
 function AnimatedRoutes() {
@@ -326,6 +327,20 @@ function AnimatedRoutes() {
               transition={pageTransition}
             >
               <PageTransitionsPage />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/examples/breadcrumb"
+          element={
+            <motion.div
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <BreadcrumbPage />
             </motion.div>
           }
         />
