@@ -1,7 +1,37 @@
-import type { Preview } from '@storybook/react-vite';
+import type { Preview, Decorator } from '@storybook/react-vite';
+import React, { useEffect } from 'react';
 import '../src/styles/main.scss';
 
+// Theme wrapper component
+const ThemeWrapper: React.FC<{ theme: string; children: React.ReactNode }> = ({
+  theme,
+  children,
+}) => {
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+
+    // Remove any existing theme classes
+    htmlElement.classList.remove('theme-light', 'theme-dark');
+
+    // Add the current theme class
+    htmlElement.classList.add(`theme-${theme}`);
+
+    // Also set the data attribute for CSS custom properties
+    htmlElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  return React.createElement('div', { className: `theme-${theme}` }, children);
+};
+
+// Theme decorator to apply theme classes to the story container
+const withTheme: Decorator = (Story, context) => {
+  const { theme } = context.globals;
+
+  return React.createElement(ThemeWrapper, { theme, children: React.createElement(Story) });
+};
+
 const preview: Preview = {
+  decorators: [withTheme],
   parameters: {
     options: {
       storySort: {

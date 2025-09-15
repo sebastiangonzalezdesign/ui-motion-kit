@@ -1,0 +1,79 @@
+// Welcome component styles for Storybook
+// Using design tokens for consistent theming
+
+.welcome-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: var(--font-family-base);
+}
+
+.welcome-title {
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.welcome-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0 0 3rem 0;
+  text-align: center;
+}
+
+.welcome-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.welcome-card {
+  padding: 1.5rem;
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+
+  h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}
+
+.welcome-features {
+  padding: 1.5rem;
+  background-color: var(--feedback-info-light);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+
+  h3 {
+    color: var(--feedback-info);
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    color: var(--feedback-info);
+    padding-left: 1.5rem;
+    margin: 0;
+  }
+}
+
+.welcome-footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+
+  p {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}
