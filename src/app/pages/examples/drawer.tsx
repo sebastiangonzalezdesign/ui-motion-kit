@@ -244,6 +244,7 @@ const DrawerPage: React.FC = () => {
         size="lg"
         title="Navigation"
         showCloseButton
+        contentClassName="drawer-page-content"
       >
         <div className="drawer-content-wrapper">
           <div className="navigation-content">
@@ -259,10 +260,14 @@ const DrawerPage: React.FC = () => {
           </div>
 
           <div className="drawer-footer">
-            <Button onClick={drawerWithContent.close} variant="outline" size="sm">
-              Close
-            </Button>
-            <Button size="sm">Save Changes</Button>
+            <div className="drawer-footer__button-group">
+              <Button onClick={drawerWithContent.close} variant="outline" size="sm">
+                Close
+              </Button>
+              <Button variant="primary" size="sm">
+                Save Changes
+              </Button>
+            </div>
           </div>
         </div>
       </Drawer>

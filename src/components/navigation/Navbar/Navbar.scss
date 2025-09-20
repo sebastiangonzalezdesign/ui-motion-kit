@@ -3,7 +3,7 @@
 // Navbar Component Styles
 .navbar {
   position: relative;
-  z-index: 1000;
+  z-index: 100 !important;
   width: 100%;
   background: var(--surface-primary);
   transition: all 0.3s ease;

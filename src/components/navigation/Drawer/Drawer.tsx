@@ -20,8 +20,10 @@ export interface DrawerProps {
   closeOnEscape?: boolean;
   className?: string;
   backdropClassName?: string;
+  contentClassName?: string;
   enableGestures?: boolean;
   preventBodyScroll?: boolean;
+  style?: React.CSSProperties;
 }
 
 const sizeMap: Record<DrawerSize, string> = {
@@ -44,8 +46,10 @@ export const Drawer: React.FC<DrawerProps> = ({
   closeOnEscape = true,
   className = '',
   backdropClassName = '',
+  contentClassName = '',
   enableGestures = true,
   preventBodyScroll = true,
+  style,
 }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
 
@@ -218,7 +222,7 @@ export const Drawer: React.FC<DrawerProps> = ({
         <motion.div
           ref={drawerRef}
           className={`drawer drawer--${direction} drawer--${size} ${className}`}
-          style={{ ...getDrawerStyle(), ...getDrawerPosition() }}
+          style={{ ...getDrawerStyle(), ...getDrawerPosition(), ...style }}
           variants={getDrawerVariants()}
           initial="hidden"
           animate="visible"
@@ -255,7 +259,7 @@ export const Drawer: React.FC<DrawerProps> = ({
           )}
 
           {/* Content */}
-          <div className="drawer__content">{children}</div>
+          <div className={`drawer__content ${contentClassName}`.trim()}>{children}</div>
 
           {/* Drag indicator */}
           {enableGestures && (

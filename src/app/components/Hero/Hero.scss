@@ -128,7 +128,7 @@
 
       .hero__floating-preview--1 {
         position: absolute !important;
-        bottom: 22% !important; // ← Adjust this (5-25%) to move up/down
+        bottom: 5% !important; // ← Adjust this (5-25%) to move up/down
         left: 15% !important; // ← Adjust this (5-25%) to move left/right
         transform: translateX(0) scale(0.6);
         margin-bottom: $space-lg;
@@ -139,7 +139,7 @@
       .hero__floating-preview--2 {
         position: absolute !important;
         right: 15% !important; // ← Adjust this (5-25%) to move left/right
-        bottom: 25% !important; // ← Adjust this (5-25%) to move up/down
+        bottom: 5% !important; // ← Adjust this (5-25%) to move up/down
         left: auto !important;
         top: auto !important;
         margin-top: 0;
@@ -179,11 +179,11 @@
   // Extra wide screens - ensure illustrations don't float too far
   @media (min-width: 1400px) {
     .hero__floating-preview--1 {
-      right: calc((100vw - 1200px) / 2 + 120px) !important;
+      right: min(15%, calc((100vw - 1200px) / 2 + 100px)) !important;
     }
 
     .hero__floating-preview--2 {
-      right: calc((100vw - 1200px) / 2 + 140px) !important;
+      right: min(15%, calc((100vw - 1200px) / 2 + 100px)) !important;
     }
   }
 

@@ -13,7 +13,7 @@ Motion UI Kit Pro delivers advanced components, sophisticated animations, **revo
 
 - **🆓 Open Source (This Repository)** - Complete component library with React 19, TypeScript, and Framer Motion
 - **💎 Premium Package** - Includes additional documentation, setup guides, and premium support ([Available on Gumroad](https://your-gumroad-link.com))  
-Motion UI Kit Pro delivers advanced components, sophisticated animations, **revolutionary Experience System**, and a complete design system for professional applications.
+  Motion UI Kit Pro delivers advanced components, sophisticated animations, **revolutionary Experience System**, and a complete design system for professional applications.
 
 > **� FREE & OPEN SOURCE** - Complete Experience System with context-aware components that understand user intent and adapt automatically to provide intelligent, personalized interfaces.
 

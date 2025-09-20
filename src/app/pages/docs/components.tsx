@@ -17,6 +17,9 @@ import {
   UserGroupIcon,
   DevicePhoneMobileIcon,
   PaintBrushIcon,
+  // Pro feature icons
+  BoltIcon,
+  WrenchScrewdriverIcon,
   // Toggle icon
   Bars3Icon,
 } from '@heroicons/react/24/outline';
@@ -465,8 +468,8 @@ const Components = () => {
               {/* Pro Value Proposition */}
               {selectedCategory === 'motion' && (
                 <div className="pro-showcase">
-                  <Card className="card--highlight">
-                    <h3>🚀 Motion Components - Pro Differentiator</h3>
+                  <Card className="cta-card" variant="icon" icon={SparklesIcon}>
+                    <h3>Motion Components - Pro Differentiator</h3>
                     <p>
                       Advanced motion components set the Pro version apart with sophisticated
                       animations, gesture support, and delightful micro-interactions that elevate
@@ -474,18 +477,42 @@ const Components = () => {
                     </p>
                     <div className="pro-features">
                       <div className="pro-feature">
-                        <strong>Spring Physics:</strong> Natural, bouncy animations that feel
-                        responsive
+                        <BoltIcon width="16" height="16" />
+                        <div>
+                          <strong>Spring Physics:</strong> Natural, bouncy animations that feel
+                          responsive and modern
+                        </div>
                       </div>
                       <div className="pro-feature">
-                        <strong>Gesture Support:</strong> Touch and drag interactions for mobile
+                        <DevicePhoneMobileIcon width="16" height="16" />
+                        <div>
+                          <strong>Gesture Support:</strong> Touch and drag interactions optimized
+                          for mobile
+                        </div>
                       </div>
                       <div className="pro-feature">
-                        <strong>Micro-interactions:</strong> Delightful details that users love
+                        <SparklesIcon width="16" height="16" />
+                        <div>
+                          <strong>Micro-interactions:</strong> Delightful details and hover effects
+                          that users love
+                        </div>
                       </div>
                       <div className="pro-feature">
-                        <strong>Performance:</strong> Optimized animations that run at 60fps
+                        <WrenchScrewdriverIcon width="16" height="16" />
+                        <div>
+                          <strong>Performance:</strong> Optimized animations that run smoothly at
+                          60fps
+                        </div>
                       </div>
+                    </div>
+                    <div className="cta-actions">
+                      <Button
+                        variant="primary"
+                        size="md"
+                        onClick={() => navigate('/docs/design-tokens?category=motion')}
+                      >
+                        Explore Motion System →
+                      </Button>
                     </div>
                   </Card>
                 </div>

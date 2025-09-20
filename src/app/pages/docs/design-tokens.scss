@@ -2683,3 +2683,117 @@
     }
   }
 }
+
+// Pro Showcase CTA Styles (matching design-tokens.scss patterns)
+.pro-showcase {
+  margin-top: $space-8;
+
+  .cta-card {
+    border: 2px solid var(--accent-primary);
+    background: linear-gradient(
+      135deg,
+      var(--background-primary) 0%,
+      var(--background-secondary) 100%
+    );
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    }
+
+    h3 {
+      color: var(--text-primary);
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      margin-bottom: $space-3;
+      display: flex;
+      align-items: center;
+      gap: $space-2;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: $font-size-base;
+      line-height: 1.6;
+      margin-bottom: $space-6;
+    }
+
+    .pro-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: $space-4;
+      margin-bottom: $space-6;
+
+      .pro-feature {
+        display: flex;
+        align-items: flex-start;
+        gap: $space-3;
+        padding: $space-4;
+        background: var(--background-tertiary);
+        border-radius: $radius-md;
+        border: 1px solid var(--border-light);
+        transition: all $motion-duration-normal $motion-easing-smooth;
+
+        svg {
+          color: var(--accent-primary);
+          flex-shrink: 0;
+          margin-top: $space-1;
+        }
+
+        div {
+          strong {
+            color: var(--text-primary);
+            font-weight: $font-weight-semibold;
+            display: block;
+            margin-bottom: $space-1;
+          }
+
+          &:last-child {
+            color: var(--text-secondary);
+            font-size: $font-size-sm;
+            line-height: 1.5;
+          }
+        }
+
+        &:hover {
+          background: var(--background-secondary);
+          border-color: var(--accent-primary);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+
+      .button {
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        border: none;
+        color: white;
+        font-weight: $font-weight-semibold;
+        padding: $space-3 $space-6;
+        border-radius: $radius-lg;
+        transition: all $motion-duration-normal $motion-easing-smooth;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}

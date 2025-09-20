@@ -112,15 +112,13 @@
     }
   }
 
-  // Drawer content styles
+  // Drawer content styles - focused on content appearance, not layout
   .simple-drawer-content {
-    padding: $space-6;
     text-align: center;
 
     h3 {
       font-size: $font-size-xl;
       font-weight: $font-weight-semibold;
-      color: $text-primary;
       margin-bottom: $space-4;
     }
 
@@ -143,11 +141,13 @@
     flex-direction: column;
     height: 100%;
     min-height: 0; // Allow flex item to shrink
+    width: 100% !important;
   }
 
   .navigation-content {
     flex: 1;
     overflow-y: auto;
+    width: 100% !important;
 
     h4 {
       font-size: $font-size-base;
@@ -160,100 +160,230 @@
 
     .drawer-content {
       margin-bottom: $space-8;
+      width: 100% !important;
 
       .navigation-item {
-        display: flex;
-        align-items: center;
-        gap: $space-3;
-        padding: $space-2 $space-4;
-        border-radius: $radius-md;
-        color: $text-secondary;
-        cursor: pointer;
-        transition: $transition-fast;
+        display: flex !important;
+        align-items: center !important;
+        gap: $space-3 !important;
+        padding: $space-2 $space-4 !important;
+        border-radius: $radius-md !important;
+        color: $text-secondary !important;
+        cursor: pointer !important;
+        transition: $transition-fast !important;
+        background: transparent !important;
+        border: none !important;
+        text-align: left !important;
+        width: 100% !important;
 
         svg {
           width: 1.125rem !important;
           height: 1.125rem !important;
           max-width: none !important; // Override global reset
-          flex-shrink: 0; // Prevent icon from shrinking
+          flex-shrink: 0 !important; // Prevent icon from shrinking
+          color: $text-secondary !important;
         }
 
         &:hover {
-          background: $background-secondary;
-          color: $text-primary;
+          background: $background-secondary !important;
+          color: $text-primary !important;
+
+          svg {
+            color: $text-primary !important;
+          }
         }
 
         span {
-          font-weight: $font-weight-medium;
-          font-size: $font-size-sm;
+          font-weight: $font-weight-medium !important;
+          font-size: $font-size-sm !important;
+          color: inherit !important;
         }
       }
     }
 
     .recent-items {
+      width: 100% !important;
+
       .recent-item {
-        padding: $space-2 $space-4;
-        background: $background-secondary;
-        border-radius: $radius-sm;
-        color: $text-secondary;
-        font-size: $font-size-sm;
-        margin-bottom: $space-1;
-        cursor: pointer;
-        transition: $transition-fast;
+        padding: $space-2 $space-4 !important;
+        background: $background-secondary !important;
+        border-radius: $radius-sm !important;
+        color: $text-secondary !important;
+        font-size: $font-size-sm !important;
+        margin-bottom: $space-1 !important;
+        cursor: pointer !important;
+        transition: $transition-fast !important;
+        border: none !important;
+        text-align: left !important;
+        width: 100% !important;
 
         &:hover {
-          background: $background-tertiary;
-          color: $text-primary;
+          background: $background-tertiary !important;
+          color: $text-primary !important;
         }
 
         &:last-child {
-          margin-bottom: 0;
+          margin-bottom: 0 !important;
         }
       }
     }
   }
 
   .drawer-footer {
-    display: flex;
-    gap: $space-3;
-    justify-content: flex-end;
-    padding: $space-4;
-    border-top: 1px solid $border-light;
-    background: $background-primary;
-    flex-shrink: 0; // Prevent footer from shrinking
-    margin-top: auto; // Push footer to bottom
+    display: flex !important;
+    gap: $space-3 !important;
+    justify-content: flex-end !important;
+    padding: $space-4 !important;
+    border-top: 1px solid $border-light !important;
+    flex-shrink: 0 !important; // Prevent footer from shrinking
+    margin-top: auto !important; // Push footer to bottom
   }
 
   // Responsive adjustments
   @include breakpoint-down(sm) {
-    padding: $space-6;
-
-    .direction-demos {
-      .button-group {
-        flex-direction: column;
-      }
-    }
-
-    .simple-drawer-content {
-      padding: $space-4;
-    }
-
     .navigation-content {
       .navigation-item {
-        gap: $space-2;
-        padding: $space-2;
+        gap: $space-2 !important;
+        padding: $space-2 !important;
       }
     }
 
     .drawer-footer {
-      padding: $space-3;
-      gap: $space-2;
+      padding: $space-3 !important;
+      gap: $space-2 !important;
 
       // Stack buttons on mobile if needed
-      flex-direction: column;
+      flex-direction: column !important;
 
       @media (min-width: 400px) {
-        flex-direction: row;
+        flex-direction: row !important;
+      }
+    }
+  }
+}
+
+// Styles for drawer content when rendered via portal
+.drawer-page-content {
+  // Apply proper spacing from design tokens instead of removing all padding
+  padding: $space-6 $space-4 !important; // 24px top/bottom, 16px left/right
+
+  // Ensure content takes full width
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+
+  // Include navigation content styles directly
+  .drawer-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    width: 100% !important;
+  }
+
+  .navigation-content {
+    flex: 1;
+    overflow-y: auto;
+    width: 100% !important;
+
+    h4 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $text-primary;
+      margin-bottom: $space-4;
+      padding-bottom: $space-1;
+      border-bottom: 1px solid $border-light;
+    }
+
+    .drawer-content {
+      margin-bottom: $space-8;
+      width: 100% !important;
+
+      .navigation-item {
+        display: flex !important;
+        align-items: center !important;
+        gap: $space-3 !important;
+        padding: $space-2 $space-4 !important;
+        border-radius: $radius-md !important;
+        color: $text-secondary !important;
+        cursor: pointer !important;
+        transition: $transition-fast !important;
+        background: transparent !important;
+        border: none !important;
+        text-align: left !important;
+        width: 100% !important;
+
+        svg {
+          width: 1.125rem !important;
+          height: 1.125rem !important;
+          max-width: none !important;
+          flex-shrink: 0 !important;
+          color: $text-secondary !important;
+        }
+
+        &:hover {
+          background: $background-secondary !important;
+          color: $text-primary !important;
+
+          svg {
+            color: $text-primary !important;
+          }
+        }
+
+        span {
+          font-weight: $font-weight-medium !important;
+          font-size: $font-size-sm !important;
+          color: inherit !important;
+        }
+      }
+    }
+
+    .recent-items {
+      width: 100% !important;
+
+      .recent-item {
+        padding: $space-2 $space-4 !important;
+        //background: $background-secondary !important;
+        border-radius: $radius-sm !important;
+        color: $text-secondary !important;
+        font-size: $font-size-sm !important;
+        margin-bottom: $space-1 !important;
+        cursor: pointer !important;
+        transition: $transition-fast !important;
+        border: none !important;
+        text-align: left !important;
+        width: 100% !important;
+
+        &:hover {
+          background: $background-tertiary !important;
+          color: $text-primary !important;
+        }
+
+        &:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+  }
+
+  .drawer-footer {
+    display: flex !important;
+    justify-content: flex-end !important;
+    padding: $space-4 !important;
+    border-top: 1px solid $border-light !important;
+    flex-shrink: 0 !important;
+    margin-top: auto !important;
+
+    &__button-group {
+      display: flex !important;
+      gap: $space-3 !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+
+      // Ensure buttons maintain their size
+      .button {
+        flex-shrink: 0 !important;
+        min-width: auto !important;
       }
     }
   }
