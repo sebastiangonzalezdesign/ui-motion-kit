@@ -798,7 +798,13 @@ import { Button } from '@motion-ui-kit/primitives';
                     enterprise-ready design patterns.
                   </p>
                   <div className="cta-actions">
-                    <Button variant="primary" size="md">
+                    <Button
+                      variant="primary"
+                      size="md"
+                      onClick={() =>
+                        window.open('https://sebastiangonzalez.design/motion-ui-kit', '_blank')
+                      }
+                    >
                       Upgrade to Pro →
                     </Button>
                   </div>
@@ -1319,7 +1325,13 @@ $motion-semantic: (
                     interactions, and performance-optimized animation patterns.
                   </p>
                   <div className="cta-actions">
-                    <Button variant="primary" size="md">
+                    <Button
+                      variant="primary"
+                      size="md"
+                      onClick={() =>
+                        window.open('https://sebastiangonzalez.design/motion-ui-kit', '_blank')
+                      }
+                    >
                       Get Motion System →
                     </Button>
                   </div>
@@ -1971,25 +1983,8 @@ $typography-scale: (
                     <p>
                       <code>space-semantic('section')</code> - Large spacing between major sections
                     </p>
-                    <div
-                      className="spacing-demo"
-                      style={{
-                        padding: 'var(--space-20)',
-                        backgroundColor: 'var(--background-secondary)',
-                        border: '2px dashed var(--border-primary)',
-                        borderRadius: '8px',
-                        margin: '1rem 0',
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: 'var(--background-tertiary)',
-                          padding: 'var(--space-4)',
-                          borderRadius: '4px',
-                        }}
-                      >
-                        Section content with large spacing
-                      </div>
+                    <div className="spacing-demo spacing-demo--section">
+                      <div>Section content with large spacing</div>
                     </div>
                   </div>
 
@@ -1998,25 +1993,8 @@ $typography-scale: (
                     <p>
                       <code>space-semantic('component')</code> - Internal component spacing
                     </p>
-                    <div
-                      className="spacing-demo"
-                      style={{
-                        padding: 'var(--space-8)',
-                        backgroundColor: 'var(--background-secondary)',
-                        border: '2px dashed var(--border-primary)',
-                        borderRadius: '8px',
-                        margin: '1rem 0',
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: 'var(--background-tertiary)',
-                          padding: 'var(--space-4)',
-                          borderRadius: '4px',
-                        }}
-                      >
-                        Component with medium spacing
-                      </div>
+                    <div className="spacing-demo spacing-demo--component">
+                      <div>Component with medium spacing</div>
                     </div>
                   </div>
 
@@ -2025,25 +2003,8 @@ $typography-scale: (
                     <p>
                       <code>space-semantic('element')</code> - Spacing between related elements
                     </p>
-                    <div
-                      className="spacing-demo"
-                      style={{
-                        padding: 'var(--space-4)',
-                        backgroundColor: 'var(--background-secondary)',
-                        border: '2px dashed var(--border-primary)',
-                        borderRadius: '8px',
-                        margin: '1rem 0',
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: 'var(--background-tertiary)',
-                          padding: 'var(--space-2)',
-                          borderRadius: '4px',
-                        }}
-                      >
-                        Element with standard spacing
-                      </div>
+                    <div className="spacing-demo spacing-demo--element">
+                      <div>Element with standard spacing</div>
                     </div>
                   </div>
 
@@ -2052,25 +2013,8 @@ $typography-scale: (
                     <p>
                       <code>space-semantic('inline')</code> - Small spacing for inline elements
                     </p>
-                    <div
-                      className="spacing-demo"
-                      style={{
-                        padding: 'var(--space-2)',
-                        backgroundColor: 'var(--background-secondary)',
-                        border: '2px dashed var(--border-primary)',
-                        borderRadius: '8px',
-                        margin: '1rem 0',
-                      }}
-                    >
-                      <div
-                        style={{
-                          backgroundColor: 'var(--background-tertiary)',
-                          padding: 'var(--space-1)',
-                          borderRadius: '4px',
-                        }}
-                      >
-                        Inline with tight spacing
-                      </div>
+                    <div className="spacing-demo spacing-demo--inline">
+                      <div>Inline with tight spacing</div>
                     </div>
                   </div>
                 </div>
@@ -2152,20 +2096,7 @@ $spacing-semantic: (
                 <h3>Usage Examples</h3>
                 <CodePreview
                   preview={
-                    <div
-                      className="spacing-demo-container"
-                      style={{
-                        width: '100%',
-                        padding: 'var(--space-4)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 'var(--space-6)',
-                        backgroundColor: 'var(--background-tertiary)',
-                        borderRadius: '8px',
-                        alignSelf: 'stretch',
-                        minHeight: 'auto',
-                      }}
-                    >
+                    <div className="spacing-demo-container">
                       {/* Single Card Demo with proper actions gap */}
                       <div className="demo-section">
                         <Card
@@ -2253,11 +2184,7 @@ import { Card, Button } from '@motion-ui-kit/primitives';
 </Card>
 
 // Grid layout with different card sizes
-<div style={{ 
-  display: 'grid', 
-  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-  gap: 'var(--space-4)' 
-}}>
+<div className="spacing-demo-grid"> 
   <Card
     title="Compact Card"
     badge="Small"

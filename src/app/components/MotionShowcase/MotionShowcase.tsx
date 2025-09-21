@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Card, Button } from '../../../components/primitives';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import './MotionShowcase.scss';
 
 const MotionShowcase = () => {
   const motionTokens = [
@@ -35,12 +36,8 @@ const MotionShowcase = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
       viewport={{ once: true }}
-      style={{ padding: '4rem 0' }}
     >
-      <div
-        className="motion-showcase-content"
-        style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}
-      >
+      <div className="motion-showcase-content">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,66 +57,25 @@ const MotionShowcase = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          style={{ marginBottom: '3rem' }}
+          className="duration-tokens-section"
         >
-          <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Duration Tokens</h3>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
+          <h3>Duration Tokens</h3>
+          <div className="duration-tokens-grid">
             {motionTokens.map((token, index) => (
-              <div key={token.name} style={{ padding: '1.5rem' }}>
+              <div key={token.name} className="duration-token-card">
                 <Card>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginBottom: '1rem',
-                    }}
-                  >
-                    <code
-                      style={{
-                        background: 'var(--color-background-subtle)',
-                        padding: '0.25rem 0.5rem',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.875rem',
-                      }}
-                    >
-                      {token.name}
-                    </code>
-                    <span style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
-                      {token.duration}ms
-                    </span>
+                  <div className="token-header">
+                    <code className="token-name">{token.name}</code>
+                    <span className="token-duration">{token.duration}ms</span>
                   </div>
-                  <p
-                    style={{
-                      fontSize: '0.875rem',
-                      marginBottom: '1rem',
-                      color: 'var(--color-text-secondary)',
-                    }}
-                  >
-                    {token.description}
-                  </p>
+                  <p className="token-description">{token.description}</p>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ duration: token.duration / 1000, ease: 'easeOut' }}
+                    className="duration-demo"
                     style={{
-                      width: '100%',
-                      height: '40px',
                       background: `linear-gradient(45deg, hsl(${220 + index * 30}, 70%, 60%), hsl(${240 + index * 30}, 70%, 70%))`,
-                      borderRadius: 'var(--radius-md)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'white',
-                      fontWeight: '500',
-                      cursor: 'pointer',
-                      fontSize: '0.875rem',
                     }}
                   >
                     Hover to test {token.duration}ms
@@ -136,54 +92,18 @@ const MotionShowcase = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           viewport={{ once: true }}
-          style={{ marginBottom: '3rem' }}
+          className="easing-tokens-section"
         >
-          <h3 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Easing Tokens</h3>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '1.5rem',
-            }}
-          >
+          <h3>Easing Tokens</h3>
+          <div className="easing-tokens-grid">
             {easingTokens.map((token, index) => (
-              <div key={token.name} style={{ padding: '1.5rem' }}>
+              <div key={token.name} className="easing-token-card">
                 <Card>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginBottom: '1rem',
-                    }}
-                  >
-                    <code
-                      style={{
-                        background: 'var(--color-background-subtle)',
-                        padding: '0.25rem 0.5rem',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.875rem',
-                      }}
-                    >
-                      {token.name}
-                    </code>
+                  <div className="token-header">
+                    <code className="token-name">{token.name}</code>
                   </div>
-                  <p
-                    style={{
-                      fontSize: '0.875rem',
-                      marginBottom: '1rem',
-                      color: 'var(--color-text-secondary)',
-                    }}
-                  >
-                    {token.description}
-                  </p>
-                  <div
-                    style={{
-                      width: '100px', // Extended width to contain the movement
-                      height: '40px',
-                      position: 'relative',
-                    }}
-                  >
+                  <p className="token-description">{token.description}</p>
+                  <div className="easing-demo-container">
                     <motion.div
                       whileHover={{ x: 40 }}
                       transition={{
@@ -195,35 +115,16 @@ const MotionShowcase = () => {
                               ? [0.2, 0, 0, 1]
                               : [0.25, 0.46, 0.45, 0.94],
                       }}
+                      className="easing-demo"
                       style={{
-                        width: '60px',
-                        height: '40px',
                         background: `hsl(${280 + index * 40}, 70%, 60%)`,
-                        borderRadius: 'var(--radius-md)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'white',
-                        fontWeight: '500',
-                        cursor: 'pointer',
-                        fontSize: '1.5rem',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
                       }}
                     >
                       →
                     </motion.div>
+                    <div className="easing-demo-hover-area" />
                   </div>
-                  <p
-                    style={{
-                      fontSize: '0.75rem',
-                      marginTop: '0.5rem',
-                      color: 'var(--color-text-tertiary)',
-                    }}
-                  >
-                    Hover to see easing curve
-                  </p>
+                  <p className="easing-instruction">Hover to see easing curve</p>
                 </Card>
               </div>
             ))}
@@ -235,7 +136,7 @@ const MotionShowcase = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
-          style={{ textAlign: 'center', marginTop: '2rem' }}
+          className="motion-cta-section"
         >
           <Link to="/docs/design-tokens" style={{ color: 'inherit', textDecoration: 'none' }}>
             <Button variant="outline" size="md" icon={<ArrowRightIcon />}>

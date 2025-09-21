@@ -1,0 +1,185 @@
+@use '../../../styles/abstracts/tokens' as *;
+
+// Motion Showcase Component Styles
+.motion-showcase {
+  padding: $space-16 0;
+
+  .motion-showcase-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $space-8;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: $space-12;
+
+    h2 {
+      margin-bottom: $space-4;
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+  }
+
+  // Duration Tokens Section
+  .duration-tokens-section {
+    margin-bottom: $space-12;
+
+    h3 {
+      margin-bottom: $space-6;
+      text-align: center;
+      color: var(--text-primary);
+    }
+
+    .duration-tokens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: $space-6;
+    }
+
+    .duration-token-card {
+      padding: $space-6;
+
+      .token-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $space-4;
+
+        .token-name {
+          background: var(--background-tertiary);
+          padding: $space-1 $space-2;
+          border-radius: $radius-sm;
+          font-size: $font-size-sm;
+          font-family: monospace;
+        }
+
+        .token-duration {
+          font-size: $font-size-sm;
+          color: var(--text-secondary);
+        }
+      }
+
+      .token-description {
+        font-size: $font-size-sm;
+        margin-bottom: $space-4;
+        color: var(--text-secondary);
+      }
+
+      .duration-demo {
+        width: 100%;
+        height: $space-10;
+        background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: $font-weight-medium;
+        cursor: pointer;
+        font-size: $font-size-sm;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  // Easing Tokens Section
+  .easing-tokens-section {
+    margin-bottom: $space-12;
+
+    h3 {
+      margin-bottom: $space-6;
+      text-align: center;
+      color: var(--text-primary);
+    }
+
+    .easing-tokens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: $space-6;
+    }
+
+    .easing-token-card {
+      padding: $space-6;
+
+      .token-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $space-4;
+
+        .token-name {
+          background: var(--background-tertiary);
+          padding: $space-1 $space-2;
+          border-radius: $radius-sm;
+          font-size: $font-size-sm;
+          font-family: monospace;
+        }
+      }
+
+      .token-description {
+        font-size: $font-size-sm;
+        margin-bottom: $space-4;
+        color: var(--text-secondary);
+      }
+
+      .easing-demo-container {
+        width: 120px; // Increased from 100px to prevent edge bounce
+        height: $space-10;
+        position: relative;
+        margin-bottom: $space-2;
+
+        .easing-demo-hover-area {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          cursor: pointer;
+          z-index: 1;
+        }
+      }
+
+      .easing-demo {
+        width: 96px;
+        height: $space-10;
+        background: var(--accent-primary);
+        border-radius: $radius-md;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: $font-weight-medium;
+        cursor: pointer;
+        font-size: 1.5rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: background-color 0.2s ease;
+        z-index: 2;
+
+        &:hover {
+          background: var(--accent-secondary);
+        }
+      }
+
+      .easing-instruction {
+        font-size: $font-size-xs;
+        margin-top: $space-2;
+        color: var(--text-tertiary);
+      }
+    }
+  }
+  // CTA Section
+  .motion-cta-section {
+    margin-top: $space-8;
+    display: flex;
+    justify-content: center;
+  }
+}
